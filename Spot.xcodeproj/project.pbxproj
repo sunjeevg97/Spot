@@ -14,7 +14,7 @@
 		1DF6E03F22089F4800BA0C36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DF6E03D22089F4800BA0C36 /* LaunchScreen.storyboard */; };
 		1DF6E04A22089F4800BA0C36 /* SpotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6E04922089F4800BA0C36 /* SpotTests.swift */; };
 		1DF6E05522089F4800BA0C36 /* SpotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6E05422089F4800BA0C36 /* SpotUITests.swift */; };
-		1DF6E06C2208A39600BA0C36 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1DF6E06B2208A39600BA0C36 /* GoogleService-Info.plist */; };
+		3EDBE3CB2208B28B006D6B75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EDBE3CA2208B28B006D6B75 /* GoogleService-Info.plist */; };
 		675844E8F30647ADD3B850A9 /* Pods_Spot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286B836E6CA8EF95A3DBF973 /* Pods_Spot.framework */; };
 		EBDB2E392332FD19246E23A1 /* Pods_SpotUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC0031C320EAA3D9491C239B /* Pods_SpotUITests.framework */; };
 		F37332E1EC816CF3DD423A7F /* Pods_SpotTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6FE8BCAD2A0033DF62E47D /* Pods_SpotTests.framework */; };
@@ -53,8 +53,8 @@
 		1DF6E05022089F4800BA0C36 /* SpotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF6E05422089F4800BA0C36 /* SpotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUITests.swift; sourceTree = "<group>"; };
 		1DF6E05622089F4800BA0C36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1DF6E06B2208A39600BA0C36 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		286B836E6CA8EF95A3DBF973 /* Pods_Spot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EDBE3CA2208B28B006D6B75 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A128FDD7E619FF550F6C816 /* Pods-SpotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpotTests/Pods-SpotTests.release.xcconfig"; sourceTree = "<group>"; };
 		5A6FE8BCAD2A0033DF62E47D /* Pods_SpotTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F13890D99E98FC8A20FE3C3 /* Pods-SpotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpotUITests/Pods-SpotUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 		1DF6E03322089F4500BA0C36 /* Spot */ = {
 			isa = PBXGroup;
 			children = (
-				1DF6E06B2208A39600BA0C36 /* GoogleService-Info.plist */,
+				3EDBE3CA2208B28B006D6B75 /* GoogleService-Info.plist */,
 				1DF6E04022089F4800BA0C36 /* Info.plist */,
 				1DF6E06822089FD400BA0C36 /* Resources */,
 				1DF6E06722089F9400BA0C36 /* Views */,
@@ -309,7 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DF6E03F22089F4800BA0C36 /* LaunchScreen.storyboard in Resources */,
-				1DF6E06C2208A39600BA0C36 /* GoogleService-Info.plist in Resources */,
+				3EDBE3CB2208B28B006D6B75 /* GoogleService-Info.plist in Resources */,
 				1DF6E03C22089F4800BA0C36 /* Assets.xcassets in Resources */,
 				1DF6E03A22089F4500BA0C36 /* Main.storyboard in Resources */,
 			);
