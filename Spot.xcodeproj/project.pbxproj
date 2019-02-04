@@ -130,11 +130,11 @@
 			isa = PBXGroup;
 			children = (
 				1DF6E06B2208A39600BA0C36 /* GoogleService-Info.plist */,
+				1DF6E04022089F4800BA0C36 /* Info.plist */,
 				1DF6E06822089FD400BA0C36 /* Resources */,
 				1DF6E06722089F9400BA0C36 /* Views */,
 				1DF6E06622089F8D00BA0C36 /* Models */,
 				1DF6E06522089F8700BA0C36 /* Controllers */,
-				1DF6E04022089F4800BA0C36 /* Info.plist */,
 			);
 			path = Spot;
 			sourceTree = "<group>";
