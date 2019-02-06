@@ -39,6 +39,7 @@ class SignUpViewController: UIViewController {
             if error == nil && user != nil { //if no errors
                 print("user created")
                 self.saveUserToFirebase(name:name, username: username, email: email)
+                self.performSegue(withIdentifier: "signUpToInfo", sender: self)
             }
             else{
                 print(error?.localizedDescription)
