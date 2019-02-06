@@ -8,6 +8,10 @@ target 'Spot' do
   # Pods for Spot
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+
 
   target 'SpotTests' do
     inherit! :search_paths
