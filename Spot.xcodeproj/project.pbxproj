@@ -14,6 +14,7 @@
 		1DF6E03F22089F4800BA0C36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DF6E03D22089F4800BA0C36 /* LaunchScreen.storyboard */; };
 		1DF6E04A22089F4800BA0C36 /* SpotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6E04922089F4800BA0C36 /* SpotTests.swift */; };
 		1DF6E05522089F4800BA0C36 /* SpotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6E05422089F4800BA0C36 /* SpotUITests.swift */; };
+		3E6189572213DEAD00A7CFF4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6189562213DEAD00A7CFF4 /* LoginViewController.swift */; };
 		3EDBE3CB2208B28B006D6B75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EDBE3CA2208B28B006D6B75 /* GoogleService-Info.plist */; };
 		675844E8F30647ADD3B850A9 /* Pods_Spot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286B836E6CA8EF95A3DBF973 /* Pods_Spot.framework */; };
 		EBDB2E392332FD19246E23A1 /* Pods_SpotUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC0031C320EAA3D9491C239B /* Pods_SpotUITests.framework */; };
@@ -54,6 +55,7 @@
 		1DF6E05422089F4800BA0C36 /* SpotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUITests.swift; sourceTree = "<group>"; };
 		1DF6E05622089F4800BA0C36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		286B836E6CA8EF95A3DBF973 /* Pods_Spot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E6189562213DEAD00A7CFF4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3EDBE3CA2208B28B006D6B75 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A128FDD7E619FF550F6C816 /* Pods-SpotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpotTests/Pods-SpotTests.release.xcconfig"; sourceTree = "<group>"; };
 		5A6FE8BCAD2A0033DF62E47D /* Pods_SpotTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				1DF6E03622089F4500BA0C36 /* SignUpViewController.swift */,
+				3E6189562213DEAD00A7CFF4 /* LoginViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E6189572213DEAD00A7CFF4 /* LoginViewController.swift in Sources */,
 				1DF6E03722089F4500BA0C36 /* SignUpViewController.swift in Sources */,
 				1DF6E03522089F4500BA0C36 /* AppDelegate.swift in Sources */,
 			);
