@@ -104,8 +104,5 @@ class SignUpViewController: UIViewController {
         return pred.evaluate(with: email)
     }
     
-    
-    
-    
 }
 
