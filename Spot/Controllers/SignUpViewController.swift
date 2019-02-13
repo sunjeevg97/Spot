@@ -74,6 +74,7 @@ class SignUpViewController: UIViewController {
     
     //Function checks to see if text is entered into all fields
     private func allFieldsComplete(name:String, username:String,email:String,password:String) -> Bool{
+        
         if name.isEmpty{
             print("name is empty")
             return false;
@@ -82,20 +83,26 @@ class SignUpViewController: UIViewController {
             print("username is empty")
             return false;
         }
-        if email.isEmpty{
-            print("email is empty")
+        if !isValidEmail(email: email){
+            print("invalid email")
             return false;
         }
-        if password.isEmpty{
-            print("password is empty")
+        if password.count < 6{
+            print("password must be at least 6 characters")
             return false;
         }
-        print("all fields entered")
+        print("all fields entered in proper format")
         return true;
     }
     
     
-    
+    //checks to see if email is valid
+    func isValidEmail(email:String?) -> Bool {
+        guard email != nil else { return false }
+        let regEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let pred = NSPredicate(format:"SELF MATCHES %@", regEx)
+        return pred.evaluate(with: email)
+    }
     
 }
 
