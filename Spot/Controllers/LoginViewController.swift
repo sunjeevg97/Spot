@@ -10,16 +10,19 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
+
+//This file controls the loginView
 class LoginViewController: UIViewController {
     
-    
+    //Fields for loginView View Controller
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var pwdTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     
+    
     override func viewDidLoad() {
         
-        //run handleLogin() when button is clicked
+        //run handleLogin() when submit button is clicked
         submitButton.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         
         super.viewDidLoad()
@@ -42,12 +45,9 @@ class LoginViewController: UIViewController {
             }
             
         }
-        
-        
-        
-        
-        
     }
+    
+   
     
 
     

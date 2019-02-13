@@ -96,7 +96,7 @@ class SignUpViewController: UIViewController {
     }
     
     
-    //checks to see if email is valid
+    //checks to see if valid email is entered
     func isValidEmail(email:String?) -> Bool {
         guard email != nil else { return false }
         let regEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
