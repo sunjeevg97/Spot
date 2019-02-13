@@ -26,26 +26,34 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
+    
     @objc func handleSignUp(_sender: AnyObject){
         guard let name = nameTextField.text else{return}
         guard let username = userNameTextField.text else{return}
         guard let email = emailTextField.text else{return}
         guard let password = passwordTextField.text else{return}
         
-        //authenticate user
-        Auth.auth().createUser(withEmail: email, password: password){
-            user, error in
-            if error == nil && user != nil { //if no errors
-                print("user created")
-                self.saveUserToFirebase(name:name, username: username, email: email)
-                self.performSegue(withIdentifier: "signUpToInfo", sender: self)
-            }
-            else{
-                print(error?.localizedDescription)
-            }
+        //Checks to see if there is text field without text entered into it
+        if (!self.allFieldsComplete(name: name, username: username, email: email, password: password)){
+            print("complete all fields to create account")
+        }else{//if there is text in all fields, proceeds to authentication
             
+            Auth.auth().createUser(withEmail: email, password: password){//authenticate user
+                user, error in
+                
+                if error == nil && user != nil { //if no errors then create user
+                    print("user created")
+                    self.saveUserToFirebase(name:name, username: username, email: email)
+                    self.performSegue(withIdentifier: "signUpToInfo", sender: self) //Go to intro page
+                }else{
+                    print(error?.localizedDescription ?? "Sign-up Error")
+                }
+            }
         }
+        
+        
+        
     }
     
     //add new user's account to firestore w/ uid key and name,email,username value pairs
@@ -63,6 +71,31 @@ class SignUpViewController: UIViewController {
         db.collection("users").document(userId).setData(accountInfo, merge: true)
         
     }
+    
+    //Function checks to see if text is entered into all fields
+    private func allFieldsComplete(name:String, username:String,email:String,password:String) -> Bool{
+        if name.isEmpty{
+            print("name is empty")
+            return false;
+        }
+        if username.isEmpty{
+            print("username is empty")
+            return false;
+        }
+        if email.isEmpty{
+            print("email is empty")
+            return false;
+        }
+        if password.isEmpty{
+            print("password is empty")
+            return false;
+        }
+        print("all fields entered")
+        return true;
+    }
+    
+    
+    
     
 }
 
