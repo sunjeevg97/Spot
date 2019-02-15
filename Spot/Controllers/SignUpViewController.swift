@@ -10,11 +10,9 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 class SignUpViewController: UIViewController {
-    
-    //set up connections b/w text fields & buttons in storyboard
-    @IBOutlet weak var signUpBtn: UIButton!
-    
+
     //Creates variables to be used when generating text fields
+    //This works but do they need to be weak variables??? -> Need to find out
     weak var nameField: UITextField!
     weak var emailField: UITextField!
     weak var usernameField: UITextField!
@@ -22,14 +20,6 @@ class SignUpViewController: UIViewController {
     
     
     override func viewDidLoad() {
-        
-        
-        
-        
-        
-        //run handleSignUp() when button is clicked
-        signUpBtn.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
-        
         
         super.viewDidLoad()
         
@@ -94,10 +84,10 @@ class SignUpViewController: UIViewController {
         let nameString = NSMutableAttributedString(string: nameContent, attributes: [
             NSAttributedString.Key.font: UIFont(name: "Arial", size: 14)!
             ])
-        let textRange = NSRange(location: 0, length: nameString.length)
+        let nameRange = NSRange(location: 0, length: nameString.length)
         _ = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 1.14
-        nameString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: textRange)
+        nameString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: nameRange)
         nameLayer.attributedText = nameString
         nameLayer.sizeToFit()
         self.view.addSubview(nameLayer)
@@ -108,7 +98,7 @@ class SignUpViewController: UIViewController {
         nameField.layer.cornerRadius = 5
         nameField.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.1)
         self.view.addSubview(nameField)
-        
+        nameField.textColor = UIColor.white
         
         
         //Load email label
@@ -134,6 +124,7 @@ class SignUpViewController: UIViewController {
         emailField.layer.cornerRadius = 5
         emailField.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.1)
         self.view.addSubview(emailField)
+        emailField.textColor = UIColor.white
         
         //load username label
         
@@ -159,6 +150,7 @@ class SignUpViewController: UIViewController {
         usernameField.layer.cornerRadius = 5
         usernameField.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.1)
         self.view.addSubview(usernameField)
+        usernameField.textColor = UIColor.white
         
         
         //load password label
@@ -179,38 +171,120 @@ class SignUpViewController: UIViewController {
         self.view.addSubview(pwdLayer)
         
         //load pwd min characters label
+        let pwdMinLayer = UILabel(frame: CGRect(x: 112, y: 362, width: 223, height: 12))
+        pwdMinLayer.lineBreakMode = .byWordWrapping
+        pwdMinLayer.numberOfLines = 0
+        pwdMinLayer.textColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
+        let pwdMinContent = "min 6 characters"
+        let pwdMinString = NSMutableAttributedString(string: pwdMinContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 10)!
+            ])
+        let pwdMinRange = NSRange(location: 0, length: pwdMinString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.2
+        pwdMinString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: pwdMinRange)
+        pwdMinLayer.attributedText = pwdMinString
+        pwdMinLayer.sizeToFit()
+        self.view.addSubview(pwdMinLayer)
         
         //load password text field
         pwdField = UITextField(frame: CGRect(x: 38, y: 378, width: 299.02, height: 36))
         pwdField.layer.cornerRadius = 5
         pwdField.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.1)
         self.view.addSubview(pwdField)
+        pwdField.isSecureTextEntry = true
+        pwdField.textColor = UIColor.white
+        
+        //Load 'Go' button background
+        let goBtnBackground = UIView(frame: CGRect(x: 134, y: 432, width: 108, height: 30))
+        goBtnBackground.layer.cornerRadius = 8
+        goBtnBackground.backgroundColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
+        self.view.addSubview(goBtnBackground)
+        
+        //Load 'Go' button text
+        let goText = UILabel(frame: CGRect(x: 177, y: 438, width: 178, height: 19))
+        goText.lineBreakMode = .byWordWrapping
+        goText.numberOfLines = 0
+        goText.textColor = UIColor.white
+        goText.textAlignment = .center
+        let goTextContent = "GO"
+        let goTextString = NSMutableAttributedString(string: goTextContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 16)!
+            ])
+        let goTextRange = NSRange(location: 0, length: goTextString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.19
+        goTextString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: goTextRange)
+        goText.attributedText = goTextString
+        goText.sizeToFit()
+        self.view.addSubview(goText)
         
         
+        //Load 'already have an account'
         
+        let alreadyhave = UILabel(frame: CGRect(x: 100, y: 709, width: 223, height: 19))
+        alreadyhave.lineBreakMode = .byWordWrapping
+        alreadyhave.numberOfLines = 0
+        alreadyhave.textColor = UIColor(red:0.61, green:0.61, blue:0.61, alpha:1)
+        alreadyhave.textAlignment = .center
+        let alreadyhaveContent = "Already have an account? "
+        let alreadyhaveString = NSMutableAttributedString(string: alreadyhaveContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 16)!
+            ])
+        let alreadyhaveRange = NSRange(location: 0, length: alreadyhaveString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.19
+        alreadyhaveString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: alreadyhaveRange)
+        alreadyhave.attributedText = alreadyhaveString
+        alreadyhave.sizeToFit()
+        self.view.addSubview(alreadyhave)
+        
+        //Load 'login' button
+        let loginBtn = UILabel(frame: CGRect(x: 170, y: 728, width: 130, height: 45))
+        loginBtn.lineBreakMode = .byWordWrapping
+        loginBtn.numberOfLines = 0
+        loginBtn.textColor = UIColor.white
+        loginBtn.textAlignment = .center
+        let loginContent = "Log in"
+        let loginString = NSMutableAttributedString(string: loginContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 20)!
+            ])
+        let loginRange = NSRange(location: 0, length: loginString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.2
+        loginString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: loginRange)
+        loginBtn.attributedText = loginString
+        loginBtn.sizeToFit()
+        self.view.addSubview(loginBtn)
+        
+        
+        //run handleSignUp() when sign up button is clicked ('GO')
+        goBtnBackground.isUserInteractionEnabled = true
+        let signupRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleSignUp))
+        goBtnBackground.addGestureRecognizer(signupRecognizer)
+        
+        
+        //run goToLoginPage() when button is clicked
+        loginBtn.isUserInteractionEnabled = true
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(goToLoginPage))
+        loginBtn.addGestureRecognizer(gestureRecognizer)
+        
+    }
+    
+    @objc func goToLoginPage(_sender: AnyObject){
+        self.performSegue(withIdentifier: "signupToLogin", sender: self) //Go to intro page
     }
     
     
     @objc func handleSignUp(_sender: AnyObject){
         
-        
-        print(nameField.text!)
-        
+        //gets the text values from the text boxes
         guard let name = nameField.text else{return}
         guard let username = usernameField.text else{return}
         guard let email = emailField.text else{return}
         guard let password = pwdField.text else{return}
         
-        
-//        guard let name = nameTextField.text else{return}
-//        guard let username = userNameTextField.text else{return}
-//        guard let email = emailTextField.text else{return}
-//        guard let password = passwordTextField.text else{return}
-        
-        
-        
-        
-        
+
         //Checks to see if there is text field without text entered into it
         if (!self.allFieldsComplete(name: name, username: username, email: email, password: password)){
             print("complete all fields to create account")

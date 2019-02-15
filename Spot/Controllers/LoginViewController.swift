@@ -14,10 +14,12 @@ import FirebaseFirestore
 //This file controls the loginView
 class LoginViewController: UIViewController {
     
-    //Fields for loginView View Controller
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var pwdTextField: UITextField!
+    //Outlet for UI buttons
     @IBOutlet weak var submitButton: UIButton!
+    
+    //Initializes text field variables
+    weak var emailField: UITextField!
+    weak var pwdField: UITextField!
     
     
     override func viewDidLoad() {
@@ -26,13 +28,182 @@ class LoginViewController: UIViewController {
         submitButton.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        //Load User Interface Elements according to Invision
+        
+        //Display background image
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "SignUpBackground.png")
+        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+        self.view.insertSubview(backgroundImage, at: 0)
+        
+        //Load Spot Logo
+        let logoPath = "Signuplogo1x.png"
+        let logoImage = UIImage(named: logoPath)
+        let logoImageView = UIImageView(image: logoImage!)
+        
+        logoImageView.frame = CGRect(x: 150, y: 45, width: 75, height: 22)
+        view.addSubview(logoImageView)
+        
+        //Load "Rediscover Your World"
+        let sloganTextLayer = UILabel(frame: CGRect(x: 99, y: 73, width: 178, height: 15))
+        sloganTextLayer.lineBreakMode = .byWordWrapping
+        sloganTextLayer.numberOfLines = 0
+        sloganTextLayer.textColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
+        sloganTextLayer.textAlignment = .center
+        let sloganTextContent = "REDISCOVER YOUR WORLD"
+        let sloganTextString = NSMutableAttributedString(string: sloganTextContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Menlo-Bold", size: 13)!
+            ])
+        let sloganTextRange = NSRange(location: 0, length: sloganTextString.length)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.15
+        sloganTextString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: sloganTextRange)
+        sloganTextLayer.attributedText = sloganTextString
+        sloganTextLayer.sizeToFit()
+        self.view.addSubview(sloganTextLayer)
+        
+        
+        //Load arrow container
+        let arrowContainer = UIView(frame: CGRect(x: 15, y: 56, width: 12, height: 20))
+        self.view.addSubview(arrowContainer)
+        
+        
+        //Load back arrow (top)
+        let backArrowTop = UIView(frame: CGRect(x: 19.68, y: 64, width: 2.5, height: 14))
+        var transformTop = CGAffineTransform.identity
+        transformTop = transformTop.rotated(by: 2.356194490192345)
+        backArrowTop.transform = transformTop
+        backArrowTop.layer.cornerRadius = 0.75
+        backArrowTop.backgroundColor = UIColor.white
+        self.view.addSubview(backArrowTop)
+        
+        //Load back arrow (bottom)
+        let backArrowBottom = UIView(frame: CGRect(x: 19.68, y: 56, width: 2.5, height: 14))
+        var transformBottom = CGAffineTransform.identity
+        transformBottom = transformBottom.rotated(by: -2.356194490192345)
+        backArrowBottom.transform = transformBottom
+        backArrowBottom.layer.cornerRadius = 0.75
+        backArrowBottom.backgroundColor = UIColor.white
+        self.view.addSubview(backArrowBottom)
+        
+        
+        //Load 'Log in' label
+        let loginLayer = UILabel(frame: CGRect(x: 38, y: 180, width: 130, height: 38))
+        loginLayer.lineBreakMode = .byWordWrapping
+        loginLayer.numberOfLines = 0
+        loginLayer.textColor = UIColor.white
+        let loginContent = "Log in"
+        let loginString = NSMutableAttributedString(string: loginContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 32)!
+            ])
+        let loginRange = NSRange(location: 0, length: loginString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.19
+        loginString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: loginRange)
+        loginLayer.attributedText = loginString
+        loginLayer.sizeToFit()
+        self.view.addSubview(loginLayer)
+        
+        
+        
+        //load email label
+        
+        let emailLayer = UILabel(frame: CGRect(x: 39, y: 234, width: 170, height: 16))
+        emailLayer.lineBreakMode = .byWordWrapping
+        emailLayer.numberOfLines = 0
+        emailLayer.textColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
+        let emailContent = "email"
+        let emailString = NSMutableAttributedString(string: emailContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 14)!
+            ])
+        let emailRange = NSRange(location: 0, length: emailString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.14
+        emailString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: emailRange)
+        emailLayer.attributedText = emailString
+        emailLayer.sizeToFit()
+        self.view.addSubview(emailLayer)
+        
+        
+        
+        //load email text field
+        emailField = UITextField(frame: CGRect(x: 38, y: 253, width: 299.02, height: 36))
+        emailField.layer.cornerRadius = 5
+        emailField.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.1)
+        self.view.addSubview(emailField)
+        emailField.textColor = UIColor.white
+        
+        
+        //load password label
+        let pwdLayer = UILabel(frame: CGRect(x: 39, y: 302, width: 170, height: 16))
+        pwdLayer.lineBreakMode = .byWordWrapping
+        pwdLayer.numberOfLines = 0
+        pwdLayer.textColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
+        let pwdContent = "password"
+        let pwdString = NSMutableAttributedString(string: pwdContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 14)!
+            ])
+        let pwdRange = NSRange(location: 0, length: pwdString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.14
+        pwdString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: pwdRange)
+        pwdLayer.attributedText = pwdString
+        pwdLayer.sizeToFit()
+        self.view.addSubview(pwdLayer)
+        
+        
+        //load password text field
+        
+        pwdField = UITextField(frame: CGRect(x: 38, y: 321, width: 299.02, height: 36))
+        pwdField.layer.cornerRadius = 5
+        pwdField.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.1)
+        self.view.addSubview(pwdField)
+        pwdField.isSecureTextEntry = true
+        pwdField.textColor = UIColor.white
+        
+        //Load 'Forgot Password' (fp) button
+        let fpLayer = UILabel(frame: CGRect(x: 195, y: 374, width: 138, height: 19))
+        fpLayer.lineBreakMode = .byWordWrapping
+        fpLayer.numberOfLines = 0
+        fpLayer.textColor = UIColor(red:0.61, green:0.61, blue:0.61, alpha:1)
+        let fpContent = "Forgot password?"
+        let fpString = NSMutableAttributedString(string: fpContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 14)!
+            ])
+        let fpRange = NSRange(location: 0, length: fpString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.19
+        fpString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: fpRange)
+        fpLayer.attributedText = fpString
+        fpLayer.sizeToFit()
+        self.view.addSubview(fpLayer)
+        
+        
+        //loginToSignup
+        arrowContainer.isUserInteractionEnabled = true
+        let backRecognizer = UITapGestureRecognizer(target: self, action: #selector(returnToSignup))
+        arrowContainer.addGestureRecognizer(backRecognizer)
+        
+        //loginToForgot
+        fpLayer.isUserInteractionEnabled = true
+        let forgotRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleForgotPwd))
+        fpLayer.addGestureRecognizer(forgotRecognizer)
+        
+    }
+    
+    @objc func returnToSignup(_sender: AnyObject){
+        self.performSegue(withIdentifier: "loginToSignup", sender: self) //return to signup view
+    }
+    
+    @objc func handleForgotPwd(_sender: AnyObject){
+        self.performSegue(withIdentifier: "loginToForgot", sender: self) //return to signup view
     }
     
     @objc func handleLogin(_sender: AnyObject){
-        guard let email = emailTextField.text else{return}
-        guard let password = pwdTextField.text else{return}
+        
+        guard let email = emailField.text else{return}
+        guard let password = pwdField.text else{return}
         
         //Authenticate login information
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
