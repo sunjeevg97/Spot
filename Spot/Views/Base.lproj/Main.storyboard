@@ -293,51 +293,49 @@
             </objects>
             <point key="canvasLocation" x="3102" y="112"/>
         </scene>
-        <!--Item 2-->
+        <!--Profile View Controller-->
         <scene sceneID="WfL-LY-DOH">
             <objects>
-                <viewController id="bxU-va-toT" sceneMemberID="viewController">
+                <viewController id="bxU-va-toT" customClass="ProfileViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dV8-gk-yX3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Page 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KdQ-nL-aC2">
-                                <rect key="frame" x="88" y="167" width="192" height="181"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="TYE-0K-qgK"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="cox-LP-bYT"/>
+                    <tabBarItem key="tabBarItem" title="" image="ProfileIcon" selectedImage="ProfileActiveIcon" id="cox-LP-bYT"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="af7-fc-tKJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2708" y="2167"/>
         </scene>
-        <!--Item 1-->
+        <!--Feed View Controller-->
+        <scene sceneID="Jyx-M5-t67">
+            <objects>
+                <viewController id="635-3n-tgi" customClass="FeedViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LA3-TR-tTo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="KNs-Qi-ebR"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="FeedIcon" selectedImage="FeedActiveIcon" id="NcP-BV-sSi"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E6z-lE-vVO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3484" y="2172"/>
+        </scene>
+        <!--Map View Controller-->
         <scene sceneID="ike-Gc-hwo">
             <objects>
-                <viewController id="vkr-4K-2jk" sceneMemberID="viewController">
+                <viewController id="vkr-4K-2jk" customClass="MapViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vo6-2s-g3b">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Page 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lyO-Zz-VWa">
-                                <rect key="frame" x="91" y="176" width="192" height="181"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="bDA-FM-KY6"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="JFc-LQ-oee"/>
+                    <tabBarItem key="tabBarItem" title="" image="MapIcon" selectedImage="MapActiveIcon" id="JFc-LQ-oee"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N1B-1F-8IV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -350,11 +348,14 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="t1z-p2-Chf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="vkr-4K-2jk" kind="relationship" relationship="viewControllers" id="7sE-do-xks"/>
                         <segue destination="bxU-va-toT" kind="relationship" relationship="viewControllers" id="Hxj-qA-KyW"/>
+                        <segue destination="635-3n-tgi" kind="relationship" relationship="viewControllers" id="KQr-kx-lnB"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wy0-EW-hlf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -409,9 +410,16 @@ IT’S A MAGICAL WORLD OUT THERE.
             <point key="canvasLocation" x="3919" y="112"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="FeedActiveIcon" width="34" height="38"/>
+        <image name="FeedIcon" width="34" height="38"/>
+        <image name="MapActiveIcon" width="31" height="37"/>
+        <image name="MapIcon" width="31" height="37"/>
+        <image name="ProfileActiveIcon" width="38" height="38"/>
+        <image name="ProfileIcon" width="38" height="38"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9El-Q1-eIU"/>
         <segue reference="9cG-7c-1HM"/>
-        <segue reference="gtI-4n-fVM"/>
+        <segue reference="RNW-2x-rNB"/>
     </inferredMetricsTieBreakers>
 </document>
