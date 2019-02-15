@@ -12,12 +12,9 @@ import FirebaseFirestore
 class SignUpViewController: UIViewController {
     
     //set up connections b/w text fields & buttons in storyboard
-//    @IBOutlet weak var nameTextField: UITextField!
-//    @IBOutlet weak var emailTextField: UITextField!
-//    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signUpBtn: UIButton!
-//    @IBOutlet weak var userNameTextField: UITextField!
     
+    //Creates variables to be used when generating text fields
     weak var nameField: UITextField!
     weak var emailField: UITextField!
     weak var usernameField: UITextField!
@@ -26,7 +23,23 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         
-        //Load User Interface Elements using code from Invision
+        
+        
+        
+        
+        //run handleSignUp() when button is clicked
+        signUpBtn.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        
+        
+        super.viewDidLoad()
+        
+        //Load User Interface Elements according to Invision
+        
+        //Display background image
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "SignUpBackground.png")
+        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+        self.view.insertSubview(backgroundImage, at: 0)
         
         //Load Spot Logo
         let logoPath = "Signuplogo1x.png"
@@ -35,7 +48,7 @@ class SignUpViewController: UIViewController {
         
         logoImageView.frame = CGRect(x: 150, y: 45, width: 75, height: 22)
         view.addSubview(logoImageView)
-
+        
         //Load "Rediscover Your World"
         let sloganTextLayer = UILabel(frame: CGRect(x: 99, y: 73, width: 178, height: 15))
         sloganTextLayer.lineBreakMode = .byWordWrapping
@@ -172,22 +185,6 @@ class SignUpViewController: UIViewController {
         pwdField.layer.cornerRadius = 5
         pwdField.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.1)
         self.view.addSubview(pwdField)
-        
-        
-        
-        //run handleSignUp() when button is clicked
-        signUpBtn.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
-        
-        
-        super.viewDidLoad()
-        
-        
-        
-        //Display background image
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-        backgroundImage.image = UIImage(named: "SignUpBackground.png")
-        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
-        self.view.insertSubview(backgroundImage, at: 0)
         
         
         
