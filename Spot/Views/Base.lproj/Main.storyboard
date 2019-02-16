@@ -17,29 +17,6 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sQg-lf-CSe">
-                                <rect key="frame" x="375" y="59" width="43" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                <state key="normal" title="Log in">
-                                    <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sign Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uy-D4-Fs2">
-                                <rect key="frame" x="134" y="832" width="86" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
-                                <color key="textColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
@@ -58,53 +35,11 @@
                     <view key="view" contentMode="scaleToFill" id="vFk-2O-OHB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="gC2-ar-C5y" userLabel="Username Text Field">
-                                <rect key="frame" x="42" y="243" width="291" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="0.10220462330000001" colorSpace="calibratedRGB"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" textContentType="password"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kea-uS-mci">
-                                <rect key="frame" x="50" y="216" width="49" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Menlo-Italic" family="Menlo" pointSize="16"/>
-                                <color key="textColor" red="0.38823529410000002" green="0.8980392157" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4h-0K-2T3">
-                                <rect key="frame" x="274" y="67" width="44" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Log in">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <segue destination="gWK-HF-6yf" kind="show" id="gtI-4n-fVM"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Wz-Lg-Yag">
-                                <rect key="frame" x="133" y="385" width="109" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Reset Password"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your email to reset your password." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdW-vJ-306">
-                                <rect key="frame" x="38" y="273" width="299" height="104"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="cme-O4-bPL"/>
                     </view>
                     <connections>
-                        <outlet property="resetPasswordBtn" destination="1Wz-Lg-Yag" id="Hev-kr-psc"/>
-                        <outlet property="resetTextField" destination="gC2-ar-C5y" id="tvb-t8-uhb"/>
                         <segue destination="VCX-LA-Nyl" kind="show" identifier="EmailSent" id="0Pa-rW-4FP"/>
+                        <segue destination="gWK-HF-6yf" kind="presentation" identifier="resetToLogin" modalTransitionStyle="crossDissolve" id="EVc-K9-Lbo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="05g-aM-7Gk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -138,7 +73,6 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="0Fu-GJ-gtp"/>
                     </view>
                 </viewController>
@@ -164,7 +98,7 @@
                     </view>
                     <connections>
                         <outlet property="submitButton" destination="AcT-XT-XBw" id="79K-cF-wNY"/>
-                        <segue destination="8JJ-p2-ETf" kind="show" identifier="loginToTab" id="9cG-7c-1HM"/>
+                        <segue destination="8JJ-p2-ETf" kind="presentation" identifier="loginToTab" modalTransitionStyle="crossDissolve" id="9cG-7c-1HM"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="loginToSignup" modalTransitionStyle="crossDissolve" id="noH-gm-GA0"/>
                         <segue destination="VBi-4S-HmH" kind="presentation" identifier="loginToForgot" modalTransitionStyle="crossDissolve" id="9El-Q1-eIU"/>
                     </connections>
@@ -411,15 +345,16 @@ IT’S A MAGICAL WORLD OUT THERE.
         </scene>
     </scenes>
     <resources>
-        <image name="FeedActiveIcon" width="34" height="38"/>
-        <image name="FeedIcon" width="34" height="38"/>
-        <image name="MapActiveIcon" width="31" height="37"/>
-        <image name="MapIcon" width="31" height="37"/>
-        <image name="ProfileActiveIcon" width="38" height="38"/>
-        <image name="ProfileIcon" width="38" height="38"/>
+        <image name="FeedActiveIcon" width="68" height="76"/>
+        <image name="FeedIcon" width="68" height="76"/>
+        <image name="MapActiveIcon" width="62" height="74"/>
+        <image name="MapIcon" width="62" height="74"/>
+        <image name="ProfileActiveIcon" width="76" height="76"/>
+        <image name="ProfileIcon" width="76" height="76"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="9El-Q1-eIU"/>
         <segue reference="9cG-7c-1HM"/>
-        <segue reference="RNW-2x-rNB"/>
+        <segue reference="EVc-K9-Lbo"/>
     </inferredMetricsTieBreakers>
 </document>
