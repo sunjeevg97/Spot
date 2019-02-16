@@ -13,12 +13,7 @@ import FirebaseFirestore
 //This file controls the resetView
 class ResetViewController: UIViewController {
     
-    //Fields for resetView View Controller
-    
-    @IBOutlet weak var resetTextField: UITextField!
-    @IBOutlet weak var resetPasswordBtn: UIButton!
-    
-    //Initializes text field variables
+    //Initializes text field variable
     weak var emailField: UITextField!
     
     override func viewDidLoad() {
@@ -187,8 +182,6 @@ class ResetViewController: UIViewController {
     
     
     @objc func handleReset(_sender: AnyObject){
-        
-//        guard let resetText = resetTextField.text else{return}
         guard let resetText = emailField.text else{return}
     
        if !isValidEmail(email: resetText){
@@ -201,8 +194,6 @@ class ResetViewController: UIViewController {
          
         }
         
-        
-        
     }
     
     
@@ -213,8 +204,5 @@ class ResetViewController: UIViewController {
         let pred = NSPredicate(format:"SELF MATCHES %@", regEx)
         return pred.evaluate(with: email)
     }
-
-
-
 
 }

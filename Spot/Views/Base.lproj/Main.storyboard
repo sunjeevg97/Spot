@@ -353,6 +353,7 @@ IT’S A MAGICAL WORLD OUT THERE.
         <image name="ProfileIcon" width="76" height="76"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="9El-Q1-eIU"/>
         <segue reference="9cG-7c-1HM"/>
         <segue reference="EVc-K9-Lbo"/>
     </inferredMetricsTieBreakers>
