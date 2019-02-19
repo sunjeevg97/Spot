@@ -257,6 +257,29 @@ class SignUpViewController: UIViewController {
         loginBtn.sizeToFit()
         self.view.addSubview(loginBtn)
         
+        //load Error box
+        let errorBox = UIView(frame: CGRect(x: 0, y: 489, width: 375, height: 32))
+        errorBox.backgroundColor = UIColor(red:0.35, green:0, blue:0.04, alpha:1)
+        self.view.addSubview(errorBox)
+        
+        //Load error text
+        let errorTextLayer = UILabel(frame: CGRect(x: 23, y: 496, width: 329, height: 18))
+        errorTextLayer.lineBreakMode = .byWordWrapping
+        errorTextLayer.numberOfLines = 0
+        errorTextLayer.textColor = UIColor.white
+        errorTextLayer.textAlignment = .center
+        let errorTextContent = "ERROR  Invalid login credentials. Please try again."
+        let errorTextString = NSMutableAttributedString(string: errorTextContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 14)!
+            ])
+        let errorTextRange = NSRange(location: 0, length: errorTextString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.14
+        errorTextString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: errorTextRange)
+        errorTextLayer.attributedText = errorTextString
+        errorTextLayer.sizeToFit()
+        self.view.addSubview(errorTextLayer)
+        
         
         //run handleSignUp() when sign up button is clicked ('GO')
         goBtnBackground.isUserInteractionEnabled = true
