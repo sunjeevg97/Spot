@@ -38,47 +38,12 @@
                         <viewLayoutGuide key="safeArea" id="cme-O4-bPL"/>
                     </view>
                     <connections>
-                        <segue destination="VCX-LA-Nyl" kind="show" identifier="EmailSent" id="0Pa-rW-4FP"/>
                         <segue destination="gWK-HF-6yf" kind="presentation" identifier="resetToLogin" modalTransitionStyle="crossDissolve" id="EVc-K9-Lbo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="05g-aM-7Gk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-196" y="832.53373313343332"/>
-        </scene>
-        <!--resetPrompt-->
-        <scene sceneID="OWb-sW-ylm">
-            <objects>
-                <viewController title="resetPrompt" id="VCX-LA-Nyl" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UGC-Yb-gJK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Follow the instructions from your email to reset your password." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZX-Q5-1Uf">
-                                <rect key="frame" x="38" y="155" width="299" height="104"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="16"/>
-                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Czl-3T-jCA">
-                                <rect key="frame" x="106" y="300" width="170" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="Return to Login">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <segue destination="gWK-HF-6yf" kind="show" id="sW2-WO-PsP"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="0Fu-GJ-gtp"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YsA-5r-Oeq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="201" y="1587"/>
         </scene>
         <!--loginView-->
         <scene sceneID="kEs-Lq-NMz">
@@ -87,17 +52,9 @@
                     <view key="view" contentMode="scaleToFill" id="KtO-vt-APb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AcT-XT-XBw">
-                                <rect key="frame" x="163" y="395" width="49" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Submit"/>
-                            </button>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Cnz-rS-oVl"/>
                     </view>
                     <connections>
-                        <outlet property="submitButton" destination="AcT-XT-XBw" id="79K-cF-wNY"/>
                         <segue destination="8JJ-p2-ETf" kind="presentation" identifier="loginToTab" modalTransitionStyle="crossDissolve" id="9cG-7c-1HM"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="loginToSignup" modalTransitionStyle="crossDissolve" id="noH-gm-GA0"/>
                         <segue destination="VBi-4S-HmH" kind="presentation" identifier="loginToForgot" modalTransitionStyle="crossDissolve" id="9El-Q1-eIU"/>
@@ -237,7 +194,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="TYE-0K-qgK"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="ProfileIcon" selectedImage="ProfileActiveIcon" id="cox-LP-bYT"/>
+                    <navigationItem key="navigationItem" id="AP4-1H-yAS"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="af7-fc-tKJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -312,8 +269,10 @@
                         <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
+
                         <segue destination="GNh-RA-eKd" kind="relationship" relationship="viewControllers" id="7sE-do-xks"/>
                         <segue destination="bxU-va-toT" kind="relationship" relationship="viewControllers" id="Hxj-qA-KyW"/>
+
                         <segue destination="635-3n-tgi" kind="relationship" relationship="viewControllers" id="KQr-kx-lnB"/>
                     </connections>
                 </tabBarController>
@@ -369,6 +328,7 @@ IT’S A MAGICAL WORLD OUT THERE.
             <point key="canvasLocation" x="3919" y="112"/>
         </scene>
         <!--Navigation Controller-->
+
         <scene sceneID="TEZ-oV-JSR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GNh-RA-eKd" sceneMemberID="viewController">
@@ -387,6 +347,7 @@ IT’S A MAGICAL WORLD OUT THERE.
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QcV-BZ-V8s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1909.5999999999999" y="2167.4662668665669"/>
+
         </scene>
     </scenes>
     <resources>

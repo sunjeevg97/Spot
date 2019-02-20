@@ -10,6 +10,12 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 class SignUpViewController: UIViewController {
+    
+    //Change status bar theme color white
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
 
     //Creates variables to be used when generating text fields
     //This works but do they need to be weak variables??? -> Need to find out
@@ -17,7 +23,8 @@ class SignUpViewController: UIViewController {
     weak var emailField: UITextField!
     weak var usernameField: UITextField!
     weak var pwdField: UITextField!
-    
+    var errorBox: UIView!
+    var errorTextLayer: UILabel!
     
     override func viewDidLoad() {
         
@@ -99,6 +106,7 @@ class SignUpViewController: UIViewController {
         nameField.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.1)
         self.view.addSubview(nameField)
         nameField.textColor = UIColor.white
+        nameField.autocorrectionType = .no
         
         
         //Load email label
@@ -125,6 +133,7 @@ class SignUpViewController: UIViewController {
         emailField.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.1)
         self.view.addSubview(emailField)
         emailField.textColor = UIColor.white
+        emailField.autocorrectionType = .no
         
         //load username label
         
@@ -151,6 +160,7 @@ class SignUpViewController: UIViewController {
         usernameField.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.1)
         self.view.addSubview(usernameField)
         usernameField.textColor = UIColor.white
+        usernameField.autocorrectionType = .no
         
         
         //load password label
@@ -194,6 +204,7 @@ class SignUpViewController: UIViewController {
         self.view.addSubview(pwdField)
         pwdField.isSecureTextEntry = true
         pwdField.textColor = UIColor.white
+        pwdField.autocorrectionType = .no
         
         //Load 'Go' button background
         let goBtnBackground = UIView(frame: CGRect(x: 134, y: 432, width: 108, height: 30))
@@ -257,6 +268,31 @@ class SignUpViewController: UIViewController {
         loginBtn.sizeToFit()
         self.view.addSubview(loginBtn)
         
+        //load Error box
+        errorBox = UIView(frame: CGRect(x: 0, y: 489, width: 375, height: 32))
+        errorBox.backgroundColor = UIColor(red:0.35, green:0, blue:0.04, alpha:1)
+        self.view.addSubview(errorBox)
+        errorBox.isHidden = true
+        
+        //Load error text
+        errorTextLayer = UILabel(frame: CGRect(x: 23, y: 496, width: 329, height: 18))
+        errorTextLayer.lineBreakMode = .byWordWrapping
+        errorTextLayer.numberOfLines = 0
+        errorTextLayer.textColor = UIColor.white
+        errorTextLayer.textAlignment = .center
+        let errorTextContent = "ERROR  Invalid login credentials. Please try again."
+        let errorTextString = NSMutableAttributedString(string: errorTextContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 14)!
+            ])
+        let errorTextRange = NSRange(location: 0, length: errorTextString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.14
+        errorTextString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: errorTextRange)
+        errorTextLayer.attributedText = errorTextString
+        errorTextLayer.sizeToFit()
+        self.view.addSubview(errorTextLayer)
+        errorTextLayer.isHidden = true
+        
         
         //run handleSignUp() when sign up button is clicked ('GO')
         goBtnBackground.isUserInteractionEnabled = true
@@ -299,6 +335,13 @@ class SignUpViewController: UIViewController {
                     self.performSegue(withIdentifier: "signUpToInfo", sender: self) //Go to intro page
                 }else{
                     print(error?.localizedDescription ?? "Sign-up Error")
+                    
+                    self.errorBox.isHidden = false
+                    self.errorTextLayer.isHidden = false
+                    self.errorTextLayer.text = "ERROR Email address already in use"
+                    
+                    
+                    
                 }
             }
         }
@@ -325,20 +368,39 @@ class SignUpViewController: UIViewController {
     
     //Function checks to see if text is entered into all fields
     private func allFieldsComplete(name:String, username:String,email:String,password:String) -> Bool{
+        errorBox.isHidden = true
+        errorTextLayer.isHidden = true
+        
         
         if name.isEmpty{
+            errorBox.isHidden = false
+            errorTextLayer.isHidden = false
+            errorTextLayer.text = "ERROR Please enter your name"
+            
             print("name is empty")
             return false;
         }
-        if username.isEmpty{
-            print("username is empty")
-            return false;
-        }
         if !isValidEmail(email: email){
+            errorBox.isHidden = false
+            errorTextLayer.isHidden = false
+            errorTextLayer.text = "ERROR Please enter a valid email"
+            
             print("invalid email")
             return false;
         }
+        if username.isEmpty{
+            errorBox.isHidden = false
+            errorTextLayer.isHidden = false
+            errorTextLayer.text = "ERROR Please enter a username"
+            
+            print("username is empty")
+            return false;
+        }
         if password.count < 6{
+            errorBox.isHidden = false
+            errorTextLayer.isHidden = false
+            errorTextLayer.text = "ERROR Please enter a valid password"
+            
             print("password must be at least 6 characters")
             return false;
         }
