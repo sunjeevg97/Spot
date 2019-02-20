@@ -10,6 +10,12 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 class SignUpViewController: UIViewController {
+    
+    //Change status bar theme color white
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
 
     //Creates variables to be used when generating text fields
     //This works but do they need to be weak variables??? -> Need to find out
@@ -19,7 +25,6 @@ class SignUpViewController: UIViewController {
     weak var pwdField: UITextField!
     var errorBox: UIView!
     var errorTextLayer: UILabel!
-    
     
     override func viewDidLoad() {
         
@@ -101,6 +106,7 @@ class SignUpViewController: UIViewController {
         nameField.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.1)
         self.view.addSubview(nameField)
         nameField.textColor = UIColor.white
+        nameField.autocorrectionType = .no
         
         
         //Load email label
@@ -127,6 +133,7 @@ class SignUpViewController: UIViewController {
         emailField.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.1)
         self.view.addSubview(emailField)
         emailField.textColor = UIColor.white
+        emailField.autocorrectionType = .no
         
         //load username label
         
@@ -153,6 +160,7 @@ class SignUpViewController: UIViewController {
         usernameField.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.1)
         self.view.addSubview(usernameField)
         usernameField.textColor = UIColor.white
+        usernameField.autocorrectionType = .no
         
         
         //load password label
@@ -196,6 +204,7 @@ class SignUpViewController: UIViewController {
         self.view.addSubview(pwdField)
         pwdField.isSecureTextEntry = true
         pwdField.textColor = UIColor.white
+        pwdField.autocorrectionType = .no
         
         //Load 'Go' button background
         let goBtnBackground = UIView(frame: CGRect(x: 134, y: 432, width: 108, height: 30))
@@ -326,6 +335,13 @@ class SignUpViewController: UIViewController {
                     self.performSegue(withIdentifier: "signUpToInfo", sender: self) //Go to intro page
                 }else{
                     print(error?.localizedDescription ?? "Sign-up Error")
+                    
+                    self.errorBox.isHidden = false
+                    self.errorTextLayer.isHidden = false
+                    self.errorTextLayer.text = "ERROR Email address already in use"
+                    
+                    
+                    
                 }
             }
         }
@@ -352,6 +368,9 @@ class SignUpViewController: UIViewController {
     
     //Function checks to see if text is entered into all fields
     private func allFieldsComplete(name:String, username:String,email:String,password:String) -> Bool{
+        errorBox.isHidden = true
+        errorTextLayer.isHidden = true
+        
         
         if name.isEmpty{
             errorBox.isHidden = false

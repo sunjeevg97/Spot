@@ -13,8 +13,22 @@ import FirebaseFirestore
 //This file controls the resetView
 class ResetViewController: UIViewController {
     
+    //Change status bar theme color white
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     //Initializes text field variable
     weak var emailField: UITextField!
+    var confirmationSymbol: UIView!
+    var confirmationLayer: UILabel!
+    var emailLayer: UILabel!
+    var instructLayer: UILabel!
+    var resetBtnBackground: UIView!
+    var resetBtnText: UILabel!
+    var resetRecognizer: UITapGestureRecognizer!
+    var errorBox: UIView!
+    var errorTextLayer: UILabel!
     
     override func viewDidLoad() {
         
@@ -100,10 +114,34 @@ class ResetViewController: UIViewController {
         resetLabel.sizeToFit()
         self.view.addSubview(resetLabel)
         
+        //load check mark in circle symbol and then hide until later
+        confirmationSymbol = UIView(frame: CGRect(x: 41, y: 299, width: 55, height: 55))
+        confirmationSymbol.layer.borderWidth = 2
+        confirmationSymbol.layer.borderColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1).cgColor
+        self.view.addSubview(confirmationSymbol)
+        confirmationSymbol.isHidden = true
         
+        //Load reset confirmation text
+        confirmationLayer = UILabel(frame: CGRect(x: 108, y: 308, width: 236, height: 38))
+        confirmationLayer.lineBreakMode = .byWordWrapping
+        confirmationLayer.numberOfLines = 0
+        confirmationLayer.textColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
+        let confirmationContent = "Got it! Check your inbox for a link to reset your password."
+        let confirmationString = NSMutableAttributedString(string: confirmationContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 16)!
+            ])
+        let confirmationRange = NSRange(location: 0, length: confirmationString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.19
+        confirmationString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: confirmationRange)
+        confirmationLayer.attributedText = confirmationString
+        confirmationLayer.sizeToFit()
+        self.view.addSubview(confirmationLayer)
+        confirmationLayer.isHidden = true
         
+
         //load email label
-        let emailLayer = UILabel(frame: CGRect(x: 39, y: 291, width: 170, height: 16))
+        emailLayer = UILabel(frame: CGRect(x: 39, y: 291, width: 170, height: 16))
         emailLayer.lineBreakMode = .byWordWrapping
         emailLayer.numberOfLines = 0
         emailLayer.textColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
@@ -128,7 +166,7 @@ class ResetViewController: UIViewController {
         
         
         //Load 'we'll send a link to reset your password'
-        let instructLayer = UILabel(frame: CGRect(x: 38, y: 371, width: 313, height: 19))
+        instructLayer = UILabel(frame: CGRect(x: 38, y: 361, width: 313, height: 19))
         instructLayer.lineBreakMode = .byWordWrapping
         instructLayer.numberOfLines = 0
         instructLayer.textColor = UIColor(red:0.61, green:0.61, blue:0.61, alpha:1)
@@ -145,14 +183,14 @@ class ResetViewController: UIViewController {
         self.view.addSubview(instructLayer)
         
         
-        //Load 'Go' button background
-        let resetBtnBackground = UIView(frame: CGRect(x: 134, y: 432, width: 108, height: 30))
+        //Load 'Email Link' button background
+        resetBtnBackground = UIView(frame: CGRect(x: 134, y: 432, width: 108, height: 30))
         resetBtnBackground.layer.cornerRadius = 8
         resetBtnBackground.backgroundColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
         self.view.addSubview(resetBtnBackground)
         
-        //Load 'Go' button text
-        let resetBtnText = UILabel(frame: CGRect(x: 145, y: 438, width: 178, height: 19))
+        //Load 'Email Link' button text
+        resetBtnText = UILabel(frame: CGRect(x: 145, y: 438, width: 178, height: 19))
         resetBtnText.lineBreakMode = .byWordWrapping
         resetBtnText.numberOfLines = 0
         resetBtnText.textColor = UIColor.white
@@ -169,9 +207,38 @@ class ResetViewController: UIViewController {
         resetBtnText.sizeToFit()
         self.view.addSubview(resetBtnText)
         
+        
+        //load Error box
+//        errorBox = UIView(frame: CGRect(x: 0, y: 489, width: 375, height: 32))
+        errorBox = UIView(frame: CGRect(x: 0, y: 390, width: 375, height: 32))
+        errorBox.backgroundColor = UIColor(red:0.35, green:0, blue:0.04, alpha:1)
+        self.view.addSubview(errorBox)
+        errorBox.isHidden = true
+        
+        //Load error text (y: box + 7)
+//        errorTextLayer = UILabel(frame: CGRect(x: 23, y: 496, width: 329, height: 18))
+        errorTextLayer = UILabel(frame: CGRect(x: 23, y: 397, width: 329, height: 18))
+        errorTextLayer.lineBreakMode = .byWordWrapping
+        errorTextLayer.numberOfLines = 0
+        errorTextLayer.textColor = UIColor.white
+        errorTextLayer.textAlignment = .center
+        let errorTextContent = "ERROR  Please enter a valid email address."
+        let errorTextString = NSMutableAttributedString(string: errorTextContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 14)!
+            ])
+        let errorTextRange = NSRange(location: 0, length: errorTextString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.14
+        errorTextString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: errorTextRange)
+        errorTextLayer.attributedText = errorTextString
+        errorTextLayer.sizeToFit()
+        self.view.addSubview(errorTextLayer)
+        errorTextLayer.isHidden = true
+        
+        
         //run handleResetNew
         resetBtnBackground.isUserInteractionEnabled = true
-        let resetRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleReset))
+        resetRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleReset))
         resetBtnBackground.addGestureRecognizer(resetRecognizer)
 
     }
@@ -185,14 +252,29 @@ class ResetViewController: UIViewController {
         guard let resetText = emailField.text else{return}
     
        if !isValidEmail(email: resetText){
-            print("Please enter a valid email")
+        
+        errorBox.isHidden = false
+        errorTextLayer.isHidden = false
+        
         }else{
-            Auth.auth().sendPasswordReset(withEmail: resetText, completion: nil)
         
         //Currently this proceeds to next page even if you enter an email that is not in the database. Need to check whether sendPasswordReset() was successful or not
+            Auth.auth().sendPasswordReset(withEmail: resetText, completion: nil)
         
-        self.performSegue(withIdentifier: "EmailSent", sender: self) //Go resetPrompt view
-         
+        
+        //Hide initial fields, label, and button
+        emailField.isHidden = true
+        emailLayer.isHidden = true
+        instructLayer.isHidden = true
+        resetBtnBackground.isHidden = true
+        resetBtnText.isHidden = true
+        errorBox.isHidden = true
+        errorTextLayer.isHidden = true
+        
+        //Show confirmation text and symbol
+        confirmationSymbol.isHidden = false //show check mark
+        confirmationLayer.isHidden = false  //show confirmation message
+        
         }
         
     }
