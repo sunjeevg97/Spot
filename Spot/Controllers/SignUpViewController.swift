@@ -17,6 +17,8 @@ class SignUpViewController: UIViewController {
     weak var emailField: UITextField!
     weak var usernameField: UITextField!
     weak var pwdField: UITextField!
+    var errorBox: UIView!
+    var errorTextLayer: UILabel!
     
     
     override func viewDidLoad() {
@@ -258,12 +260,13 @@ class SignUpViewController: UIViewController {
         self.view.addSubview(loginBtn)
         
         //load Error box
-        let errorBox = UIView(frame: CGRect(x: 0, y: 489, width: 375, height: 32))
+        errorBox = UIView(frame: CGRect(x: 0, y: 489, width: 375, height: 32))
         errorBox.backgroundColor = UIColor(red:0.35, green:0, blue:0.04, alpha:1)
         self.view.addSubview(errorBox)
+        errorBox.isHidden = true
         
         //Load error text
-        let errorTextLayer = UILabel(frame: CGRect(x: 23, y: 496, width: 329, height: 18))
+        errorTextLayer = UILabel(frame: CGRect(x: 23, y: 496, width: 329, height: 18))
         errorTextLayer.lineBreakMode = .byWordWrapping
         errorTextLayer.numberOfLines = 0
         errorTextLayer.textColor = UIColor.white
@@ -279,6 +282,7 @@ class SignUpViewController: UIViewController {
         errorTextLayer.attributedText = errorTextString
         errorTextLayer.sizeToFit()
         self.view.addSubview(errorTextLayer)
+        errorTextLayer.isHidden = true
         
         
         //run handleSignUp() when sign up button is clicked ('GO')
@@ -350,18 +354,34 @@ class SignUpViewController: UIViewController {
     private func allFieldsComplete(name:String, username:String,email:String,password:String) -> Bool{
         
         if name.isEmpty{
+            errorBox.isHidden = false
+            errorTextLayer.isHidden = false
+            errorTextLayer.text = "ERROR Please enter your name"
+            
             print("name is empty")
             return false;
         }
-        if username.isEmpty{
-            print("username is empty")
-            return false;
-        }
         if !isValidEmail(email: email){
+            errorBox.isHidden = false
+            errorTextLayer.isHidden = false
+            errorTextLayer.text = "ERROR Please enter a valid email"
+            
             print("invalid email")
             return false;
         }
+        if username.isEmpty{
+            errorBox.isHidden = false
+            errorTextLayer.isHidden = false
+            errorTextLayer.text = "ERROR Please enter a username"
+            
+            print("username is empty")
+            return false;
+        }
         if password.count < 6{
+            errorBox.isHidden = false
+            errorTextLayer.isHidden = false
+            errorTextLayer.text = "ERROR Please enter a valid password"
+            
             print("password must be at least 6 characters")
             return false;
         }

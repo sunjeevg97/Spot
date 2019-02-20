@@ -87,17 +87,9 @@
                     <view key="view" contentMode="scaleToFill" id="KtO-vt-APb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AcT-XT-XBw">
-                                <rect key="frame" x="163" y="395" width="49" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Submit"/>
-                            </button>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Cnz-rS-oVl"/>
                     </view>
                     <connections>
-                        <outlet property="submitButton" destination="AcT-XT-XBw" id="79K-cF-wNY"/>
                         <segue destination="8JJ-p2-ETf" kind="presentation" identifier="loginToTab" modalTransitionStyle="crossDissolve" id="9cG-7c-1HM"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="loginToSignup" modalTransitionStyle="crossDissolve" id="noH-gm-GA0"/>
                         <segue destination="VBi-4S-HmH" kind="presentation" identifier="loginToForgot" modalTransitionStyle="crossDissolve" id="9El-Q1-eIU"/>
