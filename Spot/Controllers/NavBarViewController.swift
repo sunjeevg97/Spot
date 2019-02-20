@@ -1,31 +1,22 @@
 //
-//  MapViewController.swift
+//  NavBarViewController.swift
 //  Spot
 //
-//  Created by Victoria Elaine Maxwell on 2/15/19.
+//  Created by Victoria Elaine Maxwell on 2/18/19.
 //  Copyright © 2019 comp523. All rights reserved.
 //
 
 import UIKit
-import MapKit
 
-class MapViewController: UIViewController {
-    
-    @IBOutlet weak var mapView: MKMapView!
-    
+class NavBarViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
 
         // Do any additional setup after loading the view.
     }
     
-    
-    
 
-    @IBAction func addSpot(_ sender: Any) {
-    }
     /*
     // MARK: - Navigation
 
