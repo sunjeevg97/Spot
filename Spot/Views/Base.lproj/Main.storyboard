@@ -194,11 +194,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="TYE-0K-qgK"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="ProfileIcon" selectedImage="ProfileActiveIcon" id="cox-LP-bYT"/>
+                    <navigationItem key="navigationItem" id="AP4-1H-yAS"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="af7-fc-tKJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2708" y="2167"/>
+            <point key="canvasLocation" x="3647.1999999999998" y="2166.5667166416792"/>
         </scene>
         <!--Feed View Controller-->
         <scene sceneID="Jyx-M5-t67">
@@ -214,7 +214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E6z-lE-vVO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3484" y="2172"/>
+            <point key="canvasLocation" x="4423.1999999999998" y="2171.9640179910048"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="ike-Gc-hwo">
@@ -245,7 +245,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="vkr-4K-2jk" kind="relationship" relationship="viewControllers" id="7sE-do-xks"/>
-                        <segue destination="bxU-va-toT" kind="relationship" relationship="viewControllers" id="Hxj-qA-KyW"/>
+                        <segue destination="cjm-ue-qUr" kind="relationship" relationship="viewControllers" id="Hxj-qA-KyW"/>
                         <segue destination="635-3n-tgi" kind="relationship" relationship="viewControllers" id="KQr-kx-lnB"/>
                     </connections>
                 </tabBarController>
@@ -299,6 +299,25 @@ IT’S A MAGICAL WORLD OUT THERE.
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cQI-I4-1r4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3919" y="112"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Rvm-5e-GOM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cjm-ue-qUr" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="ProfileIcon" selectedImage="ProfileActiveIcon" id="cox-LP-bYT"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cQv-kp-4Z6">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bxU-va-toT" kind="relationship" relationship="rootViewController" id="NCY-86-WGh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1FR-lr-rLr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2708" y="2166.5667166416792"/>
         </scene>
     </scenes>
     <resources>
