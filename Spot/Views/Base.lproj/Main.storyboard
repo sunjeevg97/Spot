@@ -38,47 +38,12 @@
                         <viewLayoutGuide key="safeArea" id="cme-O4-bPL"/>
                     </view>
                     <connections>
-                        <segue destination="VCX-LA-Nyl" kind="show" identifier="EmailSent" id="0Pa-rW-4FP"/>
                         <segue destination="gWK-HF-6yf" kind="presentation" identifier="resetToLogin" modalTransitionStyle="crossDissolve" id="EVc-K9-Lbo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="05g-aM-7Gk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-196" y="832.53373313343332"/>
-        </scene>
-        <!--resetPrompt-->
-        <scene sceneID="OWb-sW-ylm">
-            <objects>
-                <viewController title="resetPrompt" id="VCX-LA-Nyl" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UGC-Yb-gJK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Follow the instructions from your email to reset your password." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZX-Q5-1Uf">
-                                <rect key="frame" x="38" y="155" width="299" height="104"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="16"/>
-                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Czl-3T-jCA">
-                                <rect key="frame" x="106" y="300" width="170" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="Return to Login">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <segue destination="gWK-HF-6yf" kind="show" id="sW2-WO-PsP"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="0Fu-GJ-gtp"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YsA-5r-Oeq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="201" y="1587"/>
         </scene>
         <!--loginView-->
         <scene sceneID="kEs-Lq-NMz">
@@ -345,8 +310,7 @@ IT’S A MAGICAL WORLD OUT THERE.
         <image name="ProfileIcon" width="76" height="76"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9El-Q1-eIU"/>
         <segue reference="9cG-7c-1HM"/>
-        <segue reference="EVc-K9-Lbo"/>
+        <segue reference="RNW-2x-rNB"/>
     </inferredMetricsTieBreakers>
 </document>

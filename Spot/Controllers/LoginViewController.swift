@@ -14,6 +14,11 @@ import FirebaseFirestore
 //This file controls the loginView
 class LoginViewController: UIViewController {
     
+    //Change status bar theme color white
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     //Initializes text field variables
     weak var emailField: UITextField!
     weak var pwdField: UITextField!
@@ -129,6 +134,7 @@ class LoginViewController: UIViewController {
         emailField.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.1)
         self.view.addSubview(emailField)
         emailField.textColor = UIColor.white
+        emailField.autocorrectionType = .no
         
         
         //load password label
@@ -157,6 +163,7 @@ class LoginViewController: UIViewController {
         self.view.addSubview(pwdField)
         pwdField.isSecureTextEntry = true
         pwdField.textColor = UIColor.white
+        pwdField.autocorrectionType = .no
         
         //Load 'Forgot Password' (fp) button
         let fpLayer = UILabel(frame: CGRect(x: 195, y: 374, width: 138, height: 19))
