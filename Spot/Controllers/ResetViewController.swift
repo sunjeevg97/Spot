@@ -163,6 +163,7 @@ class ResetViewController: UIViewController {
         emailField.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.1)
         self.view.addSubview(emailField)
         emailField.textColor = UIColor.white
+        emailField.autocorrectionType = .no
         
         
         //Load 'we'll send a link to reset your password'
@@ -209,15 +210,14 @@ class ResetViewController: UIViewController {
         
         
         //load Error box
-//        errorBox = UIView(frame: CGRect(x: 0, y: 489, width: 375, height: 32))
-        errorBox = UIView(frame: CGRect(x: 0, y: 390, width: 375, height: 32))
+        errorBox = UIView(frame: CGRect(x: 0, y: 489, width: 375, height: 32))
+
         errorBox.backgroundColor = UIColor(red:0.35, green:0, blue:0.04, alpha:1)
         self.view.addSubview(errorBox)
         errorBox.isHidden = true
         
-        //Load error text (y: box + 7)
-//        errorTextLayer = UILabel(frame: CGRect(x: 23, y: 496, width: 329, height: 18))
-        errorTextLayer = UILabel(frame: CGRect(x: 23, y: 397, width: 329, height: 18))
+        //Load error text
+        errorTextLayer = UILabel(frame: CGRect(x: 23, y: 496, width: 329, height: 18))
         errorTextLayer.lineBreakMode = .byWordWrapping
         errorTextLayer.numberOfLines = 0
         errorTextLayer.textColor = UIColor.white
