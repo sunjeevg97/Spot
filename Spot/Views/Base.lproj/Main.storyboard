@@ -184,28 +184,28 @@
             </objects>
             <point key="canvasLocation" x="3102" y="112"/>
         </scene>
-        <!--Profile View Controller-->
-        <scene sceneID="WfL-LY-DOH">
+        <!--Item-->
+        <scene sceneID="mdV-Kn-vpE">
             <objects>
-                <viewController id="bxU-va-toT" customClass="ProfileViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dV8-gk-yX3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <viewController id="JJG-83-qOE" customClass="ProfileViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QUw-Ma-y8r">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="TYE-0K-qgK"/>
+                        <viewLayoutGuide key="safeArea" id="kpA-WP-EZz"/>
                     </view>
-                    <navigationItem key="navigationItem" id="AP4-1H-yAS"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="ProfileIcon" selectedImage="ProfileActiveIcon" id="H4I-Ag-LbV"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="af7-fc-tKJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mkA-Fl-R3H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3647.1999999999998" y="2166.5667166416792"/>
+            <point key="canvasLocation" x="3645" y="2161"/>
         </scene>
         <!--Feed View Controller-->
         <scene sceneID="Jyx-M5-t67">
             <objects>
                 <viewController id="635-3n-tgi" customClass="FeedViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LA3-TR-tTo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="KNs-Qi-ebR"/>
@@ -221,7 +221,7 @@
             <objects>
                 <viewController id="vkr-4K-2jk" customClass="MapViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vo6-2s-g3b">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="48u-bB-7c6">
@@ -250,7 +250,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="48u-bB-7c6" id="JTv-6W-dHk"/>
-                        <outlet property="navItem" destination="4De-Yd-D1a" id="hQe-57-3AU"/>
+                        <outlet property="navigationItem" destination="4De-Yd-D1a" id="hQe-57-3AU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N1B-1F-8IV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -261,7 +261,7 @@
         <scene sceneID="Xth-0Q-utc">
             <objects>
                 <tabBarController id="8JJ-p2-ETf" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="t1z-p2-Chf">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="t1z-p2-Chf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -269,10 +269,8 @@
                         <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-
                         <segue destination="GNh-RA-eKd" kind="relationship" relationship="viewControllers" id="7sE-do-xks"/>
-                        <segue destination="bxU-va-toT" kind="relationship" relationship="viewControllers" id="Hxj-qA-KyW"/>
-
+                        <segue destination="JJG-83-qOE" kind="relationship" relationship="viewControllers" id="t2V-w3-cRz"/>
                         <segue destination="635-3n-tgi" kind="relationship" relationship="viewControllers" id="KQr-kx-lnB"/>
                     </connections>
                 </tabBarController>
@@ -328,7 +326,6 @@ IT’S A MAGICAL WORLD OUT THERE.
             <point key="canvasLocation" x="3919" y="112"/>
         </scene>
         <!--Navigation Controller-->
-
         <scene sceneID="TEZ-oV-JSR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GNh-RA-eKd" sceneMemberID="viewController">
@@ -347,19 +344,18 @@ IT’S A MAGICAL WORLD OUT THERE.
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QcV-BZ-V8s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1909.5999999999999" y="2167.4662668665669"/>
-
         </scene>
     </scenes>
     <resources>
-        <image name="AddSpotIcon" width="36" height="36"/>
-        <image name="FeedActiveIcon" width="34" height="38"/>
-        <image name="FeedIcon" width="34" height="38"/>
-        <image name="MapActiveIcon" width="31" height="37"/>
-        <image name="MapIcon" width="31" height="37"/>
-        <image name="NotificationIcon" width="20" height="24"/>
-        <image name="ProfileActiveIcon" width="38" height="38"/>
-        <image name="ProfileIcon" width="38" height="38"/>
-        <image name="SearchIcon" width="26" height="26"/>
+        <image name="AddSpotIcon" width="72" height="72"/>
+        <image name="FeedActiveIcon" width="68" height="76"/>
+        <image name="FeedIcon" width="68" height="76"/>
+        <image name="MapActiveIcon" width="62" height="74"/>
+        <image name="MapIcon" width="62" height="74"/>
+        <image name="NotificationIcon" width="40" height="48"/>
+        <image name="ProfileActiveIcon" width="76" height="76"/>
+        <image name="ProfileIcon" width="76" height="76"/>
+        <image name="SearchIcon" width="52" height="52"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9cG-7c-1HM"/>
