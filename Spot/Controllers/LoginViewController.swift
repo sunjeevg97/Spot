@@ -14,18 +14,14 @@ import FirebaseFirestore
 //This file controls the loginView
 class LoginViewController: UIViewController {
     
-    //Outlet for UI buttons
-    @IBOutlet weak var submitButton: UIButton!
-    
     //Initializes text field variables
     weak var emailField: UITextField!
     weak var pwdField: UITextField!
+    var errorBox: UIView!
+    var errorTextLayer: UILabel!
     
     
     override func viewDidLoad() {
-        
-        //run handleLogin() when submit button is clicked
-        submitButton.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         
         super.viewDidLoad()
         
@@ -179,13 +175,42 @@ class LoginViewController: UIViewController {
         fpLayer.sizeToFit()
         self.view.addSubview(fpLayer)
         
+        
+        //Load 'LOG IN' button background
+        let loginBtnBackground = UIView(frame: CGRect(x: 134, y: 412, width: 108, height: 32))
+        loginBtnBackground.layer.cornerRadius = 8
+        loginBtnBackground.backgroundColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
+        self.view.addSubview(loginBtnBackground)
+        
+        
+        //Load 'LOG IN' button text
+        let loginBtnText = UILabel(frame: CGRect(x: 162, y: 419, width: 178, height: 19))
+        loginBtnText.lineBreakMode = .byWordWrapping
+        loginBtnText.numberOfLines = 0
+        loginBtnText.textColor = UIColor.white
+        loginBtnText.textAlignment = .center
+        let loginBtnTextContent = "LOG IN"
+        let loginBtnTextString = NSMutableAttributedString(string: loginBtnTextContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 16)!
+            ])
+        let loginBtnTextRange = NSRange(location: 0, length: loginBtnTextString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.19
+        loginBtnTextString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: loginBtnTextRange)
+        loginBtnText.attributedText = loginBtnTextString
+        loginBtnText.sizeToFit()
+        self.view.addSubview(loginBtnText)
+        
+        
+        
         //load Error box
-        let errorBox = UIView(frame: CGRect(x: 0, y: 489, width: 375, height: 32))
+        errorBox = UIView(frame: CGRect(x: 0, y: 489, width: 375, height: 32))
         errorBox.backgroundColor = UIColor(red:0.35, green:0, blue:0.04, alpha:1)
         self.view.addSubview(errorBox)
+        errorBox.isHidden = true
         
         //Load error text
-        let errorTextLayer = UILabel(frame: CGRect(x: 23, y: 496, width: 329, height: 18))
+        errorTextLayer = UILabel(frame: CGRect(x: 23, y: 496, width: 329, height: 18))
         errorTextLayer.lineBreakMode = .byWordWrapping
         errorTextLayer.numberOfLines = 0
         errorTextLayer.textColor = UIColor.white
@@ -201,7 +226,12 @@ class LoginViewController: UIViewController {
         errorTextLayer.attributedText = errorTextString
         errorTextLayer.sizeToFit()
         self.view.addSubview(errorTextLayer)
+        errorTextLayer.isHidden = true
         
+        //run handleLogin() when 'LOG IN' button is clicked
+        loginBtnBackground.isUserInteractionEnabled = true
+        let loginRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleLogin))
+        loginBtnBackground.addGestureRecognizer(loginRecognizer)
         
         //loginToSignup
         arrowContainer.isUserInteractionEnabled = true
@@ -232,18 +262,17 @@ class LoginViewController: UIViewController {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             
             if error == nil && user != nil {//if no errors then allow login
+                self.errorBox.isHidden = true
+                self.errorTextLayer.isHidden = true
                 print("success!")
                 self.performSegue(withIdentifier: "loginToTab", sender: self) //Go to tab view page
             }else{
                 print("login failed")
+                self.errorBox.isHidden = false
+                self.errorTextLayer.isHidden = false
             }
             
         }
     }
     
-   
-    
-
-    
-
 }

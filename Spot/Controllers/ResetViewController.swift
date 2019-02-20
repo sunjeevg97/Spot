@@ -190,6 +190,7 @@ class ResetViewController: UIViewController {
             Auth.auth().sendPasswordReset(withEmail: resetText, completion: nil)
         
         //Currently this proceeds to next page even if you enter an email that is not in the database. Need to check whether sendPasswordReset() was successful or not
+        
         self.performSegue(withIdentifier: "EmailSent", sender: self) //Go resetPrompt view
          
         }
