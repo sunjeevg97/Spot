@@ -287,5 +287,11 @@ class ResetViewController: UIViewController {
         let pred = NSPredicate(format:"SELF MATCHES %@", regEx)
         return pred.evaluate(with: email)
     }
+    
+    //Hide keyboard when user touches screen
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+        
+    }
 
 }
