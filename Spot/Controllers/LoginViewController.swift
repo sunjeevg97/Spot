@@ -30,6 +30,8 @@ class LoginViewController: UIViewController {
         
         super.viewDidLoad()
         
+        
+        
         //Load User Interface Elements according to Invision
         
         //Display background image
@@ -164,6 +166,7 @@ class LoginViewController: UIViewController {
         pwdField.isSecureTextEntry = true
         pwdField.textColor = UIColor.white
         pwdField.autocorrectionType = .no
+
         
         //Load 'Forgot Password' (fp) button
         let fpLayer = UILabel(frame: CGRect(x: 195, y: 374, width: 138, height: 19))
@@ -280,6 +283,12 @@ class LoginViewController: UIViewController {
             }
             
         }
+    }
+    
+    //Hide keyboard when user touches screen
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+        
     }
     
 }
