@@ -169,7 +169,7 @@ class LoginViewController: UIViewController {
 
         
         //Load 'Forgot Password' (fp) button
-        let fpLayer = UILabel(frame: CGRect(x: 195, y: 374, width: 138, height: 19))
+        let fpLayer = UILabel(frame: CGRect(x: 134, y: 374, width: 138, height: 19))
         fpLayer.lineBreakMode = .byWordWrapping
         fpLayer.numberOfLines = 0
         fpLayer.textColor = UIColor(red:0.61, green:0.61, blue:0.61, alpha:1)
