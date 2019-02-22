@@ -14,6 +14,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Signuplogo1x.png"))
+        
     }
     
 
