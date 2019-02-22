@@ -194,13 +194,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="kpA-WP-EZz"/>
                     </view>
-                    <navigationItem key="navigationItem" id="xvo-Vl-4gD"/>
+                    <navigationItem key="navigationItem" id="xvo-Vl-4gD">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="SearchIcon" id="QBe-Js-KnT"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="NotificationIcon" id="GFr-Do-rhz"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mkA-Fl-R3H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4583.1999999999998" y="2160.2698650674665"/>
         </scene>
-        <!--Feed View Controller-->
+        <!--FEED-->
         <scene sceneID="Jyx-M5-t67">
             <objects>
                 <viewController id="635-3n-tgi" customClass="FeedViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
@@ -224,7 +227,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="KNs-Qi-ebR"/>
                     </view>
-                    <navigationItem key="navigationItem" id="mcS-3A-el3"/>
+                    <navigationItem key="navigationItem" title="FEED" id="mcS-3A-el3">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="SearchIcon" id="cMz-II-IZn"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="NotificationIcon" id="gdG-tb-EJt"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E6z-lE-vVO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
