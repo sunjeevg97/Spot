@@ -14,8 +14,6 @@ class FeedViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     var email: String = ""
-//    var username : String = ""
-//    var name : String = ""
     var db: Firestore!
 
     
@@ -53,13 +51,6 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.dataSource = self
-        
-
-//        print(email)
-//        print(username)
-//        print("name: ", name)
-        
-        
         
         loadPosts()
         
