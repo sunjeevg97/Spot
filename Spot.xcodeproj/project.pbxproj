@@ -155,7 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				1DF6E04922089F4800BA0C36 /* SpotTests.swift */,
-				1DF6E04B22089F4800BA0C36 /* Info.plist */,
 			);
 			path = SpotTests;
 			sourceTree = "<group>";
@@ -175,6 +174,7 @@
 				7A378021221B3331008B835A /* NavBarViewController.swift */,
 				7A37801F22174BEA008B835A /* FeedViewController.swift */,
 				7A37801D22174BD6008B835A /* ProfileViewController.swift */,
+				1DF6E04B22089F4800BA0C36 /* Info.plist */,
 				7A37801B22174BB1008B835A /* MapViewController.swift */,
 				1DF6E03622089F4500BA0C36 /* SignUpViewController.swift */,
 				3E6189562213DEAD00A7CFF4 /* LoginViewController.swift */,

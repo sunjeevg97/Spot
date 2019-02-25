@@ -16,7 +16,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Signuplogo1x.png"))
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Signuplogo.png"))
 
         // Do any additional setup after loading the view.
     }
