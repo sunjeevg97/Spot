@@ -7,19 +7,72 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseFirestore
 
 class FeedViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    var email: String = ""
+//    var username : String = ""
+//    var name : String = ""
+    var db: Firestore!
+
     
 
     override func viewDidLoad() {
+        
+        db = Firestore.firestore()
+        
+        email = Auth.auth().currentUser?.email ?? "Invalid User"
+        
+        
+        let id: String = Auth.auth().currentUser?.uid ?? "invalid ID"
+        print("UserID: ", id)
+        
+
+    
+        db.collection("users").getDocuments { (snapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                    for document in snapshot!.documents {
+                        let name = document.data()["name"] as! String
+                        let username = document.data()["username"] as! String
+                        
+                        print(name)
+                        print(username)
+                        
+
+                    }
+                }
+            }
+        
+
+        
         super.viewDidLoad()
         
         tableView.dataSource = self
+        
+
+//        print(email)
+//        print(username)
+//        print("name: ", name)
+        
+        
+        
+        loadPosts()
+        
 
         
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Signuplogo1x.png"))
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Signuplogo.png"))
+    }
+    
+    
+    func loadPosts(){
+//        Firestore.collection(<#T##Firestore#>)
+        
+        
     }
     
 

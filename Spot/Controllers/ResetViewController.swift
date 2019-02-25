@@ -41,7 +41,7 @@ class ResetViewController: UIViewController {
         self.view.insertSubview(backgroundImage, at: 0)
         
         //Load Spot Logo
-        let logoPath = "Signuplogo1x.png"
+        let logoPath = "Signuplogo.png"
         let logoImage = UIImage(named: logoPath)
         let logoImageView = UIImageView(image: logoImage!)
         

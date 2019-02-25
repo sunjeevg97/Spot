@@ -39,7 +39,7 @@ class SignUpViewController: UIViewController {
         self.view.insertSubview(backgroundImage, at: 0)
         
         //Load Spot Logo
-        let logoPath = "Signuplogo1x.png"
+        let logoPath = "Signuplogo.png"
         let logoImage = UIImage(named: logoPath)
         let logoImageView = UIImageView(image: logoImage!)
         
@@ -362,7 +362,7 @@ class SignUpViewController: UIViewController {
         
         let accountInfo = [userId : values]
         
-        db.collection("users").document(userId).setData(accountInfo, merge: true)
+        db.collection("users").document(userId).setData(values, merge: true)
         
     }
     
