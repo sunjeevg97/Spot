@@ -362,6 +362,7 @@ class SignUpViewController: UIViewController {
         
         db.collection("users").document(userId).setData(values, merge: true)
         
+        
     }
     
     //Function checks to see if text is entered into all fields
