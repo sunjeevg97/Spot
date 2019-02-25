@@ -360,9 +360,8 @@ class SignUpViewController: UIViewController {
                       "email" : email,
                       "username" : username]
         
-        let accountInfo = [userId : values]
-        
         db.collection("users").document(userId).setData(values, merge: true)
+        
         
     }
     
