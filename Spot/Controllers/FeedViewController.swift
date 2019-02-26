@@ -13,46 +13,40 @@ import FirebaseFirestore
 class FeedViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    var email: String = ""
-    var db: Firestore!
-
-    
+    let email: String = Auth.auth().currentUser?.email ?? "Invalid User"
+    let db: Firestore! = Firestore.firestore()
+    let id: String = Auth.auth().currentUser?.uid ?? "invalid ID"
 
     override func viewDidLoad() {
         
-        db = Firestore.firestore()
+        var nameGlobal = "";
+        var usernameGlobal = "";
         
-        email = Auth.auth().currentUser?.email ?? "Invalid User"
+        nameGlobal = "test"
+        usernameGlobal = "test"
         
-        
-        let id: String = Auth.auth().currentUser?.uid ?? "invalid ID"
-        print("UserID: ", id)
-        
-
-    
-        db.collection("users").getDocuments { (snapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                    for document in snapshot!.documents {
-                        let name = document.data()["name"] as! String
-                        let username = document.data()["username"] as! String
-                        
-                        print(name)
-                        print(username)
-                        
-
-                    }
-                }
-            }
-        
-
         
         super.viewDidLoad()
         
+        //This is getting the name and username but is somehow not storing then in the global variables properly
+        db.collection("users").document(id).getDocument { (snapshot, err) in
+            
+            nameGlobal = snapshot?.get("name") as! String
+            usernameGlobal = snapshot?.get("username") as! String
+            
+            print("local", nameGlobal)
+            print("local", usernameGlobal)
+            
+        }
+        
+
+        print("global",nameGlobal)
+        print("global",usernameGlobal)
+        
+        
         tableView.dataSource = self
         
-        loadPosts()
+//        loadPosts()
         
 
         
@@ -60,12 +54,11 @@ class FeedViewController: UIViewController {
     }
     
     
-    func loadPosts(){
-//        Firestore.collection(<#T##Firestore#>)
-        
-        
-    }
-    
+//    func loadPosts(){
+////        Firestore.collection(<#T##Firestore#>)
+//
+//
+//    }
 
    
 
