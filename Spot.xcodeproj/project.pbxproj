@@ -17,6 +17,7 @@
 		3E6189572213DEAD00A7CFF4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6189562213DEAD00A7CFF4 /* LoginViewController.swift */; };
 		3ED3F1A622147EAE008CC29B /* ResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3F1A522147EAE008CC29B /* ResetViewController.swift */; };
 		3EDBE3CB2208B28B006D6B75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EDBE3CA2208B28B006D6B75 /* GoogleService-Info.plist */; };
+		3EE88DE52226621000E9D13F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE88DE42226621000E9D13F /* Post.swift */; };
 		675844E8F30647ADD3B850A9 /* Pods_Spot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286B836E6CA8EF95A3DBF973 /* Pods_Spot.framework */; };
 		7A37801C22174BB1008B835A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A37801B22174BB1008B835A /* MapViewController.swift */; };
 		7A37801E22174BD6008B835A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A37801D22174BD6008B835A /* ProfileViewController.swift */; };
@@ -63,6 +64,7 @@
 		3E6189562213DEAD00A7CFF4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3ED3F1A522147EAE008CC29B /* ResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetViewController.swift; sourceTree = "<group>"; };
 		3EDBE3CA2208B28B006D6B75 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3EE88DE42226621000E9D13F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Post.swift; path = Spot/Controllers/Post.swift; sourceTree = SOURCE_ROOT; };
 		4A128FDD7E619FF550F6C816 /* Pods-SpotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpotTests/Pods-SpotTests.release.xcconfig"; sourceTree = "<group>"; };
 		5A6FE8BCAD2A0033DF62E47D /* Pods_SpotTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F13890D99E98FC8A20FE3C3 /* Pods-SpotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpotUITests/Pods-SpotUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		1DF6E06622089F8D00BA0C36 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3EE88DE42226621000E9D13F /* Post.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 				3ED3F1A622147EAE008CC29B /* ResetViewController.swift in Sources */,
 				7A37801C22174BB1008B835A /* MapViewController.swift in Sources */,
 				1DF6E03522089F4500BA0C36 /* AppDelegate.swift in Sources */,
+				3EE88DE52226621000E9D13F /* Post.swift in Sources */,
 				7A378022221B3331008B835A /* NavBarViewController.swift in Sources */,
 				7A37802022174BEA008B835A /* FeedViewController.swift in Sources */,
 			);

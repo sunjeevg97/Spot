@@ -16,11 +16,10 @@ class FeedViewController: UIViewController {
     let email: String = Auth.auth().currentUser?.email ?? "Invalid User"
     let db: Firestore! = Firestore.firestore()
     let id: String = Auth.auth().currentUser?.uid ?? "invalid ID"
+    var nameGlobal : String = "";
+    var usernameGlobal : String = "";
 
     override func viewDidLoad() {
-        
-        var nameGlobal = "";
-        var usernameGlobal = "";
         
         nameGlobal = "test"
         usernameGlobal = "test"
@@ -28,37 +27,66 @@ class FeedViewController: UIViewController {
         
         super.viewDidLoad()
         
-        //This is getting the name and username but is somehow not storing then in the global variables properly
-        db.collection("users").document(id).getDocument { (snapshot, err) in
-            
-            nameGlobal = snapshot?.get("name") as! String
-            usernameGlobal = snapshot?.get("username") as! String
-            
-            print("local", nameGlobal)
-            print("local", usernameGlobal)
-            
-        }
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Signuplogo.png"))
+
+        
+        
+        
+        tableView.dataSource = self
+        loadPosts()
+        
+        var post = Post(captionText: "test", photoURLString: "url1")
         
 
+        setUserValues()
+        
+        
+        
         print("global",nameGlobal)
         print("global",usernameGlobal)
         
         
-        tableView.dataSource = self
         
-//        loadPosts()
-        
-
-        
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Signuplogo.png"))
     }
     
     
-//    func loadPosts(){
-////        Firestore.collection(<#T##Firestore#>)
-//
-//
-//    }
+    
+    
+    func loadPosts(){
+        
+
+    }
+    
+    
+    func setUserValues() {
+        
+        
+        
+        //This is asyncronous, is returning a promise before it is finished executing
+        
+        //This is getting the name and username but is somehow not storing then in the global variables properly
+        db.collection("users").document(id).getDocument { (snapshot, err) in
+            
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else{
+                
+                self.nameGlobal = snapshot?.get("name") as! String
+                self.usernameGlobal = snapshot?.get("username") as! String
+                
+                print("local", self.nameGlobal)
+                print("local", self.usernameGlobal)
+            }
+            
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
 
    
 
