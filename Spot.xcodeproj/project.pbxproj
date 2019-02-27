@@ -73,6 +73,7 @@
 		7A37801D22174BD6008B835A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = Spot/Controllers/ProfileViewController.swift; sourceTree = SOURCE_ROOT; };
 		7A37801F22174BEA008B835A /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FeedViewController.swift; path = Spot/Controllers/FeedViewController.swift; sourceTree = SOURCE_ROOT; };
 		7A378021221B3331008B835A /* NavBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NavBarViewController.swift; path = Spot/Controllers/NavBarViewController.swift; sourceTree = SOURCE_ROOT; };
+		7A9A551522273F71007469C7 /* Chapel Hill.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Chapel Hill.gpx"; path = "Spot/Chapel Hill.gpx"; sourceTree = "<group>"; };
 		B9E8B22E628AAF05FE70A61C /* Pods-SpotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpotTests/Pods-SpotTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BC0031C320EAA3D9491C239B /* Pods_SpotUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -121,6 +122,7 @@
 		1DF6E02822089F4500BA0C36 = {
 			isa = PBXGroup;
 			children = (
+				7A9A551522273F71007469C7 /* Chapel Hill.gpx */,
 				1DF6E03322089F4500BA0C36 /* Spot */,
 				1DF6E04822089F4800BA0C36 /* SpotTests */,
 				1DF6E05322089F4800BA0C36 /* SpotUITests */,
