@@ -16,8 +16,8 @@ class FeedViewController: UIViewController {
     let email: String = Auth.auth().currentUser?.email ?? "Invalid User"
     let db: Firestore! = Firestore.firestore()
     let id: String = Auth.auth().currentUser?.uid ?? "invalid ID"
-    var nameGlobal : String = "";
-    var usernameGlobal : String = "";
+    var nameGlobal : String?;
+    var usernameGlobal : String?;
 
     override func viewDidLoad() {
         
@@ -35,15 +35,39 @@ class FeedViewController: UIViewController {
         tableView.dataSource = self
         loadPosts()
         
-        var post = Post(captionText: "test", photoURLString: "url1")
         
+        
+        let group = DispatchGroup()
+        group.enter()
 
-        setUserValues()
+        DispatchQueue.main.async{
+            
+            //Bright futures google swift futures libary
+            
+            //This is asyncronous, is returning a promise before it is finished executing
+            //This is getting the name and username but is somehow not storing then in the global variables properly
+            
+            self.db.collection("users").document(self.id).getDocument { (snapshot, err) in
+                
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else{
+                    
+                    self.nameGlobal = snapshot?.get("name") as! String ?? "failed"
+                    self.usernameGlobal = snapshot?.get("username") as! String ?? "failed"
+                    
+                    group.leave()
+                }
+                
+            }
         
+        }
         
-        
-        print("global",nameGlobal)
-        print("global",usernameGlobal)
+        group.notify(queue: .main){
+            print("global",self.nameGlobal)
+            print("global",self.usernameGlobal)
+
+        }
         
         
         
@@ -58,30 +82,10 @@ class FeedViewController: UIViewController {
     }
     
     
-    func setUserValues() {
+   
         
         
-        
-        //This is asyncronous, is returning a promise before it is finished executing
-        
-        //This is getting the name and username but is somehow not storing then in the global variables properly
-        db.collection("users").document(id).getDocument { (snapshot, err) in
-            
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else{
-                
-                self.nameGlobal = snapshot?.get("name") as! String
-                self.usernameGlobal = snapshot?.get("username") as! String
-                
-                print("local", self.nameGlobal)
-                print("local", self.usernameGlobal)
-            }
-            
-        }
-        
-        
-    }
+}
     
     
     
@@ -90,20 +94,39 @@ class FeedViewController: UIViewController {
 
    
 
-}
+
 
 extension FeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+        
+        var postsList : [Post] = []
+        
+        for i in 1...10{
+            postsList.append(Post(captionText: "caption # \(i)", photoURLString: "images/\(i)"))
+            
+        }
+        
+        
+
+        
+        return postsList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
         
+        var postsList : [Post] = []
+        for i in 1...10{
+            postsList.append(Post(captionText: "caption # \(i)", photoURLString: "images/\(i)"))
+            
+        }
         
 //        let cell = UITableViewCell()
         cell.backgroundColor = UIColor.gray
         cell.textLabel?.text = "\(indexPath.row)"
+        cell.textLabel?.text = postsList[indexPath.row].caption
+        
+        
         
         return cell
         
