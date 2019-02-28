@@ -18,84 +18,92 @@ class FeedViewController: UIViewController {
     let id: String = Auth.auth().currentUser?.uid ?? "invalid ID"
     var nameGlobal : String?;
     var usernameGlobal : String?;
+    var nametestGlobal : String?;
+    var usertestGlobal : String?;
 
     override func viewDidLoad() {
         
         nameGlobal = "test"
         usernameGlobal = "test"
-        
+        nametestGlobal = "test"
+        usertestGlobal = "test"
         
         super.viewDidLoad()
         
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Signuplogo.png"))
 
         
-        
-        
         tableView.dataSource = self
-        loadPosts()
         
-        
-        
-        let group = DispatchGroup()
-        group.enter()
+        //It's good to run dispatch after everything else in viewDidLoad because nothing afterwards will run before it finishes
+        runDispatch()
+    }
 
-        DispatchQueue.main.async{
+    func runDispatch() {
+        
+        DispatchQueue.global().async {
             
-            //Bright futures google swift futures libary
+            let dispatchGroup = DispatchGroup()
             
-            //This is asyncronous, is returning a promise before it is finished executing
-            //This is getting the name and username but is somehow not storing then in the global variables properly
             
-            self.db.collection("users").document(self.id).getDocument { (snapshot, err) in
+            dispatchGroup.enter()
+            DispatchQueue.global().async {
                 
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else{
+                self.db.collection("users").document(self.id).getDocument { (snapshot, err) in
                     
-                    self.nameGlobal = snapshot?.get("name") as! String ?? "failed"
-                    self.usernameGlobal = snapshot?.get("username") as! String ?? "failed"
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    } else{
+                        
+                        self.nameGlobal = snapshot?.get("name") as? String
+                        self.usernameGlobal = snapshot?.get("username") as? String
+                        
+                        //need to query list of user's friends and store them in a global variable
+                        
+                    }
                     
-                    group.leave()
+                    dispatchGroup.leave()
+                    print("Did the first thing")
+                    
                 }
-                
             }
-        
+            
+            dispatchGroup.wait()
+            print("done waiting")
+            print(self.usernameGlobal)
+            print(self.nameGlobal)
+            
+            //Need to load posts from user's friends list (order by post timestamp)
+            
+            self.loadPosts()
+            
+            //Similarly you can run a .notify block to run after all previous blocks have completed
+            //            dispatchGroup.notify(queue: DispatchQueue.main) {
+            //                print("Did all the things")
+            //                print(self.usernameGlobal)
+            //                print(self.nameGlobal)
+            //            }
+            
+            
+            
+            //Repeat Process for more async blocks
+            
         }
-        
-        group.notify(queue: .main){
-            print("global",self.nameGlobal)
-            print("global",self.usernameGlobal)
-
-        }
-        
-        
         
     }
-    
-    
-    
     
     func loadPosts(){
+        print("posts loaded")
         
-
+        
     }
     
     
-   
-        
         
 }
     
     
     
-    
-    
-
-   
-
-
-
 extension FeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
