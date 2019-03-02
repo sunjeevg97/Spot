@@ -121,6 +121,8 @@ extension FeedViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        tableView.rowHeight = 510
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
         
         var postsList : [Post] = []
@@ -130,9 +132,69 @@ extension FeedViewController: UITableViewDataSource {
         }
         
 //        let cell = UITableViewCell()
-        cell.backgroundColor = UIColor.gray
-        cell.textLabel?.text = "\(indexPath.row)"
-        cell.textLabel?.text = postsList[indexPath.row].caption
+        cell.backgroundColor = UIColor.black
+        print("height", cell.heightAnchor)
+//        cell.textLabel?.textColor = UIColor.white
+//        cell.textLabel?.text = "\(indexPath.row)"
+//        cell.textLabel?.text = postsList[indexPath.row].caption
+        
+        
+        
+        //Display the username of the user that created the post
+        let handleDisplay = UILabel(frame: CGRect(x: 46, y: 8, width: 37, height: 15))
+        handleDisplay.lineBreakMode = .byWordWrapping
+        handleDisplay.numberOfLines = 0
+        handleDisplay.textColor = UIColor(red:0.82, green:0.82, blue:0.82, alpha:1)
+        let handleContent = "tyler"
+        let handleString = NSMutableAttributedString(string: handleContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 12)!
+            ])
+        let handleRange = NSRange(location: 0, length: handleString.length)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.17
+        handleString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: handleRange)
+        handleDisplay.attributedText = handleString
+        handleDisplay.sizeToFit()
+        cell.addSubview(handleDisplay)
+        
+        
+        //Display the name of the post's location
+        let textLayer = UILabel(frame: CGRect(x: 196, y: 0, width: 172, height: 19))
+        textLayer.lineBreakMode = .byWordWrapping
+        textLayer.numberOfLines = 0
+        textLayer.textColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
+        textLayer.textAlignment = .right
+        let textContent = "Caffe Driade"
+        let textString = NSMutableAttributedString(string: textContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 18)!
+            ])
+        let textRange = NSRange(location: 0, length: textString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.17
+        textString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: textRange)
+        textString.addAttribute(NSAttributedString.Key.kern, value: 0.69, range: textRange)
+        textLayer.attributedText = textString
+        textLayer.sizeToFit()
+        cell.addSubview(textLayer)
+        
+        
+        //Display the city of the location
+        let city = UILabel(frame: CGRect(x: 219, y: 20, width: 148, height: 13))
+        city.lineBreakMode = .byWordWrapping
+        city.numberOfLines = 0
+        city.textColor = UIColor.white
+        textLayer.textAlignment = .right
+        let cityContent = "Chapel Hill, NC"
+        let cityString = NSMutableAttributedString(string: cityContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 11)!
+            ])
+        let cityRange = NSRange(location: 0, length: cityString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.18
+        cityString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: cityRange)
+        city.attributedText = cityString
+        city.sizeToFit()
+        cell.addSubview(city)
         
         
         
