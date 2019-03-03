@@ -122,7 +122,11 @@ extension FeedViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        tableView.rowHeight = 510
+        //picture height = 510
+        
+        tableView.rowHeight = 629
+        
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
         
         var postsList : [Post] = []
@@ -141,11 +145,11 @@ extension FeedViewController: UITableViewDataSource {
         
         
         //Display the username of the user that created the post
-        let handleDisplay = UILabel(frame: CGRect(x: 46, y: 8, width: 37, height: 15))
-        handleDisplay.lineBreakMode = .byWordWrapping
-        handleDisplay.numberOfLines = 0
-        handleDisplay.textColor = UIColor(red:0.82, green:0.82, blue:0.82, alpha:1)
-        let handleContent = "tyler"
+        let handleDisplay1 = UILabel(frame: CGRect(x: 46, y: 8, width: 37, height: 15))
+        handleDisplay1.lineBreakMode = .byWordWrapping
+        handleDisplay1.numberOfLines = 0
+        handleDisplay1.textColor = UIColor(red:0.82, green:0.82, blue:0.82, alpha:1)
+        let handleContent = "user"
         let handleString = NSMutableAttributedString(string: handleContent, attributes: [
             NSAttributedString.Key.font: UIFont(name: "Arial", size: 12)!
             ])
@@ -153,29 +157,29 @@ extension FeedViewController: UITableViewDataSource {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 1.17
         handleString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: handleRange)
-        handleDisplay.attributedText = handleString
-        handleDisplay.sizeToFit()
-        cell.addSubview(handleDisplay)
+        handleDisplay1.attributedText = handleString
+        handleDisplay1.sizeToFit()
+        cell.addSubview(handleDisplay1)
         
         
         //Display the name of the post's location
-        let textLayer = UILabel(frame: CGRect(x: 196, y: 0, width: 172, height: 19))
-        textLayer.lineBreakMode = .byWordWrapping
-        textLayer.numberOfLines = 0
-        textLayer.textColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
-        textLayer.textAlignment = .right
-        let textContent = "Caffe Driade"
-        let textString = NSMutableAttributedString(string: textContent, attributes: [
+        let spotName = UILabel(frame: CGRect(x: 196, y: 0, width: 172, height: 19))
+        spotName.lineBreakMode = .byWordWrapping
+        spotName.numberOfLines = 0
+        spotName.textColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
+        spotName.textAlignment = .right
+        let spotNameContent = "Place Name"
+        let spotNameString = NSMutableAttributedString(string: spotNameContent, attributes: [
             NSAttributedString.Key.font: UIFont(name: "Arial", size: 18)!
             ])
-        let textRange = NSRange(location: 0, length: textString.length)
+        let spotNameRange = NSRange(location: 0, length: spotNameString.length)
         _ = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 1.17
-        textString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: textRange)
-        textString.addAttribute(NSAttributedString.Key.kern, value: 0.69, range: textRange)
-        textLayer.attributedText = textString
-        textLayer.sizeToFit()
-        cell.addSubview(textLayer)
+        spotNameString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: spotNameRange)
+        spotNameString.addAttribute(NSAttributedString.Key.kern, value: 0.69, range: spotNameRange)
+        spotName.attributedText = spotNameString
+        spotName.sizeToFit()
+        cell.addSubview(spotName)
         
         
         //Display the city of the location
@@ -183,7 +187,7 @@ extension FeedViewController: UITableViewDataSource {
         city.lineBreakMode = .byWordWrapping
         city.numberOfLines = 0
         city.textColor = UIColor.white
-        textLayer.textAlignment = .right
+        city.textAlignment = .right
         let cityContent = "Chapel Hill, NC"
         let cityString = NSMutableAttributedString(string: cityContent, attributes: [
             NSAttributedString.Key.font: UIFont(name: "Arial", size: 11)!
@@ -197,7 +201,88 @@ extension FeedViewController: UITableViewDataSource {
         cell.addSubview(city)
         
         
+        let postImage = UIView(frame: CGRect(x: 0, y: 38, width: 380, height: 510))
+        postImage.backgroundColor = UIColor.brown
+        cell.addSubview(postImage)
         
+        //Display username next to their caption of the post
+//        handleDisplay = UILabel(frame: CGRect(x: 46, y: 560, width: 37, height: 15))
+//        let handleDisplay2 = UILabel(frame: CGRect(x: 46, y: 610, width: 37, height: 15))
+//
+//        cell.addSubview(handleDisplay)
+        
+        //Display the username in front of the caption
+        let handleDisplay2 = UILabel(frame: CGRect(x: 12, y: 560, width: 37, height: 15))
+        handleDisplay2.lineBreakMode = .byWordWrapping
+        handleDisplay2.numberOfLines = 0
+        handleDisplay2.textColor = UIColor(red:0.82, green:0.82, blue:0.82, alpha:1)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.17
+        handleString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: handleRange)
+        handleDisplay2.attributedText = handleString
+        handleDisplay2.sizeToFit()
+        cell.addSubview(handleDisplay2)
+        
+        
+        //Caption of post
+        let captionLayer = UILabel(frame: CGRect(x: 48, y: 561, width: 270, height: 30))
+        captionLayer.lineBreakMode = .byWordWrapping
+        captionLayer.numberOfLines = 0
+        captionLayer.textColor = UIColor.white
+        let captionContent = "Caption"
+        let captionString = NSMutableAttributedString(string: captionContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 13)!
+            ])
+        let captionRange = NSRange(location: 0, length: captionString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.15
+        captionString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: captionRange)
+        captionLayer.attributedText = captionString
+        captionLayer.sizeToFit()
+        cell.addSubview(captionLayer)
+        
+        //Display number of comments
+        let numComments = UILabel(frame: CGRect(x: 30, y: 579, width: 341, height: 14))
+        numComments.lineBreakMode = .byWordWrapping
+        numComments.numberOfLines = 0
+        numComments.textColor = UIColor.darkGray
+        let commentsContent = "2 comments"
+        let commentsString = NSMutableAttributedString(string: commentsContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 12)!
+            ])
+        let commentsRange = NSRange(location: 0, length: commentsString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.17
+        commentsString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: commentsRange)
+        numComments.attributedText = commentsString
+        numComments.sizeToFit()
+        cell.addSubview(numComments)
+        
+        //Display number of likes
+        let numLikes = UILabel(frame: CGRect(x: 346, y: 560, width: 15, height: 13))
+        numLikes.lineBreakMode = .byWordWrapping
+        numLikes.numberOfLines = 0
+        numLikes.textColor = UIColor(red:0.02, green:0.62, blue:1, alpha:1)
+        numLikes.textAlignment = .center
+        let likesContent = "17"
+        let likesString = NSMutableAttributedString(string: likesContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 11)!
+            ])
+        let likesRange = NSRange(location: 0, length: likesString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.18
+        likesString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: likesRange)
+        likesString.addAttribute(NSAttributedString.Key.kern, value: -0.55, range: likesRange)
+        numLikes.attributedText = likesString
+        numLikes.sizeToFit()
+        cell.addSubview(numLikes)
+        
+        
+        
+        
+        
+        
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         return cell
         
     }
