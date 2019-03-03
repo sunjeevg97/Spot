@@ -191,12 +191,55 @@
                     <view key="view" contentMode="scaleToFill" id="QUw-Ma-y8r">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8lB-aO-6iC">
+                                <rect key="frame" x="58" y="294" width="40" height="30"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                <state key="normal" title="Spots">
+                                    <color key="titleColor" red="0.23248541583738241" green="0.70363099093264247" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rce-YA-qwg">
+                                <rect key="frame" x="152" y="294" width="71" height="30"/>
+                                <state key="normal" title="Photomap">
+                                    <color key="titleColor" red="0.24084910960370431" green="0.70363099093264247" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iio-Q7-XJW">
+                                <rect key="frame" x="263" y="294" width="51" height="30"/>
+                                <state key="normal" title="Friends">
+                                    <color key="titleColor" red="0.24249545684989707" green="0.70363099093264247" blue="0.0029100921525440277" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZLD-8E-fqw">
+                                <rect key="frame" x="291" y="82" width="75" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Edit Profile"/>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vah-zL-Ela">
+                                <rect key="frame" x="119" y="136" width="136" height="91"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="rce-YA-qwg" firstAttribute="centerY" secondItem="QUw-Ma-y8r" secondAttribute="centerY" id="9GI-DK-5Ii"/>
+                            <constraint firstItem="rce-YA-qwg" firstAttribute="baseline" secondItem="iio-Q7-XJW" secondAttribute="baseline" id="Z1S-Xq-3z7"/>
+                            <constraint firstItem="rce-YA-qwg" firstAttribute="baseline" secondItem="8lB-aO-6iC" secondAttribute="baseline" id="ZdI-aP-04T"/>
+                            <constraint firstItem="rce-YA-qwg" firstAttribute="centerX" secondItem="QUw-Ma-y8r" secondAttribute="centerX" id="a1Y-ih-AgT"/>
+                            <constraint firstItem="rce-YA-qwg" firstAttribute="leading" secondItem="8lB-aO-6iC" secondAttribute="trailing" constant="54" id="g28-TW-KMt"/>
+                            <constraint firstItem="iio-Q7-XJW" firstAttribute="leading" secondItem="rce-YA-qwg" secondAttribute="trailing" constant="40" id="pM0-g5-Z9o"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="kpA-WP-EZz"/>
                     </view>
                     <navigationItem key="navigationItem" id="xvo-Vl-4gD">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="SettingsIcon" id="QBe-Js-KnT"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="MessagesIcon" id="GFr-Do-rhz"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="SettingsIcon" id="QBe-Js-KnT">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="MessagesIcon" id="GFr-Do-rhz">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mkA-Fl-R3H" userLabel="First Responder" sceneMemberID="firstResponder"/>

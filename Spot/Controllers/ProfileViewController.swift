@@ -19,6 +19,8 @@ class ProfileViewController: UIViewController {
     var usernameGlobal : String = "";
     var nametestGlobal : String?;
     var usertestGlobal : String?;
+    var navigationBarAppearace = UINavigationBar.appearance()
+
     
     override func viewDidLoad() {
         
@@ -31,43 +33,14 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        //commented the logo to open space to enter the username field
-        //self.navigationItem.titleView = UIImageView(image: UIImage(named: "Signuplogo.png"))
-        
-        
-        
-        
-        //commented out to figure out how to add user's name
-        
-        /* let display_name = UILabel(frame: CGRect(x: 150, y: 50, width: 298, height: 26))
-        display_name.lineBreakMode = .byWordWrapping
-        display_name.numberOfLines = 0
-        display_name.textColor = UIColor.orange
-        display_name.textAlignment = .center
-        let display_Content = "NISH"
-        let display_String = NSMutableAttributedString(string: display_Content, attributes: [
-            NSAttributedString.Key.font: UIFont(name: "Arial", size: 22)!
-            ])
-        let textRange = NSRange(location: 0, length: display_String.length)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 1.14
-        display_String.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: textRange)
-        display_name.attributedText = display_String
-        display_name.sizeToFit()
-        self.view.addSubview(display_name)
-        */
+        self.navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         runDispatch()
-        self.title = usernameGlobal
+        
     }
 
     func runDispatch() {
-        
         DispatchQueue.global().async {
-            
             let dispatchGroup = DispatchGroup()
-            
-            
             dispatchGroup.enter()
             DispatchQueue.global().async {
                 
@@ -76,25 +49,20 @@ class ProfileViewController: UIViewController {
                     if let err = err {
                         print("Error getting documents: \(err)")
                     } else{
-                        
                         self.nameGlobal = (snapshot?.get("name") as? String)!
                         self.usernameGlobal = (snapshot?.get("username") as? String)!
-                        
+                        // Setting the title of the profile page to be the current user
+                        self.title = self.usernameGlobal
+                        //setting the color of the title to be white
+                        self.navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
                         //need to query list of user's friends and store them in a global variable
-                        
                     }
-                    
                     dispatchGroup.leave()
                     print("Did the first thing")
-                    
                 }
             }
-            
             dispatchGroup.wait()
             print("done waiting")
-            print(self.usernameGlobal)
-            print(self.nameGlobal)
-            
         }
         
     }
@@ -109,3 +77,22 @@ class ProfileViewController: UIViewController {
     */
 
 }
+//commented out to figure out how to add user's name
+
+/* let display_name = UILabel(frame: CGRect(x: 150, y: 50, width: 298, height: 26))
+ display_name.lineBreakMode = .byWordWrapping
+ display_name.numberOfLines = 0
+ display_name.textColor = UIColor.orange
+ display_name.textAlignment = .center
+ let display_Content = "NISH"
+ let display_String = NSMutableAttributedString(string: display_Content, attributes: [
+ NSAttributedString.Key.font: UIFont(name: "Arial", size: 22)!
+ ])
+ let textRange = NSRange(location: 0, length: display_String.length)
+ let paragraphStyle = NSMutableParagraphStyle()
+ paragraphStyle.lineSpacing = 1.14
+ display_String.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: textRange)
+ display_name.attributedText = display_String
+ display_name.sizeToFit()
+ self.view.addSubview(display_name)
+ */
