@@ -14,25 +14,26 @@ class ProfileViewController: UIViewController {
 
     let db: Firestore! = Firestore.firestore()
     let id: String = Auth.auth().currentUser?.uid ?? "invalid ID"
+    let email: String = Auth.auth().currentUser?.email ?? "Invalid User"
     var nameGlobal : String = "";
     var usernameGlobal : String = "";
+    var nametestGlobal : String?;
+    var usertestGlobal : String?;
     
     override func viewDidLoad() {
         
         nameGlobal = "test"
         usernameGlobal = "test"
+        nametestGlobal = "test"
+        usertestGlobal = "test"
+        
         
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
         //commented the logo to open space to enter the username field
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "Signuplogo.png"))
-
-        setUserValues()
-        
-        print("global",nameGlobal)
-        print("global",usernameGlobal)
+        //self.navigationItem.titleView = UIImageView(image: UIImage(named: "Signuplogo.png"))
         
         
         
@@ -56,31 +57,45 @@ class ProfileViewController: UIViewController {
         display_name.sizeToFit()
         self.view.addSubview(display_name)
         */
-        
+        runDispatch()
+        self.title = usernameGlobal
     }
 
-    func setUserValues() {
+    func runDispatch() {
         
-        
-        
-        //This is asyncronous, is returning a promise before it is finished executing
-        
-        //This is getting the name and username but is somehow not storing then in the global variables properly
-        db.collection("users").document(id).getDocument { (snapshot, err) in
+        DispatchQueue.global().async {
             
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else{
+            let dispatchGroup = DispatchGroup()
+            
+            
+            dispatchGroup.enter()
+            DispatchQueue.global().async {
                 
-                self.nameGlobal = snapshot?.get("name") as! String
-                self.usernameGlobal = snapshot?.get("username") as! String
-                
-                print("local", self.nameGlobal)
-                print("local", self.usernameGlobal)
+                self.db.collection("users").document(self.id).getDocument { (snapshot, err) in
+                    
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    } else{
+                        
+                        self.nameGlobal = (snapshot?.get("name") as? String)!
+                        self.usernameGlobal = (snapshot?.get("username") as? String)!
+                        
+                        //need to query list of user's friends and store them in a global variable
+                        
+                    }
+                    
+                    dispatchGroup.leave()
+                    print("Did the first thing")
+                    
+                }
             }
             
+            dispatchGroup.wait()
+            print("done waiting")
+            print(self.usernameGlobal)
+            print(self.nameGlobal)
+            
         }
-        
         
     }
     /*
