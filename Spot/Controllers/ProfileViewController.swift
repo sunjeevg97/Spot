@@ -21,6 +21,7 @@ class ProfileViewController: UIViewController {
     var usertestGlobal : String?;
     var navigationBarAppearace = UINavigationBar.appearance()
 
+    @IBOutlet weak var ProfileIcon: UIImageView!
     
     override func viewDidLoad() {
         
@@ -29,11 +30,16 @@ class ProfileViewController: UIViewController {
         nametestGlobal = "test"
         usertestGlobal = "test"
         
+       //making the image circular
+        ProfileIcon.layer.borderWidth = 1
+        ProfileIcon.layer.masksToBounds = false
+        ProfileIcon.layer.borderColor = UIColor.black.cgColor
+        ProfileIcon.layer.cornerRadius = ProfileIcon.frame.height/2
+        ProfileIcon.clipsToBounds = true
+        
         
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        self.navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         runDispatch()
         
     }
@@ -51,10 +57,12 @@ class ProfileViewController: UIViewController {
                     } else{
                         self.nameGlobal = (snapshot?.get("name") as? String)!
                         self.usernameGlobal = (snapshot?.get("username") as? String)!
+                        
+                        //setting the color of the title to be white
+                          self.navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
                         // Setting the title of the profile page to be the current user
                         self.title = self.usernameGlobal
-                        //setting the color of the title to be white
-                        self.navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+                      
                         //need to query list of user's friends and store them in a global variable
                     }
                     dispatchGroup.leave()
