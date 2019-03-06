@@ -217,7 +217,7 @@
                                 <state key="normal" title="Edit Profile"/>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vah-zL-Ela">
-                                <rect key="frame" x="119" y="136" width="136" height="91"/>
+                                <rect key="frame" x="143" y="109" width="88" height="84"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
@@ -241,6 +241,9 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ProfileIcon" destination="vah-zL-Ela" id="4wK-sf-NBO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mkA-Fl-R3H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
