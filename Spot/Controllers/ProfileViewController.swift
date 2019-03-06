@@ -36,6 +36,13 @@ class ProfileViewController: UIViewController {
         ProfileIcon.layer.borderColor = UIColor.black.cgColor
         ProfileIcon.layer.cornerRadius = ProfileIcon.frame.height/2
         ProfileIcon.clipsToBounds = true
+        //
+    
+        
+        
+        
+        
+        //
         
         
         super.viewDidLoad()
@@ -55,14 +62,61 @@ class ProfileViewController: UIViewController {
                     if let err = err {
                         print("Error getting documents: \(err)")
                     } else{
+                        
+                        
                         self.nameGlobal = (snapshot?.get("name") as? String)!
                         self.usernameGlobal = (snapshot?.get("username") as? String)!
                         
+                        
+                        
                         //setting the color of the title to be white
                           self.navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+                        
+                        
                         // Setting the title of the profile page to be the current user
                         self.title = self.usernameGlobal
+                        
+                        
+                        
+                        //Adding the Profile Name Underneath the Profile Icon
+                        let profile_Name = UILabel(frame: CGRect(x: 131, y: 192, width: 201, height: 29))
+                        profile_Name.lineBreakMode = .byWordWrapping
+                        profile_Name.numberOfLines = 0
+                        profile_Name.textColor = UIColor.white
+                        profile_Name.textAlignment = .center
+                        let profileContent = self.nameGlobal
+                        let profileString = NSMutableAttributedString(string: profileContent, attributes: [
+                            NSAttributedString.Key.font: UIFont(name: "Arial", size: 22)!
+                            ])
+                        let profileRange = NSRange(location: 0, length: profileString.length)
+                        let paragraphStyle = NSMutableParagraphStyle()
+                        paragraphStyle.lineSpacing = 1.18
+                        profileString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: profileRange)
+                        profile_Name.attributedText = profileString
+                        profile_Name.sizeToFit()
+                        self.view.addSubview(profile_Name)
+                        //
                       
+                        
+                        // load Place Name underneath the Profile Name
+                        let currentLocationName = UILabel(frame: CGRect(x: 150, y: 220, width: 101, height: 18))
+                        currentLocationName.lineBreakMode = .byWordWrapping
+                        currentLocationName.numberOfLines = 0
+                        currentLocationName.textColor = UIColor(red:0.61, green:0.61, blue:0.61, alpha:1)
+                        currentLocationName.textAlignment = .center
+                        let currentLocationNameContent = "Chapel Hill, NC"
+                        let currentLocationNameString = NSMutableAttributedString(string: currentLocationNameContent, attributes: [
+                            NSAttributedString.Key.font: UIFont(name: "Arial", size: 11)!
+                            ])
+                        let currentLocationNameRange = NSRange(location: 0, length: currentLocationNameString.length)
+                        let locationStyle = NSMutableParagraphStyle()
+                        locationStyle.lineSpacing = 1.18
+                        currentLocationNameString.addAttribute(NSAttributedString.Key.paragraphStyle, value:locationStyle, range: currentLocationNameRange)
+                        currentLocationName.attributedText = currentLocationNameString
+                        currentLocationName.sizeToFit()
+                        self.view.addSubview(currentLocationName)
+                        
+                        
                         //need to query list of user's friends and store them in a global variable
                     }
                     dispatchGroup.leave()
