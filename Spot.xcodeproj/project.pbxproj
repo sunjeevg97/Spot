@@ -23,6 +23,8 @@
 		7A37801E22174BD6008B835A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A37801D22174BD6008B835A /* ProfileViewController.swift */; };
 		7A37802022174BEA008B835A /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A37801F22174BEA008B835A /* FeedViewController.swift */; };
 		7A378022221B3331008B835A /* NavBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A378021221B3331008B835A /* NavBarViewController.swift */; };
+		7A5E078F2233165B00B53B58 /* MarkerInfoWindowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E078E2233165B00B53B58 /* MarkerInfoWindowView.xib */; };
+		7A5E07912233174600B53B58 /* MarkerInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5E07902233174600B53B58 /* MarkerInfoWindow.swift */; };
 		EBDB2E392332FD19246E23A1 /* Pods_SpotUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC0031C320EAA3D9491C239B /* Pods_SpotUITests.framework */; };
 		F37332E1EC816CF3DD423A7F /* Pods_SpotTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6FE8BCAD2A0033DF62E47D /* Pods_SpotTests.framework */; };
 /* End PBXBuildFile section */
@@ -73,6 +75,8 @@
 		7A37801D22174BD6008B835A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = Spot/Controllers/ProfileViewController.swift; sourceTree = SOURCE_ROOT; };
 		7A37801F22174BEA008B835A /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FeedViewController.swift; path = Spot/Controllers/FeedViewController.swift; sourceTree = SOURCE_ROOT; };
 		7A378021221B3331008B835A /* NavBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NavBarViewController.swift; path = Spot/Controllers/NavBarViewController.swift; sourceTree = SOURCE_ROOT; };
+		7A5E078E2233165B00B53B58 /* MarkerInfoWindowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerInfoWindowView.xib; sourceTree = "<group>"; };
+		7A5E07902233174600B53B58 /* MarkerInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfoWindow.swift; sourceTree = "<group>"; };
 		7A9A551522273F71007469C7 /* Chapel Hill.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Chapel Hill.gpx"; path = "Spot/Chapel Hill.gpx"; sourceTree = "<group>"; };
 		B9E8B22E628AAF05FE70A61C /* Pods-SpotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpotTests/Pods-SpotTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BC0031C320EAA3D9491C239B /* Pods_SpotUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,6 +204,8 @@
 			children = (
 				1DF6E03822089F4500BA0C36 /* Main.storyboard */,
 				1DF6E03D22089F4800BA0C36 /* LaunchScreen.storyboard */,
+				7A5E078E2233165B00B53B58 /* MarkerInfoWindowView.xib */,
+				7A5E07902233174600B53B58 /* MarkerInfoWindow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -334,6 +340,7 @@
 			files = (
 				1DF6E03F22089F4800BA0C36 /* LaunchScreen.storyboard in Resources */,
 				3EDBE3CB2208B28B006D6B75 /* GoogleService-Info.plist in Resources */,
+				7A5E078F2233165B00B53B58 /* MarkerInfoWindowView.xib in Resources */,
 				1DF6E03C22089F4800BA0C36 /* Assets.xcassets in Resources */,
 				1DF6E03A22089F4500BA0C36 /* Main.storyboard in Resources */,
 			);
@@ -498,6 +505,7 @@
 				7A37801C22174BB1008B835A /* MapViewController.swift in Sources */,
 				1DF6E03522089F4500BA0C36 /* AppDelegate.swift in Sources */,
 				3EE88DE52226621000E9D13F /* Post.swift in Sources */,
+				7A5E07912233174600B53B58 /* MarkerInfoWindow.swift in Sources */,
 				7A378022221B3331008B835A /* NavBarViewController.swift in Sources */,
 				7A37802022174BEA008B835A /* FeedViewController.swift in Sources */,
 			);

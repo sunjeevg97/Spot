@@ -20,6 +20,17 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: GMSMapView!
     private let locationManager = CLLocationManager()
     
+    let rainbowSpot = UIImage(named: "RainbowSpotIcon")
+    
+    let spots: [String: [String: Any]] = [
+        "spot1": ["latitude": 35.9121, "longitude": -79.0512, "spotName": "Old Well", "description": "drink from well to get 4.0 gpa", "privacyLevel": "public"],
+        "spot2": ["latitude": 35.9132, "longitude": -79.0546, "spotName": "Cosmic Cantina", "description": "Mexican restaurant", "privacyLevel": "public"]]
+    
+    var markers: [GMSMarker] = []
+    
+    private var infoWindow = MarkerInfoWindow()
+    var locationMarker : GMSMarker? = GMSMarker()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,13 +38,58 @@ class MapViewController: UIViewController {
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        
+        infoWindow = loadNiB()
+        loadSpotsToMap()
 
     }
     
     
     
+    @IBAction func moveToMyLocation(_ sender: UIButton) {
+        
+        guard let lat = mapView.myLocation?.coordinate.latitude,
+            let lng = mapView.myLocation?.coordinate.longitude else { return }
+        
+        let myLocation = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+        mapView.animate(toLocation: myLocation)
+    }
+    
 
     @IBAction func addSpot(_ sender: Any) {
+    }
+
+    
+    //getting spots from database
+    func loadSpotsFromDB() {
+        
+        
+    }
+    
+    //making markers to add to map
+    func loadSpotsToMap() {
+        var lat: Double? = 0
+        var lon: Double? = 0
+        
+        for (spot, data) in spots {
+            lat = data["latitude"] as? Double
+            lon = data["longitude"] as? Double
+            
+            let markerPos = CLLocationCoordinate2D(latitude: lat!, longitude: lon!)
+            
+            let marker = GMSMarker(position: markerPos)
+            marker.icon = rainbowSpot
+            marker.isFlat = true
+            marker.map = mapView
+            marker.userData = data
+            markers.append(marker)
+        }
+    }
+    
+    //making instance of view for info window
+    func loadNiB() -> MarkerInfoWindow {
+        let infoWindow = MarkerInfoWindow.instanceFromNib() as! MarkerInfoWindow
+        return infoWindow
     }
     /*
     // MARK: - Navigation
@@ -47,6 +103,7 @@ class MapViewController: UIViewController {
 
 }
 
+//delegate to handle location related events
 extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard status == .authorizedWhenInUse else {
@@ -56,7 +113,6 @@ extension MapViewController: CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
         
         mapView.isMyLocationEnabled = true
-        //mapView.settings.myLocationButton = true
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -71,4 +127,79 @@ extension MapViewController: CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
     }
     
+}
+
+//delegate to handle events from the map
+extension MapViewController: GMSMapViewDelegate {
+    /*
+     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+     var markerData: Dictionary<String, Any>?
+     if let data = marker.userData! as? Dictionary<String, Any> {
+     markerData = data
+     }
+     
+     locationMarker = marker
+     infoWindow.removeFromSuperview()
+     infoWindow = loadNiB()
+     guard let location = locationMarker?.position else {
+     return nil
+     }
+     infoWindow.spotData = markerData
+     
+     let desc = markerData!["description"] as? String
+     let title = markerData!["spotName"] as? String
+     
+     infoWindow.titleLabel.text = title
+     infoWindow.descriptionLabel.text = desc
+     infoWindow.spotImage = UIImageView(image: UIImage(named: "RainbowSpotIcon"))
+     
+     //offset info window to be directly above tapped marker
+     infoWindow.center = mapView.projection.point(for: location)
+     infoWindow.center.y = infoWindow.center.y - 82
+     
+     return infoWindow
+     }
+     */
+    
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        print("did tap marker")
+        return false
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        print("tapped on map")
+    }
+    
+    /*
+     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+     var markerData: Dictionary<String, Any>?
+     if let data = marker.userData! as? Dictionary<String, Any> {
+     markerData = data
+     }
+     
+     locationMarker = marker
+     infoWindow.removeFromSuperview()
+     infoWindow = loadNiB()
+     guard let location = locationMarker?.position else {
+     print("locationMarker is nil")
+     return false
+     }
+     
+     infoWindow.spotData = markerData
+     
+     let desc = markerData!["description"] as? String
+     let title = markerData!["spotName"] as? String
+     
+     infoWindow.titleLabel.text = title
+     infoWindow.descriptionLabel.text = desc
+     
+     //offset info window to be directly above tapped marker
+     infoWindow.center = mapView.projection.point(for: location)
+     infoWindow.center.y = infoWindow.center.y - 82
+     self.view.addSubview(infoWindow)
+     
+     return false
+     }
+     */
 }
