@@ -11,9 +11,13 @@ import Foundation
 class Post {
     var caption:String
     var photoURL:String
+    var uName: String
+    var numLikes: Int
     
-    init(captionText:String,photoURLString:String){
+    init(captionText:String,photoURLString:String,uNameString:String){
         caption = captionText
         photoURL = photoURLString
+        uName = uNameString
+        numLikes = 0
     }
 }

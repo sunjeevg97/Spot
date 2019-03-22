@@ -20,11 +20,12 @@ class FeedViewController: UIViewController {
     var usernameGlobal : String?;
     var nametestGlobal : String?;
     var usertestGlobal : String?;
+    var postsList : [Post] = []
 
     override func viewDidLoad() {
         
         nameGlobal = "test"
-        usernameGlobal = "test"
+        usernameGlobal = ""
         nametestGlobal = "test"
         usertestGlobal = "test"
         
@@ -40,32 +41,27 @@ class FeedViewController: UIViewController {
     }
 
     func runDispatch() {
-        
         DispatchQueue.global().async {
-            
             let dispatchGroup = DispatchGroup()
             
             
             dispatchGroup.enter()
-            DispatchQueue.global().async {
+            self.db.collection("users").document(self.id).getDocument { (snapshot, err) in
                 
-                self.db.collection("users").document(self.id).getDocument { (snapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else{
                     
-                    if let err = err {
-                        print("Error getting documents: \(err)")
-                    } else{
-                        
-                        self.nameGlobal = snapshot?.get("name") as? String
-                        self.usernameGlobal = snapshot?.get("username") as? String
-                        
-                        //need to query list of user's friends and store them in a global variable
-                        
-                    }
+                    self.nameGlobal = snapshot?.get("name") as? String
+                    self.usernameGlobal = snapshot?.get("username") as? String
                     
-                    dispatchGroup.leave()
-                    print("Did the first thing")
+                    //need to query list of user's friends and store them in a global variable
                     
                 }
+                
+                dispatchGroup.leave()
+                print("Did the first thing")
+                
             }
             
             dispatchGroup.wait()
@@ -74,28 +70,38 @@ class FeedViewController: UIViewController {
             print(self.nameGlobal)
             
             //Need to load posts from user's friends list (order by post timestamp)
+            dispatchGroup.enter()
             
+            self.db.collection("spots").document("NZNdh5JLF3xwFykXubdY").collection("feedPost").document("EwP3fznHgW3fDvrpmfVp").getDocument{(snapshot, err) in
+                
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else{
+                    print("image URL")
+                    print(snapshot?.get("image"))
+                    
+                    self.postsList[0].caption = snapshot?.get("caption") as! String
+                    self.postsList[0].uName = snapshot?.get("posterUserName") as! String
+                    self.postsList[0].numLikes = snapshot?.get("numberLikes") as! Int
+//                    self.postsList[0].photoURL = snapshot?.get("image") as! String
+                    
+                    
+                }
+                
+                dispatchGroup.leave()
+            }
+            
+            
+            dispatchGroup.wait()
+            self.tableView.reloadData() //This should update the generic post objects with the newly retrieved data
             self.loadPosts()
             
-            //Similarly you can run a .notify block to run after all previous blocks have completed
-            //            dispatchGroup.notify(queue: DispatchQueue.main) {
-            //                print("Did all the things")
-            //                print(self.usernameGlobal)
-            //                print(self.nameGlobal)
-            //            }
-            
-            
-            
-            //Repeat Process for more async blocks
-            
         }
-        
     }
     
     func loadPosts(){
+        
         print("posts loaded")
-        
-        
     }
     
     
@@ -107,17 +113,7 @@ class FeedViewController: UIViewController {
 extension FeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        var postsList : [Post] = []
-        
-        for i in 1...10{
-            postsList.append(Post(captionText: "caption # \(i)", photoURLString: "images/\(i)"))
-            
-        }
-        
-        
-
-        
-        return postsList.count
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -129,9 +125,13 @@ extension FeedViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
         
-        var postsList : [Post] = []
-        for i in 1...10{
-            postsList.append(Post(captionText: "caption # \(i)", photoURLString: "images/\(i)"))
+//        var postsList : [Post] = []
+        for i in 0...9{
+            if i == 0{
+                postsList.append(Post(captionText: "", photoURLString: "images/\(i)", uNameString: ""))
+            }else{
+                postsList.append(Post(captionText: "caption # \(i)", photoURLString: "images/\(i)",uNameString: "user/\(i)"))
+            }
             
         }
         
@@ -145,11 +145,11 @@ extension FeedViewController: UITableViewDataSource {
         
         
         //Display the username of the user that created the post
-        let handleDisplay1 = UILabel(frame: CGRect(x: 46, y: 8, width: 37, height: 15))
+        let handleDisplay1 = UILabel(frame: CGRect(x: 46, y: 8, width: 100, height: 15))
         handleDisplay1.lineBreakMode = .byWordWrapping
         handleDisplay1.numberOfLines = 0
         handleDisplay1.textColor = UIColor(red:0.82, green:0.82, blue:0.82, alpha:1)
-        let handleContent = "user"
+        let handleContent = postsList[indexPath.row].uName
         let handleString = NSMutableAttributedString(string: handleContent, attributes: [
             NSAttributedString.Key.font: UIFont(name: "Arial", size: 12)!
             ])
@@ -200,16 +200,17 @@ extension FeedViewController: UITableViewDataSource {
         city.sizeToFit()
         cell.addSubview(city)
         
+        //Show the image associated with the post
         
-        let postImage = UIView(frame: CGRect(x: 0, y: 38, width: 380, height: 510))
+        let postImage = UIImageView(frame: CGRect(x: 0, y: 38, width: 380, height: 510))
         postImage.backgroundColor = UIColor.brown
-        cell.addSubview(postImage)
+//        cell.addSubview(postImage)
+        postImage.image = UIImage(named: "Signuplogo.png")
+        postImage.contentMode = UIView.ContentMode.scaleAspectFit
+        cell.insertSubview(postImage, at: 0)
         
-        //Display username next to their caption of the post
-//        handleDisplay = UILabel(frame: CGRect(x: 46, y: 560, width: 37, height: 15))
-//        let handleDisplay2 = UILabel(frame: CGRect(x: 46, y: 610, width: 37, height: 15))
-//
-//        cell.addSubview(handleDisplay)
+        
+        
         
         //Display the username in front of the caption
         let handleDisplay2 = UILabel(frame: CGRect(x: 12, y: 560, width: 37, height: 15))
@@ -229,7 +230,7 @@ extension FeedViewController: UITableViewDataSource {
         captionLayer.lineBreakMode = .byWordWrapping
         captionLayer.numberOfLines = 0
         captionLayer.textColor = UIColor.white
-        let captionContent = "Caption"
+        let captionContent = postsList[indexPath.row].caption
         let captionString = NSMutableAttributedString(string: captionContent, attributes: [
             NSAttributedString.Key.font: UIFont(name: "Arial", size: 13)!
             ])
@@ -264,7 +265,7 @@ extension FeedViewController: UITableViewDataSource {
         numLikes.numberOfLines = 0
         numLikes.textColor = UIColor(red:0.02, green:0.62, blue:1, alpha:1)
         numLikes.textAlignment = .center
-        let likesContent = "17"
+        let likesContent = String(postsList[indexPath.row].numLikes)
         let likesString = NSMutableAttributedString(string: likesContent, attributes: [
             NSAttributedString.Key.font: UIFont(name: "Arial", size: 11)!
             ])
