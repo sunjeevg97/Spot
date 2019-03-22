@@ -221,11 +221,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eFm-KS-03V">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Lorem ipsum dolor sit er elit lamet" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eFm-KS-03V">
                                 <rect key="frame" x="67" y="239" width="240" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -321,14 +321,14 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqm-Bm-Lkd">
-                                <rect key="frame" x="8" y="525" width="56" height="56"/>
+                                <rect key="frame" x="8" y="469" width="112" height="112"/>
                                 <state key="normal" image="LocateIcon"/>
                                 <connections>
                                     <action selector="moveToMyLocation:" destination="vkr-4K-2jk" eventType="touchUpInside" id="Sh3-2n-7VY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9oj-XG-G6K">
-                                <rect key="frame" x="331" y="574" width="36" height="36"/>
+                                <rect key="frame" x="295" y="538" width="72" height="72"/>
                                 <state key="normal" image="AddSpotIcon"/>
                                 <connections>
                                     <action selector="addSpot:" destination="vkr-4K-2jk" eventType="touchUpInside" id="Xgf-F2-24c"/>
@@ -495,18 +495,18 @@ IT’S A MAGICAL WORLD OUT THERE.
         </scene>
     </scenes>
     <resources>
-        <image name="AddSpotIcon" width="36" height="36"/>
-        <image name="FeedActiveIcon" width="34" height="38"/>
-        <image name="FeedIcon" width="34" height="38"/>
-        <image name="LocateIcon" width="56" height="56"/>
-        <image name="MapActiveIcon" width="31" height="37"/>
-        <image name="MapIcon" width="31" height="37"/>
-        <image name="MessagesIcon" width="25" height="18"/>
-        <image name="NotificationIcon" width="20" height="24"/>
-        <image name="ProfileActiveIcon" width="38" height="38"/>
-        <image name="ProfileIcon" width="38" height="38"/>
-        <image name="SearchIcon" width="26" height="26"/>
-        <image name="SettingsIcon" width="26" height="26"/>
+        <image name="AddSpotIcon" width="72" height="72"/>
+        <image name="FeedActiveIcon" width="68" height="76"/>
+        <image name="FeedIcon" width="68" height="76"/>
+        <image name="LocateIcon" width="112" height="112"/>
+        <image name="MapActiveIcon" width="62" height="74"/>
+        <image name="MapIcon" width="62" height="74"/>
+        <image name="MessagesIcon" width="50" height="36"/>
+        <image name="NotificationIcon" width="40" height="48"/>
+        <image name="ProfileActiveIcon" width="76" height="76"/>
+        <image name="ProfileIcon" width="76" height="76"/>
+        <image name="SearchIcon" width="52" height="52"/>
+        <image name="SettingsIcon" width="52" height="52"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9cG-7c-1HM"/>
