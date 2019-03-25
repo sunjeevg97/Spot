@@ -216,7 +216,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Edit Profile"/>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vah-zL-Ela">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Profile1x" translatesAutoresizingMaskIntoConstraints="NO" id="vah-zL-Ela">
                                 <rect key="frame" x="143" y="109" width="88" height="84"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -503,6 +503,7 @@ IT’S A MAGICAL WORLD OUT THERE.
         <image name="MapIcon" width="62" height="74"/>
         <image name="MessagesIcon" width="50" height="36"/>
         <image name="NotificationIcon" width="40" height="48"/>
+        <image name="Profile1x" width="76" height="76"/>
         <image name="ProfileActiveIcon" width="76" height="76"/>
         <image name="ProfileIcon" width="76" height="76"/>
         <image name="SearchIcon" width="52" height="52"/>
