@@ -10,14 +10,14 @@ import Foundation
 
 class Post {
     var caption:String
-    var photoURL:String
+    var photo:NSObject
     var uName: String
     var numLikes: Int
     
-    init(captionText:String,photoURLString:String,uNameString:String){
+    init(captionText:String,photoObj:NSObject,uNameString:String, likesCount:Int){
         caption = captionText
-        photoURL = photoURLString
+        photo = photoObj
         uName = uNameString
-        numLikes = 0
+        numLikes = likesCount
     }
 }

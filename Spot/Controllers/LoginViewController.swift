@@ -30,8 +30,6 @@ class LoginViewController: UIViewController {
         
         super.viewDidLoad()
         
-        
-        
         //Load User Interface Elements according to Invision
         
         //Display background image
