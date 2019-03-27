@@ -28,6 +28,15 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         
+        //If user is already logged in, then this will take them directly to the map.
+        Auth.auth().addStateDidChangeListener { auth, user in
+            if let user = user {
+                // User is signed in.
+                print("user signed in")
+                self.performSegue(withIdentifier: "signUpToTabBar", sender: self)
+            }
+        }
+        
         super.viewDidLoad()
         
         //Load User Interface Elements according to Invision

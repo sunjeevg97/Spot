@@ -22,6 +22,7 @@
                     <connections>
                         <segue destination="3qA-Fj-wcO" kind="show" identifier="signUpToInfo" id="Jm6-xI-JNv"/>
                         <segue destination="gWK-HF-6yf" kind="presentation" identifier="signupToLogin" modalTransitionStyle="crossDissolve" id="RNW-2x-rNB"/>
+                        <segue destination="8JJ-p2-ETf" kind="presentation" identifier="signUpToTabBar" id="bBT-m9-MKU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -298,7 +299,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="FEED" id="mcS-3A-el3">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="SearchIcon" id="cMz-II-IZn"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="NotificationIcon" id="gdG-tb-EJt"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="NotificationIcon" id="gdG-tb-EJt">
+                            <connections>
+                                <segue destination="ouQ-Fe-Sgt" kind="presentation" id="yVZ-SL-aEz"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="vVM-dx-tsn" id="hat-H7-tk0"/>
@@ -307,6 +312,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E6z-lE-vVO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6301.6000000000004" y="2171.9640179910048"/>
+        </scene>
+        <!--Logout View-->
+        <scene sceneID="en7-er-0lK">
+            <objects>
+                <viewController id="ouQ-Fe-Sgt" customClass="LogoutView" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rjQ-ac-oS5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="slN-aQ-pLx">
+                                <rect key="frame" x="163" y="265" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Logout"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="THg-dj-AuN"/>
+                    </view>
+                    <connections>
+                        <outlet property="logoutBtn" destination="slN-aQ-pLx" id="5d7-gU-NFq"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="uOX-ts-t6F"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w5t-MR-2g6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7333.6000000000004" y="2210.6446776611697"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="ike-Gc-hwo">
@@ -503,14 +534,15 @@ IT’S A MAGICAL WORLD OUT THERE.
         <image name="MapIcon" width="62" height="74"/>
         <image name="MessagesIcon" width="50" height="36"/>
         <image name="NotificationIcon" width="40" height="48"/>
-        <image name="Profile1x" width="76" height="76"/>
+ master
         <image name="ProfileActiveIcon" width="76" height="76"/>
         <image name="ProfileIcon" width="76" height="76"/>
         <image name="SearchIcon" width="52" height="52"/>
         <image name="SettingsIcon" width="52" height="52"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9cG-7c-1HM"/>
+        <segue reference="bBT-m9-MKU"/>
         <segue reference="RNW-2x-rNB"/>
+        <segue reference="uOX-ts-t6F"/>
     </inferredMetricsTieBreakers>
 </document>

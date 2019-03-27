@@ -9,8 +9,11 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
+import FirebaseStorage
 
 class FeedViewController: UIViewController {
+    
+    
     
     @IBOutlet weak var tableView: UITableView!
     let email: String = Auth.auth().currentUser?.email ?? "Invalid User"
@@ -24,6 +27,7 @@ class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         
+        
         nameGlobal = "test"
         usernameGlobal = ""
         nametestGlobal = "test"
@@ -32,7 +36,6 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Signuplogo.png"))
-
         
         tableView.dataSource = self
         
@@ -83,9 +86,6 @@ class FeedViewController: UIViewController {
                     self.postsList[0].caption = snapshot?.get("caption") as! String
                     self.postsList[0].uName = snapshot?.get("posterUserName") as! String
                     self.postsList[0].numLikes = snapshot?.get("numberLikes") as! Int
-//                    self.postsList[0].photoURL = snapshot?.get("image") as! String
-                    
-                    
                 }
                 
                 dispatchGroup.leave()
@@ -93,15 +93,41 @@ class FeedViewController: UIViewController {
             
             
             dispatchGroup.wait()
-            self.tableView.reloadData() //This should update the generic post objects with the newly retrieved data
-            self.loadPosts()
+            
+            
+            dispatchGroup.enter()
+            let gsReference = Storage.storage().reference().child("spotPics").child("34A09798-926E-47BB-80FE-6DC004FECD1D")
+            let path = gsReference.fullPath
+            let gsName = gsReference.name
+            let images = gsReference.parent()
+
+            print(gsReference)
+
+            gsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                if let error = error {
+                    // Uh-oh, an error occurred!
+                } else {
+                    // Data for "images/island.jpg" is returned
+                    let image = UIImage(data: data!)
+                    print("image: ", image)
+
+                    self.postsList[0].photo = image!;
+
+                    dispatchGroup.leave()
+
+                }
+            }
+
+            dispatchGroup.wait()
+            print("after image")
+            self.tableView.reloadData()
+            print("after reload")
+            
+            
+            
+            
             
         }
-    }
-    
-    func loadPosts(){
-        
-        print("posts loaded")
     }
     
     
@@ -111,9 +137,11 @@ class FeedViewController: UIViewController {
     
     
 extension FeedViewController: UITableViewDataSource {
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -126,21 +154,26 @@ extension FeedViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
         
 //        var postsList : [Post] = []
-        for i in 0...9{
-            if i == 0{
-                postsList.append(Post(captionText: "", photoURLString: "images/\(i)", uNameString: ""))
-            }else{
-                postsList.append(Post(captionText: "caption # \(i)", photoURLString: "images/\(i)",uNameString: "user/\(i)"))
-            }
+        for i in 0...4{
+            
+            postsList.append(Post(captionText: "", photoObj: UIImage(), uNameString: "",likesCount:0))
+            
+//            if i == 0{
+////                postsList.append(Post(captionText: "", photoURLString: "images/\(i)", uNameString: ""))
+//                postsList.append(Post(captionText: "", photoObj: UIImage(named: "Signuplogo.png")!, uNameString: ""))
+//
+//
+//            }else{
+////                postsList.append(Post(captionText: "caption # \(i)", photoURLString: "images/\(i)",uNameString: "user/\(i)"))
+//                postsList.append(Post(captionText: "caption # \(i)", photoObj: UIImage(named: "Signuplogo.png")!,uNameString: "user/\(i)"))
+//            }
             
         }
         
 //        let cell = UITableViewCell()
         cell.backgroundColor = UIColor.black
         print("height", cell.heightAnchor)
-//        cell.textLabel?.textColor = UIColor.white
-//        cell.textLabel?.text = "\(indexPath.row)"
-//        cell.textLabel?.text = postsList[indexPath.row].caption
+
         
         
         
@@ -203,13 +236,12 @@ extension FeedViewController: UITableViewDataSource {
         //Show the image associated with the post
         
         let postImage = UIImageView(frame: CGRect(x: 0, y: 38, width: 380, height: 510))
-        postImage.backgroundColor = UIColor.brown
+//        postImage.backgroundColor = UIColor.brown
 //        cell.addSubview(postImage)
-        postImage.image = UIImage(named: "Signuplogo.png")
+//        postImage.image = UIImage(named: "Signuplogo.png")
+        postImage.image = postsList[indexPath.row].photo as! UIImage
         postImage.contentMode = UIView.ContentMode.scaleAspectFit
         cell.insertSubview(postImage, at: 0)
-        
-        
         
         
         //Display the username in front of the caption
@@ -279,17 +311,10 @@ extension FeedViewController: UITableViewDataSource {
         cell.addSubview(numLikes)
         
         
-        
-        
-        
-        
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         return cell
         
     }
-    
-    
-    
     
 }
 
