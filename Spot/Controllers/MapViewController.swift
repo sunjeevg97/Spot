@@ -8,6 +8,9 @@
 
 import UIKit
 import GoogleMaps
+import Firebase
+import FirebaseFirestore
+import FirebaseStorage
 
 class MapViewController: UIViewController {
     
@@ -20,18 +23,21 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: GMSMapView!
     private let locationManager = CLLocationManager()
     
+    let db: Firestore! = Firestore.firestore()
+    let id: String = Auth.auth().currentUser?.uid ?? "invalid user"
+    
     let rainbowSpot = UIImage(named: "RainbowSpotIcon")
     let blackSpot = UIImage(named: "BlackSpotIcon")
-    let greenSpot = UIImage(named: "GreenspotIcon")
+    let greenSpot = UIImage(named: "GreenSpotIcon")
     
-    let spots: [String: [String: Any]] = [
-        "spot1": ["latitude": 35.9121, "longitude": -79.0512, "spotName": "Old Well", "description": "drink from well to get 4.0 gpa", "privacyLevel": "public"],
-        "spot2": ["latitude": 35.9132, "longitude": -79.0546, "spotName": "Cosmic Cantina", "description": "Mexican restaurant", "privacyLevel": "private"]]
+    var spots: [String: [String: Any]] = [:]
     
     var markers: [GMSMarker] = []
     
     private var infoWindow = MarkerInfoWindow()
     var locationMarker : GMSMarker? = GMSMarker()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +46,10 @@ class MapViewController: UIViewController {
         
         mapView.delegate = self
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
+        startLocationServices()
         
-        loadSpotsToMap()
-
+        loadSpotsFromDB()
     }
-    
     
     
     @IBAction func moveToMyLocation(_ sender: UIButton) {
@@ -61,27 +65,70 @@ class MapViewController: UIViewController {
     @IBAction func addSpot(_ sender: Any) {
         
     }
+    
+    func startLocationServices() {
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            break
+            
+        case .restricted, .denied:
+            //Do something if access to location services is denied; notify user that app can't be used without authorization
+            break
+            
+        case .authorizedWhenInUse, .authorizedAlways:
+            locationManager.startUpdatingLocation()
+            mapView.isMyLocationEnabled = true
+            break
+            
+        }
+    }
 
     
     //getting spots from database
     func loadSpotsFromDB() {
-        
-        
+        db.collection("spots").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let id = document.documentID
+                    let description = document.get("description")
+                    let location = document.get("location") as? GeoPoint
+                    let privacyLevel = document.get("privacyLevel")
+                    let spotName = document.get("spotName")
+                    self.spots[id] = ["description": description, "latitude": location?.latitude, "longitude": location?.longitude, "privacyLevel": privacyLevel, "spotName": spotName]
+                    
+                }
+                
+                self.loadSpotsToMap()
+            }
+        }
     }
     
     //making markers to add to map
     func loadSpotsToMap() {
-        var lat: Double? = 0
-        var lon: Double? = 0
+        var lat: Double?
+        var lon: Double?
+        var privacy: String?
         
         for (spot, data) in spots {
             lat = data["latitude"] as? Double
             lon = data["longitude"] as? Double
+            privacy = data["privacyLevel"] as? String
             
             let markerPos = CLLocationCoordinate2D(latitude: lat!, longitude: lon!)
             
             let marker = GMSMarker(position: markerPos)
-            marker.icon = rainbowSpot
+            
+            if (privacy == "private") {
+                marker.icon = blackSpot
+            } else if (privacy == "friends") {
+                marker.icon = greenSpot
+            } else {
+                marker.icon = rainbowSpot
+            }
+            
             marker.isFlat = true
             marker.map = mapView
             marker.userData = data
@@ -99,8 +146,9 @@ class MapViewController: UIViewController {
 
 //delegate to handle location related events
 extension MapViewController: CLLocationManagerDelegate {
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        guard status == .authorizedWhenInUse else {
+        guard status == .authorizedWhenInUse, status == .authorizedAlways else {
             return
         }
         
@@ -117,8 +165,8 @@ extension MapViewController: CLLocationManagerDelegate {
         
         mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
         
-        
-        locationManager.stopUpdatingLocation()
+        locationManager.pausesLocationUpdatesAutomatically = true
+        //locationManager.stopUpdatingLocation()
     }
     
 }
