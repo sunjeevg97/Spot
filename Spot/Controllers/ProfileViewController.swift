@@ -22,7 +22,24 @@ class ProfileViewController: UIViewController {
     var navigationBarAppearace = UINavigationBar.appearance()
 
     @IBOutlet weak var ProfileIcon: UIImageView!
+
     
+    @IBAction func SpotsButton(_ sender: Any) {
+        performSegue(withIdentifier: "SpotsSegue", sender: self)
+    }
+    
+    
+    
+    @IBAction func PhotomapButton(_ sender: Any) {
+        performSegue(withIdentifier: "PhotomapSegue", sender: self)
+    }
+    
+    
+    @IBAction func FriendsButton(_ sender: Any) {
+        performSegue(withIdentifier: "FriendsSegue", sender: self)
+    }
+    
+
     override func viewDidLoad() {
         
         nameGlobal = "test"
@@ -139,22 +156,3 @@ class ProfileViewController: UIViewController {
     */
 
 }
-//commented out to figure out how to add user's name
-
-/* let display_name = UILabel(frame: CGRect(x: 150, y: 50, width: 298, height: 26))
- display_name.lineBreakMode = .byWordWrapping
- display_name.numberOfLines = 0
- display_name.textColor = UIColor.orange
- display_name.textAlignment = .center
- let display_Content = "NISH"
- let display_String = NSMutableAttributedString(string: display_Content, attributes: [
- NSAttributedString.Key.font: UIFont(name: "Arial", size: 22)!
- ])
- let textRange = NSRange(location: 0, length: display_String.length)
- let paragraphStyle = NSMutableParagraphStyle()
- paragraphStyle.lineSpacing = 1.14
- display_String.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: textRange)
- display_name.attributedText = display_String
- display_name.sizeToFit()
- self.view.addSubview(display_name)
- */

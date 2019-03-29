@@ -18,6 +18,11 @@
 		3ED3F1A622147EAE008CC29B /* ResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3F1A522147EAE008CC29B /* ResetViewController.swift */; };
 		3EDBE3CB2208B28B006D6B75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EDBE3CA2208B28B006D6B75 /* GoogleService-Info.plist */; };
 		3EE88DE52226621000E9D13F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE88DE42226621000E9D13F /* Post.swift */; };
+		61447FA4224BD1E9005DFB35 /* SpotsProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61447FA3224BD1E9005DFB35 /* SpotsProfileViewController.swift */; };
+		61447FA6224EA1A1005DFB35 /* PhotomapProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61447FA5224EA1A1005DFB35 /* PhotomapProfileViewController.swift */; };
+		61447FA8224EA1D6005DFB35 /* FriendsProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61447FA7224EA1D6005DFB35 /* FriendsProfileViewController.swift */; };
+		615963D8224960BA00511EDB /* ProfileHeadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 615963D7224960BA00511EDB /* ProfileHeadingView.xib */; };
+		615963DA22496E8500511EDB /* ProfileHeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615963D922496E8500511EDB /* ProfileHeadingView.swift */; };
 		675844E8F30647ADD3B850A9 /* Pods_Spot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286B836E6CA8EF95A3DBF973 /* Pods_Spot.framework */; };
 		7A37801C22174BB1008B835A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A37801B22174BB1008B835A /* MapViewController.swift */; };
 		7A37801E22174BD6008B835A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A37801D22174BD6008B835A /* ProfileViewController.swift */; };
@@ -69,6 +74,11 @@
 		3EE88DE42226621000E9D13F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Post.swift; path = Spot/Controllers/Post.swift; sourceTree = SOURCE_ROOT; };
 		4A128FDD7E619FF550F6C816 /* Pods-SpotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpotTests/Pods-SpotTests.release.xcconfig"; sourceTree = "<group>"; };
 		5A6FE8BCAD2A0033DF62E47D /* Pods_SpotTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		61447FA3224BD1E9005DFB35 /* SpotsProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsProfileViewController.swift; sourceTree = "<group>"; };
+		61447FA5224EA1A1005DFB35 /* PhotomapProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotomapProfileViewController.swift; sourceTree = "<group>"; };
+		61447FA7224EA1D6005DFB35 /* FriendsProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsProfileViewController.swift; sourceTree = "<group>"; };
+		615963D7224960BA00511EDB /* ProfileHeadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeadingView.xib; sourceTree = "<group>"; };
+		615963D922496E8500511EDB /* ProfileHeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeadingView.swift; sourceTree = "<group>"; };
 		6F13890D99E98FC8A20FE3C3 /* Pods-SpotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpotUITests/Pods-SpotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		774AE91C70FFBA506C2DA416 /* Pods-SpotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpotUITests/Pods-SpotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7A37801B22174BB1008B835A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = Spot/Controllers/MapViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -180,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				7A378021221B3331008B835A /* NavBarViewController.swift */,
+				61447FA7224EA1D6005DFB35 /* FriendsProfileViewController.swift */,
 				7A37801F22174BEA008B835A /* FeedViewController.swift */,
 				7A37801D22174BD6008B835A /* ProfileViewController.swift */,
 				1DF6E04B22089F4800BA0C36 /* Info.plist */,
@@ -187,6 +198,8 @@
 				1DF6E03622089F4500BA0C36 /* SignUpViewController.swift */,
 				3E6189562213DEAD00A7CFF4 /* LoginViewController.swift */,
 				3ED3F1A522147EAE008CC29B /* ResetViewController.swift */,
+				61447FA3224BD1E9005DFB35 /* SpotsProfileViewController.swift */,
+				61447FA5224EA1A1005DFB35 /* PhotomapProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -206,6 +219,8 @@
 				1DF6E03D22089F4800BA0C36 /* LaunchScreen.storyboard */,
 				7A5E078E2233165B00B53B58 /* MarkerInfoWindowView.xib */,
 				7A5E07902233174600B53B58 /* MarkerInfoWindow.swift */,
+				615963D7224960BA00511EDB /* ProfileHeadingView.xib */,
+				615963D922496E8500511EDB /* ProfileHeadingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -343,6 +358,7 @@
 				7A5E078F2233165B00B53B58 /* MarkerInfoWindowView.xib in Resources */,
 				1DF6E03C22089F4800BA0C36 /* Assets.xcassets in Resources */,
 				1DF6E03A22089F4500BA0C36 /* Main.storyboard in Resources */,
+				615963D8224960BA00511EDB /* ProfileHeadingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,15 +514,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61447FA6224EA1A1005DFB35 /* PhotomapProfileViewController.swift in Sources */,
+				61447FA4224BD1E9005DFB35 /* SpotsProfileViewController.swift in Sources */,
 				7A37801E22174BD6008B835A /* ProfileViewController.swift in Sources */,
 				3E6189572213DEAD00A7CFF4 /* LoginViewController.swift in Sources */,
 				1DF6E03722089F4500BA0C36 /* SignUpViewController.swift in Sources */,
 				3ED3F1A622147EAE008CC29B /* ResetViewController.swift in Sources */,
 				7A37801C22174BB1008B835A /* MapViewController.swift in Sources */,
 				1DF6E03522089F4500BA0C36 /* AppDelegate.swift in Sources */,
+				61447FA8224EA1D6005DFB35 /* FriendsProfileViewController.swift in Sources */,
 				3EE88DE52226621000E9D13F /* Post.swift in Sources */,
 				7A5E07912233174600B53B58 /* MarkerInfoWindow.swift in Sources */,
 				7A378022221B3331008B835A /* NavBarViewController.swift in Sources */,
+				615963DA22496E8500511EDB /* ProfileHeadingView.swift in Sources */,
 				7A37802022174BEA008B835A /* FeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
