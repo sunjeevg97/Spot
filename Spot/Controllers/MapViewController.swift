@@ -17,6 +17,8 @@ class MapViewController: UIViewController {
     }
     
     
+    @IBOutlet weak var addSpotBtn: UIButton!
+    
     @IBOutlet weak var mapView: GMSMapView!
     private let locationManager = CLLocationManager()
     
@@ -27,7 +29,8 @@ class MapViewController: UIViewController {
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-
+        
+        mapView.addSubview(addSpotBtn)
     }
     
     

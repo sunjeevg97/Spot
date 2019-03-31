@@ -319,11 +319,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qcc-qJ-c0D" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9oj-XG-G6K">
-                                        <rect key="frame" x="295" y="462" width="72" height="72"/>
+                                    <button opaque="NO" contentMode="topRight" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9oj-XG-G6K">
+                                        <rect key="frame" x="295" y="474" width="72" height="72"/>
                                         <state key="normal" image="AddSpotIcon"/>
                                         <connections>
                                             <action selector="addSpot:" destination="vkr-4K-2jk" eventType="touchUpInside" id="Xgf-F2-24c"/>
+                                            <segue destination="39m-3j-LiI" kind="show" id="1YC-7p-cjA"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -352,6 +353,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addSpotBtn" destination="9oj-XG-G6K" id="wIe-mk-C0s"/>
                         <outlet property="mapView" destination="qcc-qJ-c0D" id="a4H-dh-CjQ"/>
                         <outlet property="navigationItem" destination="4De-Yd-D1a" id="hQe-57-3AU"/>
                     </connections>
@@ -359,6 +361,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N1B-1F-8IV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2848.8000000000002" y="2167.4662668665669"/>
+        </scene>
+        <!--Add Spot View Controller-->
+        <scene sceneID="rHm-cP-Y9D">
+            <objects>
+                <viewController id="39m-3j-LiI" customClass="AddSpotViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FtL-Ro-yJD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="fDg-wQ-cHI"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TIH-Wm-sbv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2849" y="2893"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Xth-0Q-utc">
