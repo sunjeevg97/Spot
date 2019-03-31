@@ -117,7 +117,7 @@ class MapViewController: UIViewController {
             lon = data["longitude"] as? Double
             privacy = data["privacyLevel"] as? String
             
-            let markerPos = CLLocationCoordinate2D(latitude: lat!, longitude: lon!)
+            let markerPos = CLLocationCoordinate2D(latitude: 0, longitude: 0)
             
             let marker = GMSMarker(position: markerPos)
             
@@ -158,7 +158,7 @@ extension MapViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else {
+        guard let location = locations.last as? CLLocation else {
             return
         }
         

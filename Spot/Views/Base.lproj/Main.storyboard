@@ -363,6 +363,7 @@
                                 <state key="normal" image="AddSpotIcon"/>
                                 <connections>
                                     <action selector="addSpot:" destination="vkr-4K-2jk" eventType="touchUpInside" id="Xgf-F2-24c"/>
+                                    <segue destination="x0m-OS-bdd" kind="show" id="kEI-A0-egT"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -395,6 +396,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N1B-1F-8IV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2848.8000000000002" y="2167.4662668665669"/>
+        </scene>
+        <!--Add Spot View Controller-->
+        <scene sceneID="i7e-lc-8AG">
+            <objects>
+                <viewController id="x0m-OS-bdd" customClass="AddSpotViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9Eq-P8-TTE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Ptb-DI-2qG"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ooy-2O-TfZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2830" y="2835"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Xth-0Q-utc">
@@ -534,7 +550,7 @@ IT’S A MAGICAL WORLD OUT THERE.
         <image name="MapIcon" width="62" height="74"/>
         <image name="MessagesIcon" width="50" height="36"/>
         <image name="NotificationIcon" width="40" height="48"/>
- master
+        <image name="Profile1x" width="76" height="76"/>
         <image name="ProfileActiveIcon" width="76" height="76"/>
         <image name="ProfileIcon" width="76" height="76"/>
         <image name="SearchIcon" width="52" height="52"/>
