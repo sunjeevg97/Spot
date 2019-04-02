@@ -68,18 +68,18 @@ class MapViewController: UIViewController {
     
     func startLocationServices() {
         switch CLLocationManager.authorizationStatus() {
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-            break
+            case .notDetermined:
+                locationManager.requestWhenInUseAuthorization()
+                break
             
-        case .restricted, .denied:
-            //Do something if access to location services is denied; notify user that app can't be used without authorization
-            break
+            case .restricted, .denied:
+                //Do something if access to location services is denied; notify user that app can't be used without authorization
+                break
             
-        case .authorizedWhenInUse, .authorizedAlways:
-            locationManager.startUpdatingLocation()
-            mapView.isMyLocationEnabled = true
-            break
+            case .authorizedWhenInUse, .authorizedAlways:
+                locationManager.startUpdatingLocation()
+                mapView.isMyLocationEnabled = true
+                break
             
         }
     }
@@ -108,16 +108,18 @@ class MapViewController: UIViewController {
     
     //making markers to add to map
     func loadSpotsToMap() {
-        var lat: Double?
-        var lon: Double?
         var privacy: String?
         
-        for (spot, data) in spots {
-            lat = data["latitude"] as? Double
-            lon = data["longitude"] as? Double
+        for (_, data) in spots {
+            guard let lat = data["latitude"] as? Double else {
+                continue
+            }
+            guard let lon = data["longitude"] as? Double else {
+                continue
+            }
             privacy = data["privacyLevel"] as? String
             
-            let markerPos = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+            let markerPos = CLLocationCoordinate2D(latitude: lat, longitude: lon)
             
             let marker = GMSMarker(position: markerPos)
             
