@@ -21,7 +21,22 @@ class ProfileViewController: UIViewController {
     var usertestGlobal : String?;
     var navigationBarAppearace = UINavigationBar.appearance()
 
+    private var childViewController: SpotsButtonViewController?
     @IBOutlet weak var ProfileIcon: UIImageView!
+    
+    
+    @IBAction func onTapPhotomapButton(_ sender: Any) {
+        childViewController?.reloadContent("Photomap")
+    }
+    
+    @IBAction func onTapSpotsButton(_ sender: Any) {
+        childViewController?.reloadContent("Spots")
+    }
+    
+    
+    @IBAction func onTapFriendsButton(_ sender: Any) {
+        childViewController?.reloadContent("Friends")
+    }
     
     override func viewDidLoad() {
         
@@ -128,15 +143,19 @@ class ProfileViewController: UIViewController {
         }
         
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? SpotsButtonViewController{
+            self.childViewController = vc
+            
+        }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }
 //commented out to figure out how to add user's name
