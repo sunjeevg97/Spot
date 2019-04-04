@@ -289,7 +289,6 @@ class AddSpotViewController: UIViewController {
         
         let dg = DispatchGroup()
         
-//        dg.enter()
         
         
         storageRef.putData(imageData, metadata: metadata){metadata, error in
@@ -300,7 +299,6 @@ class AddSpotViewController: UIViewController {
             if error == nil, metadata != nil{
                 //get download url
                 
-                //dispatchgroup.enter()
                 
                 storageRef.downloadURL(completion: { url, error in
                     if let error = error{
@@ -312,19 +310,14 @@ class AddSpotViewController: UIViewController {
                     urlStr = (url?.absoluteString)!
                     print(urlStr)
                     
-//                    dg.leave()
-                    
-                    //dispatchgroup.leave()
+
                     
                 })
                 
-//                dg.wait()
                 
                 print("testing")
                 print(urlStr)
                 
-                //dispatchgroup.wait()
-                // print(urlStr)
                 
             }else{
                 completion(nil)
