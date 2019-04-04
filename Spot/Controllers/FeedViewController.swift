@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import FirebaseStorage
+import CoreLocation
 
 class FeedViewController: UIViewController {
     
@@ -23,7 +24,8 @@ class FeedViewController: UIViewController {
     var usernameGlobal : String?;
     var nametestGlobal : String?;
     var usertestGlobal : String?;
-    var postsList : [Post] = []
+    var postsList : [Post] = [];
+    var fullURL: String?;
 
     override func viewDidLoad() {
         
@@ -63,19 +65,61 @@ class FeedViewController: UIViewController {
                 }
                 
                 dispatchGroup.leave()
-                print("Did the first thing")
                 
             }
             
             dispatchGroup.wait()
-            print("done waiting")
+            
             print(self.usernameGlobal)
             print(self.nameGlobal)
             
             //Need to load posts from user's friends list (order by post timestamp)
+            
             dispatchGroup.enter()
             
-            self.db.collection("spots").document("NZNdh5JLF3xwFykXubdY").collection("feedPost").document("EwP3fznHgW3fDvrpmfVp").getDocument{(snapshot, err) in
+            let pathOfPost = self.db.collection("spots").document("NZNdh5JLF3xwFykXubdY")
+            
+            pathOfPost.getDocument(completion: { (snapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                }else{
+                    self.postsList[0].spotname = snapshot?.get("spotName") as! String
+                    
+                    let coordinates: GeoPoint = snapshot?.get("location") as! GeoPoint
+                    
+                    let longitude: Double =  coordinates.longitude
+                    let latitude: Double = coordinates.latitude
+                    
+                    
+                    var convertedLocation = CLLocation(latitude: latitude, longitude: longitude);
+                    
+                    CLGeocoder().reverseGeocodeLocation(convertedLocation, completionHandler: { (placemarks, error) -> Void in
+                        
+                        
+                        let cityName: String = placemarks?[0].locality ?? "City"
+                        let stateName: String = placemarks?[0].administrativeArea ?? "Earth"
+                        
+                        let cityAndState : String = cityName + ", " + stateName
+                        
+                        print("placemarker: ", cityAndState)
+                        
+                        self.postsList[0].location = cityAndState
+                        
+                    })
+                    
+                    
+                    
+                }
+                
+                dispatchGroup.leave()
+            })
+            
+            
+            dispatchGroup.enter()
+            var imageStorageID:String = "";
+            var imageEnclosingFolder:String = "";
+            
+            pathOfPost.collection("feedPost").document("EwP3fznHgW3fDvrpmfVp").getDocument{(snapshot, err) in
                 
                 if let err = err {
                     print("Error getting documents: \(err)")
@@ -83,9 +127,26 @@ class FeedViewController: UIViewController {
                     print("image URL")
                     print(snapshot?.get("image"))
                     
+                    let imageRef : DocumentReference = snapshot?.get("image") as! DocumentReference
+                    self.fullURL = imageRef.path
+                    
+                    
+                    print(imageRef.path)
+                    print(imageRef)
+                    
+                    var slicedPath = self.fullURL?.components(separatedBy: "/")
+                    imageStorageID = (slicedPath?.popLast())!
+                    imageEnclosingFolder = (slicedPath?.popLast())!
+                    
+                    print(slicedPath)
+                    print(imageStorageID)
+                    print(imageEnclosingFolder)
+                    
                     self.postsList[0].caption = snapshot?.get("caption") as! String
                     self.postsList[0].uName = snapshot?.get("posterUserName") as! String
                     self.postsList[0].numLikes = snapshot?.get("numberLikes") as! Int
+                    
+                    
                 }
                 
                 dispatchGroup.leave()
@@ -96,7 +157,10 @@ class FeedViewController: UIViewController {
             
             
             dispatchGroup.enter()
-            let gsReference = Storage.storage().reference().child("spotPics").child("34A09798-926E-47BB-80FE-6DC004FECD1D")
+            
+            let gsReference = Storage.storage().reference().child(imageEnclosingFolder).child(imageStorageID)
+            
+//            let gsReference = Storage.storage().reference().child("spotPics").child("34A09798-926E-47BB-80FE-6DC004FECD1D")
             let path = gsReference.fullPath
             let gsName = gsReference.name
             let images = gsReference.parent()
@@ -156,17 +220,8 @@ extension FeedViewController: UITableViewDataSource {
 //        var postsList : [Post] = []
         for i in 0...4{
             
-            postsList.append(Post(captionText: "", photoObj: UIImage(), uNameString: "",likesCount:0))
+            postsList.append(Post(spotname: "",captionText: "", photoObj: UIImage(), uNameString: "",likesCount:0, location: ""))
             
-//            if i == 0{
-////                postsList.append(Post(captionText: "", photoURLString: "images/\(i)", uNameString: ""))
-//                postsList.append(Post(captionText: "", photoObj: UIImage(named: "Signuplogo.png")!, uNameString: ""))
-//
-//
-//            }else{
-////                postsList.append(Post(captionText: "caption # \(i)", photoURLString: "images/\(i)",uNameString: "user/\(i)"))
-//                postsList.append(Post(captionText: "caption # \(i)", photoObj: UIImage(named: "Signuplogo.png")!,uNameString: "user/\(i)"))
-//            }
             
         }
         
@@ -201,7 +256,7 @@ extension FeedViewController: UITableViewDataSource {
         spotName.numberOfLines = 0
         spotName.textColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
         spotName.textAlignment = .right
-        let spotNameContent = "Place Name"
+        let spotNameContent = postsList[indexPath.row].spotname
         let spotNameString = NSMutableAttributedString(string: spotNameContent, attributes: [
             NSAttributedString.Key.font: UIFont(name: "Arial", size: 18)!
             ])
@@ -221,7 +276,7 @@ extension FeedViewController: UITableViewDataSource {
         city.numberOfLines = 0
         city.textColor = UIColor.white
         city.textAlignment = .right
-        let cityContent = "Chapel Hill, NC"
+        let cityContent = postsList[indexPath.row].location
         let cityString = NSMutableAttributedString(string: cityContent, attributes: [
             NSAttributedString.Key.font: UIFont(name: "Arial", size: 11)!
             ])
