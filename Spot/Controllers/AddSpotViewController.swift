@@ -213,7 +213,7 @@ class AddSpotViewController: UIViewController {
         self.view.addSubview(sBtnLayer)
         
         
-        //DispatchQueue.main.async {
+        DispatchQueue.global().async {
         
         self.submitBtn = UIButton(frame: CGRect(x: 288, y: 664, width: 71, height: 32))
         self.submitBtn.layer.cornerRadius = 9.6
@@ -223,7 +223,7 @@ class AddSpotViewController: UIViewController {
         self.submitBtn.addTarget(self, action: #selector(self.handleAddSpot), for: .touchUpInside)
         self.view.addSubview(self.submitBtn)
         
-        //}
+        }
         
         // Do any additional setup after loading the view.
         
@@ -287,34 +287,47 @@ class AddSpotViewController: UIViewController {
         metadata.contentType = "image/jpeg"
         
         
+        let dg = DispatchGroup()
+        
+        
         
         storageRef.putData(imageData, metadata: metadata){metadata, error in
+            
+            
+            
+            
             if error == nil, metadata != nil{
                 //get download url
                 
-                //dispatchgroup.enter()
                 
                 storageRef.downloadURL(completion: { url, error in
                     if let error = error{
                         print("\(error.localizedDescription)")
                         
-                        //dispatchgroup.leave()
+                        
                     }
                     //url
                     urlStr = (url?.absoluteString)!
                     print(urlStr)
                     
-                    //dispatchgroup.leave()
+
                     
                 })
                 
-                //dispatchgroup.wait()
-                // print(urlStr)
+                
+                print("testing")
+                print(urlStr)
+                
                 
             }else{
                 completion(nil)
             }
         }
+        
+        
+        
+        
+        
     }
     
     

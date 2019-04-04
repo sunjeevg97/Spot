@@ -9,15 +9,20 @@
 import Foundation
 
 class Post {
+    var spotname: String
     var caption:String
     var photo:NSObject
     var uName: String
     var numLikes: Int
+    var location: String
     
-    init(captionText:String,photoObj:NSObject,uNameString:String, likesCount:Int){
-        caption = captionText
-        photo = photoObj
-        uName = uNameString
-        numLikes = likesCount
+    init(spotname:String, captionText:String,photoObj:NSObject,uNameString:String, likesCount:Int, location: String){
+        self.spotname = spotname
+        self.caption = captionText
+        self.photo = photoObj
+        self.uName = uNameString
+        self.numLikes = likesCount
+        self.location = location
+        
     }
 }
