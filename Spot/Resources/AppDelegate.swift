@@ -14,10 +14,11 @@ import GooglePlaces
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var navigationBarAppearace = UINavigationBar.appearance()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         FirebaseApp.configure()
         GMSServices.provideAPIKey("AIzaSyDr91JijTPT2QsHIEe1R0O-Subfz0aZilA")
         GMSPlacesClient.provideAPIKey("AIzaSyDr91JijTPT2QsHIEe1R0O-Subfz0aZilA")
