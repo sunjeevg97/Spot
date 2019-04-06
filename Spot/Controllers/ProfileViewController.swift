@@ -20,6 +20,7 @@ class ProfileViewController: UIViewController {
     var nametestGlobal : String?;
     var usertestGlobal : String?;
     var navigationBarAppearace = UINavigationBar.appearance()
+    var userHasImage = false
 
     private var childViewController: SpotsButtonViewController?
     @IBOutlet weak var ProfileIcon: UIImageView!
@@ -53,8 +54,14 @@ class ProfileViewController: UIViewController {
         ProfileIcon.clipsToBounds = true
         //
     
-        
-        
+        //Check if User has uploaded a picture, if not Displays Stock image
+        if userHasImage == true {
+            print("User's Profile")
+        }
+        else {
+            ProfileIcon.image = UIImage(named: "Profile1x.png")
+        }
+        //end
         
         
         //
