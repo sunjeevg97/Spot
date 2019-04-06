@@ -466,6 +466,26 @@
                     <view key="view" contentMode="scaleToFill" id="9Eq-P8-TTE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59S-OX-lm2">
+                                <rect key="frame" x="26.5" y="673.5" width="34" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="AddSpotCircleUnchecked1x"/>
+                                <state key="selected" image="AddSpotCircleChecked1x"/>
+                                <connections>
+                                    <action selector="pubCheckboxTapped:" destination="x0m-OS-bdd" eventType="touchUpInside" id="haV-x8-hvy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9y-cg-LGa">
+                                <rect key="frame" x="108.5" y="673.5" width="33" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="AddSpotCircleUnchecked1x"/>
+                                <state key="selected" image="AddSpotCircleChecked1x"/>
+                                <connections>
+                                    <action selector="friendCheckboxTapped:" destination="x0m-OS-bdd" eventType="touchUpInside" id="tUs-H3-oV1"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Ptb-DI-2qG"/>
                     </view>
@@ -630,6 +650,8 @@ IT’S A MAGICAL WORLD OUT THERE.
         </scene>
     </scenes>
     <resources>
+        <image name="AddSpotCircleChecked1x" width="34" height="34"/>
+        <image name="AddSpotCircleUnchecked1x" width="34" height="34"/>
         <image name="AddSpotIcon" width="72" height="72"/>
         <image name="FeedActiveIcon" width="68" height="76"/>
         <image name="FeedIcon" width="68" height="76"/>

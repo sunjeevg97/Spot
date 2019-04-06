@@ -79,8 +79,8 @@ class ProfileViewController: UIViewController {
                     } else{
                         
                         
-                        self.nameGlobal = (snapshot?.get("name") as? String)!
-                        self.usernameGlobal = (snapshot?.get("username") as? String)!
+                        self.nameGlobal = (snapshot?.get("name") as! String)
+                        self.usernameGlobal = (snapshot?.get("username") as! String)
                         
                         
                         

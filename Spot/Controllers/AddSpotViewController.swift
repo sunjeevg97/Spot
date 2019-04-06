@@ -25,6 +25,9 @@ class AddSpotViewController: UIViewController {
     
     var submitBtn : UIButton!
     
+    var pubBtnWasChecked : Bool!
+    var friendBtnWasChecked : Bool!
+    
     var urlStr : String = " "
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,9 +86,9 @@ class AddSpotViewController: UIViewController {
         self.view.addSubview(spotPic)
         
         //load image button
-        addSpotBtn = UIButton(frame: CGRect(x: 200, y: 271, width: 70, height: 50))
-        addSpotBtn.backgroundColor = UIColor.green
-        addSpotBtn.setTitle("pick", for: .normal)
+        let addSpotBtnImg = UIImage(named: "CreateSpotAddPicture2x.png")
+        addSpotBtn = UIButton(frame: CGRect(x: 64, y: 267, width: 9, height: 9))
+        addSpotBtn.setBackgroundImage(addSpotBtnImg, for: .normal)
         addSpotBtn.addTarget(self, action: #selector(openCamRoll), for: .touchUpInside)
         self.view.addSubview(addSpotBtn)
         
@@ -116,6 +119,8 @@ class AddSpotViewController: UIViewController {
         descriptionTextField.layer.borderColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1).cgColor
         descriptionTextField.textColor = UIColor.white
         self.view.addSubview(descriptionTextField)
+        
+        
         
         /********* WALKING DIRECTIONS ******/
         //walking direction label
@@ -192,8 +197,51 @@ class AddSpotViewController: UIViewController {
         tag3TextField.textColor = UIColor.white
         self.view.addSubview(tag3TextField)
         
-        //PRIVACY SETTINGS -- need image
+        //PRIVACY SETTINGS
+        //public label
+        let publicTextLayer = UILabel(frame: CGRect(x: 10, y: 649, width: 67, height: 16))
+        publicTextLayer.lineBreakMode = .byWordWrapping
+        publicTextLayer.numberOfLines = 0
+        publicTextLayer.textColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
+        publicTextLayer.textAlignment = .center
+        let publicTextContent = "Open"
+        let publicTextString = NSMutableAttributedString(string: publicTextContent, attributes: [    NSAttributedString.Key.font: UIFont(name: "Arial", size: 15)!])
+        let publicTextRange = NSRange(location: 0, length: publicTextString.length)
+        let publicParagraphStyle = NSMutableParagraphStyle()
+        publicParagraphStyle.lineSpacing = 1.13
+        publicTextString.addAttribute(NSAttributedString.Key.paragraphStyle, value:publicParagraphStyle, range: publicTextRange)
+        publicTextString.addAttribute(NSAttributedString.Key.kern, value: 1, range: publicTextRange)
+        publicTextLayer.attributedText = publicTextString
+        publicTextLayer.sizeToFit()
+        self.view.addSubview(publicTextLayer)
         //public Spot
+        /*let publicImg = UIImage(named: "AddSpotCircleUnchecked1x.png")
+        let publicImgView = UIImageView(image: publicImg!)
+        publicImgView.frame = CGRect(x: 26.63, y: 673.63, width: 32.75, height: 32.75)
+        self.view.addSubview(publicImgView)*/
+       
+        
+        //friends Label
+        let friendsTextLayer = UILabel(frame: CGRect(x: 74, y: 649, width: 107, height: 16))
+        friendsTextLayer.lineBreakMode = .byWordWrapping
+        friendsTextLayer.numberOfLines = 0
+        friendsTextLayer.textColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
+        friendsTextLayer.textAlignment = .center
+        let friendsTextContent = "Friends"
+        let friendsTextString = NSMutableAttributedString(string: friendsTextContent, attributes: [    NSAttributedString.Key.font: UIFont(name: "Arial", size: 15)!])
+        let friendsTextRange = NSRange(location: 0, length: friendsTextString.length)
+        let friendsParagraphStyle = NSMutableParagraphStyle()
+        friendsParagraphStyle.lineSpacing = 1.13
+        friendsTextString.addAttribute(NSAttributedString.Key.paragraphStyle, value:friendsParagraphStyle, range: friendsTextRange)
+        friendsTextString.addAttribute(NSAttributedString.Key.kern, value: 1, range: friendsTextRange)
+        friendsTextLayer.attributedText = friendsTextString
+        friendsTextLayer.sizeToFit()
+        self.view.addSubview(friendsTextLayer)
+        //friends Spot
+        /*let friendsImg = UIImage(named: "AddSpotCircleUnchecked1x.png")
+        let friendsImgView = UIImageView(image: friendsImg!)
+        friendsImgView.frame = CGRect(x: 108.63, y: 673.63, width: 32.75, height: 32.75)
+        self.view.addSubview(friendsImgView)*/
         
         //Submit button
         let sBtnLayer = UILabel(frame: CGRect(x: 292.81, y: 671.11, width: 62.58, height: 17.78))
@@ -202,7 +250,7 @@ class AddSpotViewController: UIViewController {
         sBtnLayer.textColor = UIColor.white
         sBtnLayer.textAlignment = .center
         let sBtnTextContent = "SUBMIT"
-        let sBtnTextString = NSMutableAttributedString(string: sBtnTextContent, attributes: [    NSAttributedString.Key.font: UIFont(name: "Arial", size: 16.8)!])
+        let sBtnTextString = NSMutableAttributedString(string: sBtnTextContent, attributes: [    NSAttributedString.Key.font: UIFont(name: "Arial", size: 15)!])
         let sBtnTextRange = NSRange(location: 0, length: sBtnTextString.length)
         let sBtnParagraphStyle = NSMutableParagraphStyle()
         sBtnParagraphStyle.lineSpacing = 1.13
@@ -210,6 +258,7 @@ class AddSpotViewController: UIViewController {
         sBtnTextString.addAttribute(NSAttributedString.Key.kern, value: 0.5, range: sBtnTextRange)
         sBtnLayer.attributedText = sBtnTextString
         sBtnLayer.sizeToFit()
+        sBtnLayer.layer.zPosition = 1;
         self.view.addSubview(sBtnLayer)
         
         
@@ -237,7 +286,7 @@ class AddSpotViewController: UIViewController {
     
     @objc func handleAddSpot(_sender: AnyObject){
         let db = Firestore.firestore()
-        let uuid = UUID().uuidString
+        let spotId = UUID().uuidString
         
         guard let userId = Auth.auth().currentUser?.uid else{return}
         
@@ -261,7 +310,7 @@ class AddSpotViewController: UIViewController {
         
         guard let image = spotPic.image else {return}
         //1. Upload Image to Firebase Storage
-        self.uploadSpotImage(image){error in
+        self.uploadSpotImage(image, spotId: spotId){error in
             
             if error == nil{
                 print("imaged saved to db")
@@ -270,16 +319,36 @@ class AddSpotViewController: UIViewController {
         
         //2. Upload Image URL and Other Spot Data and Firebase Firestore
         
-        db.collection("spots").document(uuid).setData(values, merge: true)
+        db.collection("spots").document(spotId).setData(values, merge: true)
+        
+        if(pubBtnWasChecked == true){
+            let btnVal = ["public" : 1]
+            db.collection("spots").document(spotId).setData(btnVal, merge: true)
+        }
+        else{
+            let btnVal = ["public" : 0]
+             db.collection("spots").document(spotId).setData(btnVal, merge: true)
+        }
+        
+        if(friendBtnWasChecked == true){
+            let btnVal = ["friends" : 1]
+            db.collection("spots").document(spotId).setData(btnVal, merge: true)
+        }
+        else{
+            let btnVal = ["friends" : 0]
+            db.collection("spots").document(spotId).setData(btnVal, merge: true)
+        }
+        
+        
         
     }
     
     
-    func uploadSpotImage(_ image:UIImage, completion: @escaping ((_ url:String?) -> ())){
+    func uploadSpotImage(_ image:UIImage, spotId: String,  completion: @escaping ((_ url:String?) -> ())){
         
-        
-        let uuid = UUID().uuidString
-        let storageRef = Storage.storage().reference().child("spotPics-dev").child("\(uuid)")
+        let db = Firestore.firestore()
+        let imageId = UUID().uuidString
+        let storageRef = Storage.storage().reference().child("spotPics-dev").child("\(imageId)")
         guard let imageData = image.jpegData(compressionQuality: 0.75) else{return}
         
         var urlStr: String = ""
@@ -311,6 +380,8 @@ class AddSpotViewController: UIViewController {
                     print(urlStr)
                     
 
+                    let values = ["image url": urlStr]
+                    db.collection("spots").document(spotId).setData(values, merge:true)
                     
                 })
                 
@@ -328,6 +399,28 @@ class AddSpotViewController: UIViewController {
         
         
         
+    }
+    
+    @IBAction func pubCheckboxTapped(_ sender: UIButton){
+        if sender.isSelected{
+            sender.isSelected = false
+            pubBtnWasChecked = false
+        }
+        else{
+            sender.isSelected = true
+            pubBtnWasChecked = true
+        }
+    }
+    
+    @IBAction func friendCheckboxTapped(_ sender: UIButton){
+        if sender.isSelected{
+            sender.isSelected = false
+            friendBtnWasChecked = false
+        }
+        else{
+            sender.isSelected = true
+            friendBtnWasChecked = true
+        }
     }
     
     
