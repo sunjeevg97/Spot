@@ -127,7 +127,7 @@ class FeedViewController: UIViewController {
                     print("image URL")
                     print(snapshot?.get("image"))
                     
-                    let imageRef : DocumentReference = snapshot?.get("image") as! DocumentReference
+                    let imageRef : DocumentReference = snapshot?.get("imageRef") as! DocumentReference
                     self.fullURL = imageRef.path
                     
                     
