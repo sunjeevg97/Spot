@@ -14,7 +14,8 @@ target 'Spot' do
   pod 'Firebase/Storage'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
-
+  pod 'Geofirestore'
+  
   target 'SpotTests' do
     inherit! :search_paths
     # Pods for testing
