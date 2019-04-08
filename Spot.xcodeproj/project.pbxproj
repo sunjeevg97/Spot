@@ -19,7 +19,6 @@
 		3E6189572213DEAD00A7CFF4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6189562213DEAD00A7CFF4 /* LoginViewController.swift */; };
 		3E9178EB225A688400AFB2DA /* SpotsButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9178EA225A688400AFB2DA /* SpotsButtonViewController.swift */; };
 		3EA94B9E224B3C560050922D /* LogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA94B9D224B3C560050922D /* LogoutView.swift */; };
-		3EC4D92B225AB6950061F36F /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC4D92A225AB6950061F36F /* CreatePostViewController.swift */; };
 		3ED3F1A622147EAE008CC29B /* ResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3F1A522147EAE008CC29B /* ResetViewController.swift */; };
 		3EDBE3CB2208B28B006D6B75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EDBE3CA2208B28B006D6B75 /* GoogleService-Info.plist */; };
 		3EE88DE52226621000E9D13F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE88DE42226621000E9D13F /* Post.swift */; };
@@ -72,7 +71,6 @@
 		3E6189562213DEAD00A7CFF4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3E9178EA225A688400AFB2DA /* SpotsButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsButtonViewController.swift; sourceTree = "<group>"; };
 		3EA94B9D224B3C560050922D /* LogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutView.swift; sourceTree = "<group>"; };
-		3EC4D92A225AB6950061F36F /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		3ED3F1A522147EAE008CC29B /* ResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetViewController.swift; sourceTree = "<group>"; };
 		3EDBE3CA2208B28B006D6B75 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3EE88DE42226621000E9D13F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Post.swift; path = Spot/Controllers/Post.swift; sourceTree = SOURCE_ROOT; };
@@ -198,11 +196,7 @@
 				3EA94B9D224B3C560050922D /* LogoutView.swift */,
 				1D58C260225174C900EA646C /* AddSpotViewController.swift */,
 				3E9178EA225A688400AFB2DA /* SpotsButtonViewController.swift */,
-
-				3EC4D92A225AB6950061F36F /* CreatePostViewController.swift */,
-
 				1D58C262225AA29C00EA646C /* SuccessViewController.swift */,
-
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -524,10 +518,7 @@
 				1DF6E03522089F4500BA0C36 /* AppDelegate.swift in Sources */,
 				3EE88DE52226621000E9D13F /* Post.swift in Sources */,
 				7A5E07912233174600B53B58 /* MarkerInfoWindow.swift in Sources */,
-
-				3EC4D92B225AB6950061F36F /* CreatePostViewController.swift in Sources */,
 				1D58C263225AA29C00EA646C /* SuccessViewController.swift in Sources */,
-
 				3E9178EB225A688400AFB2DA /* SpotsButtonViewController.swift in Sources */,
 				1D58C261225174C900EA646C /* AddSpotViewController.swift in Sources */,
 				7A378022221B3331008B835A /* NavBarViewController.swift in Sources */,
