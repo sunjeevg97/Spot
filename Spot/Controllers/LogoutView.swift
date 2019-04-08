@@ -12,6 +12,7 @@ import Firebase
 class LogoutView: UIViewController {
 
 
+    @IBOutlet weak var createPostBtn: UIButton!
     @IBOutlet weak var logoutBtn: UIButton!
     
     override func viewDidLoad() {
@@ -21,6 +22,11 @@ class LogoutView: UIViewController {
         logoutBtn.isUserInteractionEnabled = true
         let logoutRecognizer = UITapGestureRecognizer(target: self, action: #selector(logoutFunc))
         logoutBtn.addGestureRecognizer(logoutRecognizer)
+        
+        createPostBtn.isUserInteractionEnabled = true
+        let createPostRecognizer = UITapGestureRecognizer(target:self, action: #selector(createPost))
+        createPostBtn.addGestureRecognizer(createPostRecognizer)
+        
         
     }
     
@@ -39,6 +45,13 @@ class LogoutView: UIViewController {
             self.performSegue(withIdentifier: "logoutSegue", sender: self) //return to signup view
             print("logout complete 2")
         }
+    
+    @objc func createPost(_sender: AnyObject){
+        
+        self.performSegue(withIdentifier: "createPostSegue", sender: self)
+        
+        
+    }
     
 
 }
