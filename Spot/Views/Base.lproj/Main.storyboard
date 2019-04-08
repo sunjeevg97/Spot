@@ -388,20 +388,13 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Logout"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ac-KM-xbZ">
-                                <rect key="frame" x="147" y="361" width="81" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Create Post"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="THg-dj-AuN"/>
                     </view>
                     <connections>
-                        <outlet property="createPostBtn" destination="3ac-KM-xbZ" id="UcW-FS-WsB"/>
                         <outlet property="logoutBtn" destination="slN-aQ-pLx" id="5d7-gU-NFq"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="uOX-ts-t6F"/>
-                        <segue destination="WHH-ct-5H6" kind="presentation" identifier="createPostSegue" id="rp7-Og-Jc4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w5t-MR-2g6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -673,21 +666,6 @@ IT’S A MAGICAL WORLD OUT THERE.
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YI0-Jf-WOl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4348" y="3016.1919040479761"/>
-        </scene>
-        <!--Create Post View Controller-->
-        <scene sceneID="BDk-sr-kBg">
-            <objects>
-                <viewController id="WHH-ct-5H6" customClass="CreatePostViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="yrJ-Zg-6kc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Anb-5b-L1x"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6lx-U4-SRf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7601" y="1334"/>
         </scene>
     </scenes>
     <resources>
