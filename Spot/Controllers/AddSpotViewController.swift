@@ -7,9 +7,9 @@
 //
 import UIKit
 import Firebase
-
-class AddSpotViewController: UIViewController {
-    
+import MapKit
+import Geofirestore
+class AddSpotViewController: UIViewController{
     var spotNameTextField : UITextField!
     var descriptionTextField: UITextField!
     var directionsTextField: UITextField!
@@ -29,11 +29,31 @@ class AddSpotViewController: UIViewController {
     var friendBtnWasChecked : Bool!
     
     var urlStr : String = " "
+    
+    let locationManager : CLLocationManager = CLLocationManager()
+    var currentLocation : CLLocation!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.black
+        //Get User's current location
+        if CLLocationManager.locationServicesEnabled() == true{
+            if CLLocationManager.authorizationStatus() == .restricted ||
+               CLLocationManager.authorizationStatus() == .denied ||
+                CLLocationManager.authorizationStatus() == .notDetermined{
+                
+                locationManager.requestWhenInUseAuthorization()
+            }
+            locationManager.desiredAccuracy = 1.0
+            locationManager.delegate = self
+            locationManager.startUpdatingLocation()
+            currentLocation = locationManager.location
+            
+        }else{
+            print("please turn on location services")
+        }
         
+        self.view.backgroundColor = UIColor.black
+        self.navigationItem.title = "Create Spot"
         imgPicker.delegate = self
         //name label
         let nameLabel = UILabel(frame: CGRect(x: 16, y: 109, width: 171, height: 16))
@@ -214,11 +234,7 @@ class AddSpotViewController: UIViewController {
         publicTextLayer.attributedText = publicTextString
         publicTextLayer.sizeToFit()
         self.view.addSubview(publicTextLayer)
-        //public Spot
-        /*let publicImg = UIImage(named: "AddSpotCircleUnchecked1x.png")
-        let publicImgView = UIImageView(image: publicImg!)
-        publicImgView.frame = CGRect(x: 26.63, y: 673.63, width: 32.75, height: 32.75)
-        self.view.addSubview(publicImgView)*/
+    
        
         
         //friends Label
@@ -237,11 +253,6 @@ class AddSpotViewController: UIViewController {
         friendsTextLayer.attributedText = friendsTextString
         friendsTextLayer.sizeToFit()
         self.view.addSubview(friendsTextLayer)
-        //friends Spot
-        /*let friendsImg = UIImage(named: "AddSpotCircleUnchecked1x.png")
-        let friendsImgView = UIImageView(image: friendsImg!)
-        friendsImgView.frame = CGRect(x: 108.63, y: 673.63, width: 32.75, height: 32.75)
-        self.view.addSubview(friendsImgView)*/
         
         //Submit button
         let sBtnLayer = UILabel(frame: CGRect(x: 292.81, y: 671.11, width: 62.58, height: 17.78))
@@ -262,7 +273,6 @@ class AddSpotViewController: UIViewController {
         self.view.addSubview(sBtnLayer)
         
         
-        DispatchQueue.global().async {
         
         self.submitBtn = UIButton(frame: CGRect(x: 288, y: 664, width: 71, height: 32))
         self.submitBtn.layer.cornerRadius = 9.6
@@ -272,7 +282,6 @@ class AddSpotViewController: UIViewController {
         self.submitBtn.addTarget(self, action: #selector(self.handleAddSpot), for: .touchUpInside)
         self.view.addSubview(self.submitBtn)
         
-        }
         
         // Do any additional setup after loading the view.
         
@@ -286,6 +295,8 @@ class AddSpotViewController: UIViewController {
     
     @objc func handleAddSpot(_sender: AnyObject){
         let db = Firestore.firestore()
+        //let geoFirestoreRef = Firestore.firestore().collection("spots")
+        //let geoFirestore = GeoFirestore(collectionRef: geoFirestoreRef)
         let spotId = UUID().uuidString
         
         guard let userId = Auth.auth().currentUser?.uid else{return}
@@ -297,6 +308,9 @@ class AddSpotViewController: UIViewController {
         guard let tag2 = tag2TextField.text as String? else{return}
         guard let tag3 = tag3TextField.text as String? else{return}
         
+        let latitude = currentLocation.coordinate.latitude
+        let longitude = currentLocation.coordinate.longitude
+        let location = GeoPoint(latitude: latitude,longitude: longitude)
         
         let values = ["spot name" : name,
                       "description" : description,
@@ -305,8 +319,7 @@ class AddSpotViewController: UIViewController {
                       "tag2": tag2,
                       "tag3": tag3,
                       "created by": userId]
-        
-        
+        let locations = ["location": location]
         
         guard let image = spotPic.image else {return}
         //1. Upload Image to Firebase Storage
@@ -317,9 +330,10 @@ class AddSpotViewController: UIViewController {
             }
         }
         
-        //2. Upload Image URL and Other Spot Data and Firebase Firestore
+        //2. Upload Image URL and Other Spot Data to Firebase Firestore
         
         db.collection("spots").document(spotId).setData(values, merge: true)
+        db.collection("spots").document(spotId).setData(locations, merge: true)
         
         if(pubBtnWasChecked == true){
             let btnVal = ["public" : 1]
@@ -340,10 +354,10 @@ class AddSpotViewController: UIViewController {
         }
         
         
-        
+        self.performSegue(withIdentifier: "spotFormSuccess", sender: self) //Go to success page
     }
     
-    
+
     func uploadSpotImage(_ image:UIImage, spotId: String,  completion: @escaping ((_ url:String?) -> ())){
         
         let db = Firestore.firestore()
@@ -356,7 +370,6 @@ class AddSpotViewController: UIViewController {
         metadata.contentType = "image/jpeg"
         
         
-        let dg = DispatchGroup()
         
         
         
@@ -431,7 +444,7 @@ class AddSpotViewController: UIViewController {
 
 
 
-extension AddSpotViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+extension AddSpotViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         var selectedImageFromPicker : UIImage?
         
@@ -447,7 +460,19 @@ extension AddSpotViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         dismiss(animated: true, completion: nil)
     }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        for currentLocation in locations{
+            print("\(index): \(currentLocation)")
+            // "0:[locations]"
+        }
+    }
+   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error){
+        print("Unable to access your current location")
+    }
+    
+    
 }
+
 
 
 /*

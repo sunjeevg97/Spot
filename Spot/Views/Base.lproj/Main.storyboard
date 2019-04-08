@@ -489,6 +489,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Ptb-DI-2qG"/>
                     </view>
+                    <connections>
+                        <segue destination="jhu-Ys-cOK" kind="show" identifier="spotFormSuccess" id="SHW-Af-czw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ooy-2O-TfZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -621,6 +624,21 @@ IT’S A MAGICAL WORLD OUT THERE.
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zRm-mb-QKa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5362.3999999999996" y="2171.9640179910048"/>
+        </scene>
+        <!--Success View Controller-->
+        <scene sceneID="JIC-f1-14D">
+            <objects>
+                <viewController id="jhu-Ys-cOK" customClass="SuccessViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5pB-eN-AjX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="PoB-73-3co"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ypp-Rd-agM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2830" y="3527"/>
         </scene>
         <!--Spots Button View Controller-->
         <scene sceneID="Rui-2N-mBK">
