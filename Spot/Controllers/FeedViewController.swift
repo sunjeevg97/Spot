@@ -118,71 +118,73 @@ class FeedViewController: UIViewController {
             dispatchGroup.enter()
             var imageStorageID:String = "";
             var imageEnclosingFolder:String = "";
-            
+
             pathOfPost.collection("feedPost").document("EwP3fznHgW3fDvrpmfVp").getDocument{(snapshot, err) in
-                
+
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else{
                     print("image URL")
                     print(snapshot?.get("image"))
-                    
+
                     let imageRef : DocumentReference = snapshot?.get("imageRef") as! DocumentReference
                     self.fullURL = imageRef.path
-                    
-                    
+
+
                     print(imageRef.path)
                     print(imageRef)
-                    
+
                     var slicedPath = self.fullURL?.components(separatedBy: "/")
                     imageStorageID = (slicedPath?.popLast())!
                     imageEnclosingFolder = (slicedPath?.popLast())!
-                    
+
                     print(slicedPath)
                     print(imageStorageID)
                     print(imageEnclosingFolder)
-                    
+
                     self.postsList[0].caption = snapshot?.get("caption") as! String
                     self.postsList[0].uName = snapshot?.get("posterUserName") as! String
                     self.postsList[0].numLikes = snapshot?.get("numberLikes") as! Int
-                    
-                    
+
+
                 }
-                
+
                 dispatchGroup.leave()
             }
-            
-            
+//
+//
             dispatchGroup.wait()
-            
-            
-            dispatchGroup.enter()
-            
+//
+//
+
+//
             let gsReference = Storage.storage().reference().child(imageEnclosingFolder).child(imageStorageID)
-            
-//            let gsReference = Storage.storage().reference().child("spotPics").child("34A09798-926E-47BB-80FE-6DC004FECD1D")
+//
+////            let gsReference = Storage.storage().reference().child("spotPics").child("34A09798-926E-47BB-80FE-6DC004FECD1D")
             let path = gsReference.fullPath
             let gsName = gsReference.name
             let images = gsReference.parent()
-
+//
             print(gsReference)
 
-            gsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                if let error = error {
-                    // Uh-oh, an error occurred!
-                } else {
-                    // Data for "images/island.jpg" is returned
-                    let image = UIImage(data: data!)
-                    print("image: ", image)
-
-                    self.postsList[0].photo = image!;
-
-                    dispatchGroup.leave()
-
-                }
-            }
-
-            dispatchGroup.wait()
+            
+//            dispatchGroup.enter()
+//            gsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+//                if let error = error {
+//                    // Uh-oh, an error occurred!
+//                } else {
+//                    // Data for "images/island.jpg" is returned
+//                    let image = UIImage(data: data!)
+//                    print("image: ", image)
+//
+//                    self.postsList[0].photo = image!;
+//
+//                    dispatchGroup.leave()
+//
+//                }
+//            }
+//
+//            dispatchGroup.wait()
             print("after image")
             self.tableView.reloadData()
             print("after reload")
