@@ -96,7 +96,7 @@ class CreatePostViewController: UIViewController {
         self.view.addSubview(postBtn)
         
         //Caption text field
-        let captionInput = UITextField(frame: CGRect(x: 40, y: 200, width: 300, height: 300))
+        let captionInput = UITextField(frame: CGRect(x: 20, y: 150, width: 300, height: 150))
         captionInput.textColor = UIColor.white
         captionInput.placeholder = "write caption here"
         captionInput.backgroundColor = UIColor.gray
@@ -115,7 +115,22 @@ class CreatePostViewController: UIViewController {
         galleryFrame.contentMode = UIView.ContentMode.scaleAspectFill
         self.view.addSubview(galleryFrame)
         
+        //picture input
+        let spotPic = UIImageView(frame: CGRect(x: 200, y: 406, width: 111, height: 131))
+        spotPic.layer.cornerRadius = 5
+        spotPic.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:0.1)
+        spotPic.layer.borderWidth = 0.75
+        spotPic.layer.borderColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1).cgColor
+        self.view.addSubview(spotPic)
         
+        
+    }
+    
+    @objc func openCamRoll(_sender: AnyObject){
+        let imgPicker = UIImagePickerController()
+        imgPicker.sourceType = .photoLibrary
+        imgPicker.allowsEditing = true
+        present(imgPicker, animated: true, completion: nil)
     }
     
     
