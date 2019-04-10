@@ -223,6 +223,11 @@
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </imageView>
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UG5-7m-YXv">
+                                                                <rect key="frame" x="24" y="8" width="48" height="30"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <state key="normal" title="Logout"/>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
@@ -314,11 +319,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="ProfileIcon" destination="vah-zL-Ela" id="4wK-sf-NBO"/>
+                        <outlet property="logoutButton" destination="UG5-7m-YXv" id="mGW-2i-57x"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="FMj-j9-qIR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mkA-Fl-R3H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4542" y="2172"/>
+            <point key="canvasLocation" x="4541.6000000000004" y="2171.9640179910048"/>
         </scene>
         <!--FEED-->
         <scene sceneID="Jyx-M5-t67">
@@ -672,7 +679,7 @@ IT’S A MAGICAL WORLD OUT THERE.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Click a Button" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRN-fg-aOc">
-                                <rect key="frame" x="134" y="459" width="107" height="21"/>
+                                <rect key="frame" x="134" y="200" width="107" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -710,6 +717,6 @@ IT’S A MAGICAL WORLD OUT THERE.
     <inferredMetricsTieBreakers>
         <segue reference="bBT-m9-MKU"/>
         <segue reference="RNW-2x-rNB"/>
-        <segue reference="uOX-ts-t6F"/>
+        <segue reference="FMj-j9-qIR"/>
     </inferredMetricsTieBreakers>
 </document>

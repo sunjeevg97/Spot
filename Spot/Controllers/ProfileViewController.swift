@@ -21,7 +21,12 @@ class ProfileViewController: UIViewController {
     var usertestGlobal : String?;
     var navigationBarAppearace = UINavigationBar.appearance()
     var userHasImage = false
+    var spotInt = 0;
+    var friendsInt = 0;
+    var friendsArray = [String]()
 
+    @IBOutlet weak var logoutButton: UIButton!
+    
     private var childViewController: SpotsButtonViewController?
     @IBOutlet weak var ProfileIcon: UIImageView!
     
@@ -41,34 +46,17 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         
-        nameGlobal = "test"
-        usernameGlobal = "test"
-        nametestGlobal = "test"
-        usertestGlobal = "test"
         
-       //making the image circular
-        ProfileIcon.layer.borderWidth = 1
-        ProfileIcon.layer.masksToBounds = false
-        ProfileIcon.layer.borderColor = UIColor.black.cgColor
-        ProfileIcon.layer.cornerRadius = ProfileIcon.frame.height/2
-        ProfileIcon.clipsToBounds = true
-        //
-    
-        //Check if User has uploaded a picture, if not Displays Stock image
-        if userHasImage == true {
-            print("User's Profile")
-        }
-        else {
-            ProfileIcon.image = UIImage(named: "Profile1x.png")
-        }
-        //end
-        
-        
-        //
-        
-        
+        //make profile circular and call userImage
+        profileIconInsert()
+        getProfileInt()
         super.viewDidLoad()
-
+        
+        logoutButton.isUserInteractionEnabled = true
+        let logoutRecognizer = UITapGestureRecognizer(target: self, action: #selector(logoutFunc))
+        logoutButton.addGestureRecognizer(logoutRecognizer)
+        
+        
         runDispatch()
         
     }
@@ -151,6 +139,50 @@ class ProfileViewController: UIViewController {
         
     }
     
+    // GET THE NUMBER OF SPOTS AND FRIENDS
+    
+    func getProfileInt() {
+        self.db.collection("users").document(self.id).getDocument { (snapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            }else {
+                self.friendsArray = snapshot?.get("friendsList") as! [String]
+                self.friendsInt = self.friendsArray.count
+                print ("Getting number of friends")
+                print (self.friendsArray)
+        
+            }
+        }
+    }
+    
+    func profileIconInsert() {
+        //making the image circular
+        ProfileIcon.layer.borderWidth = 1
+        ProfileIcon.layer.masksToBounds = false
+        ProfileIcon.layer.borderColor = UIColor.black.cgColor
+        ProfileIcon.layer.cornerRadius = ProfileIcon.frame.height/2
+        ProfileIcon.clipsToBounds = true
+        //
+        
+        //Check if User has uploaded a picture, if not Displays Stock image
+        if userHasImage == true {
+            print("User's Profile")
+        }
+        else {
+            ProfileIcon.image = UIImage(named: "Profile1x.png")
+        }
+        //end
+        
+    }
+    
+    
+//    UnComment once you can change the font of the button programmatically
+//    func setButtonTitles() {
+//        let UserSpotsString = "(" + String(userSpots) + ") \nSpots"
+//        SpotsView.setTitle(UserSpotsString, for: UIControl.State.normal)
+//
+//    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -163,6 +195,17 @@ class ProfileViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     
+    @objc func logoutFunc(_sender: AnyObject){
+        
+        do {
+            try Auth.auth().signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        print("logout complete 1")
+        self.performSegue(withIdentifier: "logoutSegue", sender: self) //return to signup view
+        print("logout complete 2")
+    }
 
 }
 //commented out to figure out how to add user's name
