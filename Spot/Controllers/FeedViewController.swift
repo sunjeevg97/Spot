@@ -49,7 +49,6 @@ class FeedViewController: UIViewController {
         DispatchQueue.global().async {
             let dispatchGroup = DispatchGroup()
             
-            
             dispatchGroup.enter()
             self.db.collection("users").document(self.id).getDocument { (snapshot, err) in
                 
@@ -70,6 +69,7 @@ class FeedViewController: UIViewController {
             
             dispatchGroup.wait()
             
+            print("username values")
             print(self.usernameGlobal)
             print(self.nameGlobal)
             
@@ -91,10 +91,9 @@ class FeedViewController: UIViewController {
                     let latitude: Double = coordinates.latitude
                     
                     
-                    var convertedLocation = CLLocation(latitude: latitude, longitude: longitude);
+                    let convertedLocation = CLLocation(latitude: latitude, longitude: longitude);
                     
                     CLGeocoder().reverseGeocodeLocation(convertedLocation, completionHandler: { (placemarks, error) -> Void in
-                        
                         
                         let cityName: String = placemarks?[0].locality ?? "City"
                         let stateName: String = placemarks?[0].administrativeArea ?? "Earth"
@@ -107,8 +106,6 @@ class FeedViewController: UIViewController {
                         
                     })
                     
-                    
-                    
                 }
                 
                 dispatchGroup.leave()
@@ -116,81 +113,53 @@ class FeedViewController: UIViewController {
             
             
             dispatchGroup.enter()
-            var imageStorageID:String = "";
-            var imageEnclosingFolder:String = "";
+            var imageURL:String = "";
 
-            pathOfPost.collection("feedPost").document("EwP3fznHgW3fDvrpmfVp").getDocument{(snapshot, err) in
+            pathOfPost.collection("feedPost").document("C94475D4-0585-4C9D-BAC0-70433B4E9523").getDocument{(snapshot, err) in
 
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else{
                     print("image URL")
-                    print(snapshot?.get("image"))
 
-                    let imageRef : DocumentReference = snapshot?.get("imageRef") as! DocumentReference
-                    self.fullURL = imageRef.path
-
-
-                    print(imageRef.path)
-                    print(imageRef)
-
-                    var slicedPath = self.fullURL?.components(separatedBy: "/")
-                    imageStorageID = (slicedPath?.popLast())!
-                    imageEnclosingFolder = (slicedPath?.popLast())!
-
-                    print(slicedPath)
-                    print(imageStorageID)
-                    print(imageEnclosingFolder)
+                    imageURL = snapshot?.get("image url") as! String
 
                     self.postsList[0].caption = snapshot?.get("caption") as! String
-                    self.postsList[0].uName = snapshot?.get("posterUserName") as! String
-                    self.postsList[0].numLikes = snapshot?.get("numberLikes") as! Int
+                    self.postsList[0].uName = snapshot?.get("posterID") as! String
+                    self.postsList[0].numLikes = snapshot?.get("numLikes") as! Int
 
 
                 }
 
                 dispatchGroup.leave()
             }
-//
-//
-            dispatchGroup.wait()
-//
-//
 
-//
-            let gsReference = Storage.storage().reference().child(imageEnclosingFolder).child(imageStorageID)
-//
-////            let gsReference = Storage.storage().reference().child("spotPics").child("34A09798-926E-47BB-80FE-6DC004FECD1D")
-            let path = gsReference.fullPath
-            let gsName = gsReference.name
-            let images = gsReference.parent()
-//
+            dispatchGroup.wait()
+
+            let gsReference = Storage.storage().reference(forURL: imageURL)
+
+            print("reference info")
             print(gsReference)
+            print(gsReference.fullPath)
+            print(gsReference.name)
+//            print(gsReference.parent())
+            
+            DispatchQueue.main.sync {
+                gsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                    if error != nil {
+                        print("error occured")
+                    } else {
+                        let image = UIImage(data: data!)
+                        self.postsList[0].photo = image!;
+                    }
+                }
+            }
 
             
-//            dispatchGroup.enter()
-//            gsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-//                if let error = error {
-//                    // Uh-oh, an error occurred!
-//                } else {
-//                    // Data for "images/island.jpg" is returned
-//                    let image = UIImage(data: data!)
-//                    print("image: ", image)
-//
-//                    self.postsList[0].photo = image!;
-//
-//                    dispatchGroup.leave()
-//
-//                }
-//            }
-//
-//            dispatchGroup.wait()
+            dispatchGroup.wait()
             print("after image")
             self.tableView.reloadData()
             print("after reload")
-            
-            
-            
             
             
         }

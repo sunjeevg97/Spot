@@ -205,9 +205,19 @@ class CreatePostViewController: UIViewController{
         let caption = self.captionTextField.text
         let posterID = self.currentUserID
         
+        //Get the time that the post was created
+        let timestamp = NSDate().timeIntervalSince1970
+        let myTimeInterval = TimeInterval(timestamp)
+        let time = NSDate(timeIntervalSince1970: TimeInterval(myTimeInterval))
+        
+        var likersList : [String] = []
+        
         let values = ["caption" : caption,
-                      "posterID" : posterID
-                      ]
+                      "posterID" : posterID,
+                      "timestamp" : time,
+                      "numLikes" : 0,
+                      "likers" : likersList
+            ] as [String : Any]
         self.db.collection("spots").document(self.spotID).collection("feedPost").document(postId).setData(values, merge: true)
         print("post created")
         
