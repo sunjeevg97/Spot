@@ -114,53 +114,65 @@ class FeedViewController: UIViewController {
             
             dispatchGroup.enter()
             var imageURL:String = "";
+            var posterUsername : String = "";
 
-            pathOfPost.collection("feedPost").document("C94475D4-0585-4C9D-BAC0-70433B4E9523").getDocument{(snapshot, err) in
+            pathOfPost.collection("feedPost").document("C94475D4-0585-4C9D-BAC0-70433B4E9523").getDocument{(snapshotSpot, errSpot) in
 
-                if let err = err {
+  
+                if let err = errSpot {
                     print("Error getting documents: \(err)")
                 } else{
                     print("image URL")
+                    
+                    let posterID = snapshotSpot?.get("posterID") as! String
 
-                    imageURL = snapshot?.get("image url") as! String
+                    imageURL = snapshotSpot?.get("image url") as! String
 
-                    self.postsList[0].caption = snapshot?.get("caption") as! String
-                    self.postsList[0].uName = snapshot?.get("posterID") as! String
-                    self.postsList[0].numLikes = snapshot?.get("numLikes") as! Int
+                    self.postsList[0].caption = snapshotSpot?.get("caption") as! String
+                    self.postsList[0].uName = snapshotSpot?.get("posterID") as! String
+                    self.postsList[0].numLikes = snapshotSpot?.get("numLikes") as! Int
+                    
+                    
+                    self.db.collection("users").document(posterID).getDocument(completion: { (snapshotUser, errUser) in
+                        
+                        posterUsername = snapshotUser?.get("username") as! String
+                        
+                        self.postsList[0].uName = posterUsername
+                        
+                        
+                        
+                        let gsReference = Storage.storage().reference(forURL: imageURL)
+                        
+                        print("reference info")
+                        print(gsReference)
+                        print(gsReference.fullPath)
+                        print(gsReference.name)
+                        //            print(gsReference.parent())
+                        
+
+                        
+                        //Extract image and put it into a Post object
+                            gsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                                if error != nil {
+                                    print("error occured")
+                                } else {
+                                    let image = UIImage(data: data!)
+                                    self.postsList[0].photo = image!;
+                                    
+                                    self.tableView.reloadData()
+                                    
+                                    dispatchGroup.leave()
+
+                                }
+                            }
+
+
+                    })
 
 
                 }
 
-                dispatchGroup.leave()
             }
-
-            dispatchGroup.wait()
-
-            let gsReference = Storage.storage().reference(forURL: imageURL)
-
-            print("reference info")
-            print(gsReference)
-            print(gsReference.fullPath)
-            print(gsReference.name)
-//            print(gsReference.parent())
-            
-            DispatchQueue.main.sync {
-                gsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                    if error != nil {
-                        print("error occured")
-                    } else {
-                        let image = UIImage(data: data!)
-                        self.postsList[0].photo = image!;
-                    }
-                }
-            }
-
-            
-            dispatchGroup.wait()
-            print("after image")
-            self.tableView.reloadData()
-            print("after reload")
-            
             
         }
     }
@@ -200,8 +212,6 @@ extension FeedViewController: UITableViewDataSource {
         cell.backgroundColor = UIColor.black
         print("height", cell.heightAnchor)
 
-        
-        
         
         //Display the username of the user that created the post
         let handleDisplay1 = UILabel(frame: CGRect(x: 46, y: 8, width: 100, height: 15))
