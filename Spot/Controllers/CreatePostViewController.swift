@@ -10,6 +10,7 @@ import MapKit
 import Geofirestore
 class CreatePostViewController: UIViewController{
     
+    let userID: String = Auth.auth().currentUser?.uid ?? "invalid ID"
     var captionTextField: UITextField!
     var spotPic: UIImageView!
     let currentUserID: String = Auth.auth().currentUser?.uid ?? "invalid ID"
