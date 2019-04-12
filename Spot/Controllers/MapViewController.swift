@@ -11,6 +11,7 @@ import GoogleMaps
 import Firebase
 import FirebaseFirestore
 import FirebaseStorage
+import Geofirestore
 
 class MapViewController: UIViewController {
     
@@ -24,20 +25,20 @@ class MapViewController: UIViewController {
     private let locationManager = CLLocationManager()
     
     let db: Firestore! = Firestore.firestore()
+    let spotsRef = Firestore.firestore().collection("spots")
+    let geoFirestore = GeoFirestore(collectionRef: Firestore.firestore().collection("spots"))
     let id: String = Auth.auth().currentUser?.uid ?? "invalid user"
     
     let rainbowSpot = UIImage(named: "RainbowSpotIcon")
     let blackSpot = UIImage(named: "BlackSpotIcon")
     let greenSpot = UIImage(named: "GreenSpotIcon")
     
-    var spots: [String: [String: Any]] = [:]
-    
-    var markers: [GMSMarker] = []
+    var markers: [String: GMSMarker] = [:]
     
     private var infoWindow = MarkerInfoWindow()
     var locationMarker : GMSMarker? = GMSMarker()
     
-    
+    var circleQuery: GFSCircleQuery?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +49,10 @@ class MapViewController: UIViewController {
         locationManager.delegate = self
         startLocationServices()
         
-        loadSpotsFromDB()
+        circleQuery = geoFirestore.query(withCenter: GeoPoint(latitude: 35.9132, longitude: -79.0558), radius: 0.804672)
+        let _ = circleQuery?.observe(.documentEntered, with: loadSpotFromDB)
+        
+        //setSpotLocations()
     }
     
     
@@ -64,6 +68,18 @@ class MapViewController: UIViewController {
 
     @IBAction func addSpot(_ sender: Any) {
         
+    }
+    
+    //setting location for spot in database using geoFirestore
+    func setSpotLocations() {
+        //old well
+        geoFirestore.setLocation(location: CLLocation(latitude: 35.9121, longitude: -79.0512), forDocumentWithID: "4fbapPCV0sxcnE9rdLyE") { (error) in
+            if (error != nil) {
+                print("An error occured: \(String(describing: error))")
+            } else {
+                print("Saved location successfully!")
+            }
+        }
     }
     
     func startLocationServices() {
@@ -85,57 +101,60 @@ class MapViewController: UIViewController {
     }
 
     
-    //getting spots from database
-    func loadSpotsFromDB() {
-        db.collection("spots").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    let id = document.documentID
+    //getting spot from database
+    func loadSpotFromDB(key: String?, location: CLLocation?) {
+        print("in load spot from db")
+        if let spotKey = key, markers[key!] == nil {
+            self.spotsRef.document(spotKey).getDocument { (document, error) in
+                print("in get document")
+                if let document = document, document.exists {
                     let description = document.get("description")
-                    let location = document.get("location") as? GeoPoint
-                    let privacyLevel = document.get("privacyLevel")
+                    let lat = location?.coordinate.latitude as! Double
+                    let long = location?.coordinate.longitude as! Double
+                    let privacyLevel = document.get("privacyLevel") as? String
                     let spotName = document.get("spotName")
-                    self.spots[id] = ["description": description, "latitude": location?.latitude, "longitude": location?.longitude, "privacyLevel": privacyLevel, "spotName": spotName]
                     
+                    let spotData = ["spotId": spotKey, "description": description, "latitude": lat, "longitude": long, "privacyLevel": privacyLevel, "spotName": spotName]
+                    
+                    self.loadSpotToMap(data: spotData)
+                    
+                } else {
+                    print("Document does not exist")
                 }
-                
-                self.loadSpotsToMap()
             }
+                
         }
     }
     
-    //making markers to add to map
-    func loadSpotsToMap() {
-        var privacy: String?
-        
-        for (_, data) in spots {
-            guard let lat = data["latitude"] as? Double else {
-                continue
-            }
-            guard let lon = data["longitude"] as? Double else {
-                continue
-            }
-            privacy = data["privacyLevel"] as? String
-            
-            let markerPos = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-            
-            let marker = GMSMarker(position: markerPos)
-            
-            if (privacy == "private") {
-                marker.icon = blackSpot
-            } else if (privacy == "friends") {
-                marker.icon = greenSpot
-            } else {
-                marker.icon = rainbowSpot
-            }
-            
-            marker.isFlat = true
-            marker.map = mapView
-            marker.userData = data
-            markers.append(marker)
+    
+    //making marker to add to map
+    func loadSpotToMap(data: [String:Any]) {
+        print("in load spot to map")
+        let spotID = data["spotId"] as! String
+        let privacyLevel = data["privacyLevel"] as? String
+        guard let lat = data["latitude"] as? Double else {
+            return
         }
+        guard let long = data["longitude"] as? Double else {
+            return
+        }
+        
+        let markerPos = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        
+        let marker = GMSMarker(position: markerPos)
+        
+        if (privacyLevel == "private") {
+            marker.icon = self.blackSpot
+        } else if (privacyLevel == "friends") {
+            marker.icon = self.greenSpot
+        } else {
+            marker.icon = self.rainbowSpot
+        }
+        
+        marker.isFlat = true
+        marker.map = self.mapView
+        marker.userData = data
+        self.markers[spotID] = marker
     }
     
     //making instance of view for info window
@@ -210,4 +229,10 @@ extension MapViewController: GMSMapViewDelegate {
         print("tapped on map")
     }
     
+    func mapView(_ mapView: GMSMapView, idleAt cameraPosition: GMSCameraPosition) {
+        let lat = cameraPosition.target.latitude
+        let long = cameraPosition.target.longitude
+        
+        circleQuery?.center = CLLocation(latitude: lat, longitude: long)
+    }
 }
