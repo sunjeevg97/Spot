@@ -73,106 +73,115 @@ class FeedViewController: UIViewController {
             print(self.usernameGlobal)
             print(self.nameGlobal)
             
-            //Need to load posts from user's friends list (order by post timestamp)
+            //Need to load posts from user's friends list (order by post timestamp or location)
             
-            dispatchGroup.enter()
             
-            let pathOfPost = self.db.collection("spots").document("NZNdh5JLF3xwFykXubdY")
             
-            pathOfPost.getDocument(completion: { (snapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                }else{
-                    self.postsList[0].spotname = snapshot?.get("spotName") as! String
-                    
-                    let coordinates: GeoPoint = snapshot?.get("location") as! GeoPoint
-                    
-                    let longitude: Double =  coordinates.longitude
-                    let latitude: Double = coordinates.latitude
-                    
-                    
-                    let convertedLocation = CLLocation(latitude: latitude, longitude: longitude);
-                    
-                    CLGeocoder().reverseGeocodeLocation(convertedLocation, completionHandler: { (placemarks, error) -> Void in
-                        
-                        let cityName: String = placemarks?[0].locality ?? "City"
-                        let stateName: String = placemarks?[0].administrativeArea ?? "Earth"
-                        
-                        let cityAndState : String = cityName + ", " + stateName
-                        
-                        print("placemarker: ", cityAndState)
-                        
-                        self.postsList[0].location = cityAndState
-                        
-                    })
-                    
-                }
+            for index in 0...4{
                 
-                dispatchGroup.leave()
-            })
+                dispatchGroup.enter()
+            
+                let spotID : String = "NZNdh5JLF3xwFykXubdY"
+            
+                let pathOfPost = self.db.collection("spots").document(spotID)
+            
+                pathOfPost.getDocument(completion: { (snapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    }else{
+                        self.postsList[index].spotname = snapshot?.get("spotName") as! String
+                        
+                        let coordinates: GeoPoint = snapshot?.get("location") as! GeoPoint
+                        
+                        let longitude: Double =  coordinates.longitude
+                        let latitude: Double = coordinates.latitude
+                        
+                        
+                        let convertedLocation = CLLocation(latitude: latitude, longitude: longitude);
+                        
+                        CLGeocoder().reverseGeocodeLocation(convertedLocation, completionHandler: { (placemarks, error) -> Void in
+                            
+                            let cityName: String = placemarks?[0].locality ?? "City"
+                            let stateName: String = placemarks?[0].administrativeArea ?? "Earth"
+                            
+                            let cityAndState : String = cityName + ", " + stateName
+                            
+                            print("placemarker: ", cityAndState)
+                            
+                            self.postsList[index].location = cityAndState
+                            
+                        })
+                        
+                    }
+                    
+                    dispatchGroup.leave()
+                })
             
             
-            dispatchGroup.enter()
-            var imageURL:String = "";
-            var posterUsername : String = "";
+                dispatchGroup.enter()
+                var imageURL:String = "";
+                var posterUsername : String = "";
 
-            pathOfPost.collection("feedPost").document("C94475D4-0585-4C9D-BAC0-70433B4E9523").getDocument{(snapshotSpot, errSpot) in
+                pathOfPost.collection("feedPost").document("C94475D4-0585-4C9D-BAC0-70433B4E9523").getDocument{(snapshotSpot, errSpot) in
 
-  
-                if let err = errSpot {
-                    print("Error getting documents: \(err)")
-                } else{
-                    print("image URL")
-                    
-                    let posterID = snapshotSpot?.get("posterID") as! String
+      
+                    if let err = errSpot {
+                        print("Error getting documents: \(err)")
+                    } else{
+                        print("image URL")
+                        
+                        let posterID = snapshotSpot?.get("posterID") as! String
 
-                    imageURL = snapshotSpot?.get("image url") as! String
+                        imageURL = snapshotSpot?.get("image url") as! String
 
-                    self.postsList[0].caption = snapshotSpot?.get("caption") as! String
-                    self.postsList[0].uName = snapshotSpot?.get("posterID") as! String
-                    self.postsList[0].numLikes = snapshotSpot?.get("numLikes") as! Int
-                    
-                    
-                    self.db.collection("users").document(posterID).getDocument(completion: { (snapshotUser, errUser) in
-                        
-                        posterUsername = snapshotUser?.get("username") as! String
-                        
-                        self.postsList[0].uName = posterUsername
+                        self.postsList[index].caption = (snapshotSpot?.get("caption") as! String) + ": Row " + String(index)
+                        self.postsList[index].uName = snapshotSpot?.get("posterID") as! String
+                        self.postsList[index].numLikes = snapshotSpot?.get("numLikes") as! Int
                         
                         
-                        
-                        let gsReference = Storage.storage().reference(forURL: imageURL)
-                        
-                        print("reference info")
-                        print(gsReference)
-                        print(gsReference.fullPath)
-                        print(gsReference.name)
-                        //            print(gsReference.parent())
-                        
+                        self.db.collection("users").document(posterID).getDocument(completion: {
+                            
+                            (snapshotUser, errUser) in
+                            
+                            posterUsername = snapshotUser?.get("username") as! String
+                            
+                            self.postsList[index].uName = posterUsername
+                            
+                            
+                            
+                            let gsReference = Storage.storage().reference(forURL: imageURL)
+                            
+                            print("reference info")
+                            print(gsReference)
+                            print(gsReference.fullPath)
+                            print(gsReference.name)
+                            //            print(gsReference.parent())
+                            
 
-                        
-                        //Extract image and put it into a Post object
-                            gsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                                if error != nil {
-                                    print("error occured")
-                                } else {
-                                    let image = UIImage(data: data!)
-                                    self.postsList[0].photo = image!;
-                                    
-                                    self.tableView.reloadData()
-                                    
-                                    dispatchGroup.leave()
+                            
+                            //Extract image and put it into a Post object
+                                gsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                                    if error != nil {
+                                        print("error occured")
+                                    } else {
+                                        let image = UIImage(data: data!)
+                                        self.postsList[index].photo = image!;
+                                        
+                                        self.tableView.reloadData()
+                                        
+                                        dispatchGroup.leave()
 
+                                    }
                                 }
-                            }
-
-
-                    })
-
-
+                            
+                        })
+                    }
                 }
-
-            }
+            }//End loop
+            
+            
+            
+            
             
         }
     }
@@ -201,7 +210,7 @@ extension FeedViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
         
 //        var postsList : [Post] = []
-        for i in 0...4{
+        for i in 0...10{
             
             postsList.append(Post(spotname: "",captionText: "", photoObj: UIImage(), uNameString: "",likesCount:0, location: ""))
             
