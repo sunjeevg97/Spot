@@ -26,7 +26,7 @@ class FeedViewController: UIViewController {
     var usertestGlobal : String?;
     var postsList : [Post] = [];
     var fullURL: String?;
-
+    
     override func viewDidLoad() {
         
         
@@ -44,7 +44,7 @@ class FeedViewController: UIViewController {
         //It's good to run dispatch after everything else in viewDidLoad because nothing afterwards will run before it finishes
         runDispatch()
     }
-
+    
     func runDispatch() {
         DispatchQueue.global().async {
             let dispatchGroup = DispatchGroup()
@@ -80,21 +80,27 @@ class FeedViewController: UIViewController {
             for index in 0...4{
                 
                 dispatchGroup.enter()
-            
+                
                 let spotID : String = "NZNdh5JLF3xwFykXubdY"
-            
+                
                 let pathOfPost = self.db.collection("spots").document(spotID)
-            
+                
                 pathOfPost.getDocument(completion: { (snapshot, err) in
                     if let err = err {
                         print("Error getting documents: \(err)")
                     }else{
                         self.postsList[index].spotname = snapshot?.get("spotName") as! String
                         
-                        let coordinates: GeoPoint = snapshot?.get("location") as! GeoPoint
+//                        let coordinates: GeoPoint = snapshot?.get("location") as! GeoPoint
+                        let arrayLocation = snapshot?.get("l") as! [NSNumber]
                         
-                        let longitude: Double =  coordinates.longitude
-                        let latitude: Double = coordinates.latitude
+                        print("arrayLocation",arrayLocation as! [Double])
+                        
+//                        var longitude: Double =  coordinates.longitude
+//                        var latitude: Double = coordinates.latitude
+                        
+                        let latitude : Double = arrayLocation[0] as! Double
+                        let longitude : Double = arrayLocation[1] as! Double
                         
                         
                         let convertedLocation = CLLocation(latitude: latitude, longitude: longitude);
@@ -116,24 +122,24 @@ class FeedViewController: UIViewController {
                     
                     dispatchGroup.leave()
                 })
-            
-            
+                
+                
                 dispatchGroup.enter()
                 var imageURL:String = "";
                 var posterUsername : String = "";
-
+                
                 pathOfPost.collection("feedPost").document("C94475D4-0585-4C9D-BAC0-70433B4E9523").getDocument{(snapshotSpot, errSpot) in
-
-      
+                    
+                    
                     if let err = errSpot {
                         print("Error getting documents: \(err)")
                     } else{
                         print("image URL")
                         
                         let posterID = snapshotSpot?.get("posterID") as! String
-
+                        
                         imageURL = snapshotSpot?.get("image url") as! String
-
+                        
                         self.postsList[index].caption = (snapshotSpot?.get("caption") as! String) + ": Row " + String(index)
                         self.postsList[index].uName = snapshotSpot?.get("posterID") as! String
                         self.postsList[index].numLikes = snapshotSpot?.get("numLikes") as! Int
@@ -157,22 +163,22 @@ class FeedViewController: UIViewController {
                             print(gsReference.name)
                             //            print(gsReference.parent())
                             
-
+                            
                             
                             //Extract image and put it into a Post object
-                                gsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                                    if error != nil {
-                                        print("error occured")
-                                    } else {
-                                        let image = UIImage(data: data!)
-                                        self.postsList[index].photo = image!;
-                                        
-                                        self.tableView.reloadData()
-                                        
-                                        dispatchGroup.leave()
-
-                                    }
+                            gsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                                if error != nil {
+                                    print("error occured")
+                                } else {
+                                    let image = UIImage(data: data!)
+                                    self.postsList[index].photo = image!;
+                                    
+                                    self.tableView.reloadData()
+                                    
+                                    dispatchGroup.leave()
+                                    
                                 }
+                            }
                             
                         })
                     }
@@ -187,11 +193,11 @@ class FeedViewController: UIViewController {
     }
     
     
-        
+    
 }
-    
-    
-    
+
+
+
 extension FeedViewController: UITableViewDataSource {
     
     
@@ -209,7 +215,7 @@ extension FeedViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
         
-//        var postsList : [Post] = []
+        //        var postsList : [Post] = []
         for i in 0...10{
             
             postsList.append(Post(spotname: "",captionText: "", photoObj: UIImage(), uNameString: "",likesCount:0, location: ""))
@@ -217,10 +223,10 @@ extension FeedViewController: UITableViewDataSource {
             
         }
         
-//        let cell = UITableViewCell()
+        //        let cell = UITableViewCell()
         cell.backgroundColor = UIColor.black
         print("height", cell.heightAnchor)
-
+        
         
         //Display the username of the user that created the post
         let handleDisplay1 = UILabel(frame: CGRect(x: 46, y: 8, width: 100, height: 15))
@@ -281,9 +287,9 @@ extension FeedViewController: UITableViewDataSource {
         //Show the image associated with the post
         
         let postImage = UIImageView(frame: CGRect(x: 0, y: 38, width: 380, height: 510))
-//        postImage.backgroundColor = UIColor.brown
-//        cell.addSubview(postImage)
-//        postImage.image = UIImage(named: "Signuplogo.png")
+        //        postImage.backgroundColor = UIColor.brown
+        //        cell.addSubview(postImage)
+        //        postImage.image = UIImage(named: "Signuplogo.png")
         postImage.image = postsList[indexPath.row].photo as! UIImage
         postImage.contentMode = UIView.ContentMode.scaleAspectFit
         cell.insertSubview(postImage, at: 0)
@@ -362,4 +368,5 @@ extension FeedViewController: UITableViewDataSource {
     }
     
 }
+
 
