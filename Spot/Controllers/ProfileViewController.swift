@@ -232,7 +232,7 @@ class ProfileViewController: UIViewController {
         ProfileIcon.layer.cornerRadius = ProfileIcon.frame.height/2
         ProfileIcon.clipsToBounds = true
         //
-        
+    
         //Check if User has uploaded a picture, if not Displays Stock image
         if userHasImage == true {
             
