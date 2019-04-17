@@ -366,11 +366,14 @@ class SignUpViewController: UIViewController {
         guard let userId = Auth.auth().currentUser?.uid else{return}
         
         var friendsList : [String] = [] 
+        var spotsList : [String] = []
         
         let values = ["name" : name,
                       "email" : email,
                       "username" : username,
-                      "friendsList" :  friendsList
+                      "userBio" : "",
+                      "friendsList" :  friendsList,
+                      "spotsList" : spotsList
             ] as [String : Any]
         
         db.collection("users").document(userId).setData(values, merge: true)

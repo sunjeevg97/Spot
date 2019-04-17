@@ -23,6 +23,7 @@
 		3ED3F1A622147EAE008CC29B /* ResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3F1A522147EAE008CC29B /* ResetViewController.swift */; };
 		3EDBE3CB2208B28B006D6B75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EDBE3CA2208B28B006D6B75 /* GoogleService-Info.plist */; };
 		3EE88DE52226621000E9D13F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE88DE42226621000E9D13F /* Post.swift */; };
+		611FA3082267991000310ED2 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611FA3072267991000310ED2 /* EditProfileViewController.swift */; };
 		675844E8F30647ADD3B850A9 /* Pods_Spot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286B836E6CA8EF95A3DBF973 /* Pods_Spot.framework */; };
 		7A37801C22174BB1008B835A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A37801B22174BB1008B835A /* MapViewController.swift */; };
 		7A37801E22174BD6008B835A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A37801D22174BD6008B835A /* ProfileViewController.swift */; };
@@ -78,6 +79,7 @@
 		3EE88DE42226621000E9D13F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Post.swift; path = Spot/Controllers/Post.swift; sourceTree = SOURCE_ROOT; };
 		4A128FDD7E619FF550F6C816 /* Pods-SpotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpotTests/Pods-SpotTests.release.xcconfig"; sourceTree = "<group>"; };
 		5A6FE8BCAD2A0033DF62E47D /* Pods_SpotTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		611FA3072267991000310ED2 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		6F13890D99E98FC8A20FE3C3 /* Pods-SpotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpotUITests/Pods-SpotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		774AE91C70FFBA506C2DA416 /* Pods-SpotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpotUITests/Pods-SpotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7A37801B22174BB1008B835A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = Spot/Controllers/MapViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -200,6 +202,7 @@
 				3E9178EA225A688400AFB2DA /* SpotsButtonViewController.swift */,
 				1D58C262225AA29C00EA646C /* SuccessViewController.swift */,
 				3EC4D92C225C21BF0061F36F /* CreatePostViewController.swift */,
+				611FA3072267991000310ED2 /* EditProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				611FA3082267991000310ED2 /* EditProfileViewController.swift in Sources */,
 				7A37801E22174BD6008B835A /* ProfileViewController.swift in Sources */,
 				3E6189572213DEAD00A7CFF4 /* LoginViewController.swift in Sources */,
 				1DF6E03722089F4500BA0C36 /* SignUpViewController.swift in Sources */,
