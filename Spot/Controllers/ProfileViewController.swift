@@ -11,6 +11,11 @@ import Firebase
 import FirebaseFirestore
 
 class ProfileViewController: UIViewController {
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
 
     let db: Firestore! = Firestore.firestore()
     let id: String = Auth.auth().currentUser?.uid ?? "invalid ID"
@@ -24,7 +29,14 @@ class ProfileViewController: UIViewController {
     var spotInt = 0;
     var friendsInt = 0;
     var friendsArray = [String]()
+    var spotsInt = 0;
+    var spotsArray = [String]()
+    var userBioString : String = "";
+    var userHasBio = false
 
+    
+    @IBOutlet weak var bioText: UITextView!
+    
     @IBOutlet weak var logoutButton: UIButton!
     
     private var childViewController: SpotsButtonViewController?
@@ -44,23 +56,33 @@ class ProfileViewController: UIViewController {
         childViewController?.reloadContent("Friends")
     }
     
+    //VIEW LOAD
+    
     override func viewDidLoad() {
         
         
         //make profile circular and call userImage
         profileIconInsert()
         getProfileInt()
+        getUserBio()
         super.viewDidLoad()
         
+        //logout code
         logoutButton.isUserInteractionEnabled = true
         let logoutRecognizer = UITapGestureRecognizer(target: self, action: #selector(logoutFunc))
         logoutButton.addGestureRecognizer(logoutRecognizer)
+        print("Logging Out")
+        //
         
         
         runDispatch()
         
     }
 
+    @objc func buttonAction(sender: UIButton!) {
+        print("Button tapped")
+    }
+    
     func runDispatch() {
         DispatchQueue.global().async {
             let dispatchGroup = DispatchGroup()
@@ -146,14 +168,61 @@ class ProfileViewController: UIViewController {
             if let err = err {
                 print("Error getting documents: \(err)")
             }else {
+                //Getting number of friends
                 self.friendsArray = snapshot?.get("friendsList") as! [String]
                 self.friendsInt = self.friendsArray.count
                 print ("Getting number of friends")
                 print (self.friendsArray)
         
+                //Getting number of Spots
+                self.spotsArray = snapshot?.get("spotsList") as! [String]
+                self.spotsInt = self.spotsArray.count
+                print ("Getting number of spots")
+                print (self.spotsArray)
+                //Adding the friends number label
+                let friendsIntLabel = UILabel(frame: CGRect(x: 322, y: 285, width: 50, height: 21))
+                friendsIntLabel.textAlignment = .center //For center alignment
+                let friendsIntString = String(self.friendsInt)
+                let fIntString = "(" + friendsIntString + ")"
+                friendsIntLabel.text = fIntString
+                friendsIntLabel.textColor = .green
+                friendsIntLabel.font = UIFont.systemFont(ofSize: 14)
+                self.view.addSubview(friendsIntLabel)
+                
+                //Adding the Spots number label
+                let spotsIntLabel = UILabel(frame: CGRect(x: 65, y: 285, width: 50, height: 21))
+                spotsIntLabel.textAlignment = .center //For center alignment
+                let spotsIntString = String(self.spotsInt)
+                let sIntString = "(" + spotsIntString + ")"
+                spotsIntLabel.text = sIntString
+                spotsIntLabel.textColor = .green
+                spotsIntLabel.font = UIFont.systemFont(ofSize: 14)
+                self.view.addSubview(spotsIntLabel)
             }
         }
     }
+    
+    func getUserBio() {
+        self.db.collection("users").document(self.id).getDocument { (snapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            }else {
+                //gets userBio
+                self.userBioString = snapshot?.get("userBio") as! String
+                print(self.userBioString)
+                // checks if user has a bio
+                if 5 == 4 {
+                    print ("no Bio spotted")
+                }else {
+                //inserts bio into textfield
+                    self.bioText.insertText(self.userBioString)
+                }
+                
+            }
+        }
+    }
+        
+    
     
     func profileIconInsert() {
         //making the image circular
@@ -166,9 +235,11 @@ class ProfileViewController: UIViewController {
         
         //Check if User has uploaded a picture, if not Displays Stock image
         if userHasImage == true {
+            
             print("User's Profile")
         }
         else {
+            //stock image
             ProfileIcon.image = UIImage(named: "Profile1x.png")
         }
         //end
