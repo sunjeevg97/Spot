@@ -310,7 +310,9 @@ class AddSpotViewController: UIViewController{
         
         let latitude = currentLocation.coordinate.latitude
         let longitude = currentLocation.coordinate.longitude
-        let location = GeoPoint(latitude: latitude,longitude: longitude)
+        let geopointLocation = GeoPoint(latitude: latitude,longitude: longitude)
+        
+        
         
         let values = ["spot name" : name,
                       "description" : description,
@@ -319,7 +321,9 @@ class AddSpotViewController: UIViewController{
                       "tag2": tag2,
                       "tag3": tag3,
                       "created by": userId]
-        let locations = ["location": location]
+//        let locations = ["location": ArrayLocation]
+        
+        
         
         guard let image = spotPic.image else {return}
         //1. Upload Image to Firebase Storage
@@ -333,7 +337,8 @@ class AddSpotViewController: UIViewController{
         //2. Upload Image URL and Other Spot Data to Firebase Firestore
         
         db.collection("spots").document(spotId).setData(values, merge: true)
-        db.collection("spots").document(spotId).setData(locations, merge: true)
+//        db.collection("spots").document(spotId).setData(locations, merge: true)
+        let ArrayLocation = setSpotLocations(userLocation: currentLocation, spotID: spotId)
         
         if(pubBtnWasChecked == true){
             let btnVal = ["public" : 1]
@@ -468,6 +473,16 @@ extension AddSpotViewController: UIImagePickerControllerDelegate, UINavigationCo
     }
    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error){
         print("Unable to access your current location")
+    }
+    func setSpotLocations(userLocation: CLLocation, spotID: String) {
+        //old well
+        GeoFirestore(collectionRef: Firestore.firestore().collection("spots")).setLocation(location: userLocation, forDocumentWithID: spotID) { (error) in
+            if (error != nil) {
+                print("An error occured: \(String(describing: error))")
+            } else {
+                print("Saved location successfully!")
+            }
+        }
     }
     
     
