@@ -92,9 +92,15 @@ class FeedViewController: UIViewController {
                         self.postsList[index].spotname = snapshot?.get("spotName") as! String
                         
                         let coordinates: GeoPoint = snapshot?.get("location") as! GeoPoint
+                        let arrayLocation = snapshot?.get("l") as! [NSNumber]
                         
-                        let longitude: Double =  coordinates.longitude
-                        let latitude: Double = coordinates.latitude
+                        print("arrayLocation",arrayLocation as! [Double])
+                        
+                        var longitude: Double =  coordinates.longitude
+                        var latitude: Double = coordinates.latitude
+                        
+                        latitude = arrayLocation[0] as! Double
+                        longitude = arrayLocation[1] as! Double
                         
                         
                         let convertedLocation = CLLocation(latitude: latitude, longitude: longitude);

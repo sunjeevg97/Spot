@@ -321,9 +321,6 @@ class AddSpotViewController: UIViewController{
                       "tag2": tag2,
                       "tag3": tag3,
                       "created by": userId]
-//        let locations = ["location": ArrayLocation]
-        
-        
         
         guard let image = spotPic.image else {return}
         //1. Upload Image to Firebase Storage
@@ -337,7 +334,7 @@ class AddSpotViewController: UIViewController{
         //2. Upload Image URL and Other Spot Data to Firebase Firestore
         
         db.collection("spots").document(spotId).setData(values, merge: true)
-//        db.collection("spots").document(spotId).setData(locations, merge: true)
+
         let ArrayLocation = setSpotLocations(userLocation: currentLocation, spotID: spotId)
         
         if(pubBtnWasChecked == true){
@@ -471,11 +468,12 @@ extension AddSpotViewController: UIImagePickerControllerDelegate, UINavigationCo
             // "0:[locations]"
         }
     }
+    
    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error){
         print("Unable to access your current location")
     }
+    
     func setSpotLocations(userLocation: CLLocation, spotID: String) {
-        //old well
         GeoFirestore(collectionRef: Firestore.firestore().collection("spots")).setLocation(location: userLocation, forDocumentWithID: spotID) { (error) in
             if (error != nil) {
                 print("An error occured: \(String(describing: error))")
@@ -487,18 +485,6 @@ extension AddSpotViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     
 }
-
-
-
-/*
- // MARK: - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- // Get the new view controller using segue.destination.
- // Pass the selected object to the new view controller.
- }
- */
 
 
 
