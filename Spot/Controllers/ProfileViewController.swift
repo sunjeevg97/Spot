@@ -33,6 +33,7 @@ class ProfileViewController: UIViewController {
     var spotsArray = [String]()
     var userBioString : String = "";
     var userHasBio = false
+    var userURL : String = "";
 
     
     @IBOutlet weak var bioText: UITextView!
@@ -211,7 +212,8 @@ class ProfileViewController: UIViewController {
                 self.userBioString = snapshot?.get("userBio") as! String
                 print(self.userBioString)
                 // checks if user has a bio
-                if 5 == 4 {
+                if self.userBioString == "" {
+                    self.bioText.insertText("Change Your Bio In Edit profile")
                     print ("no Bio spotted")
                 }else {
                 //inserts bio into textfield
@@ -232,17 +234,40 @@ class ProfileViewController: UIViewController {
         ProfileIcon.layer.cornerRadius = ProfileIcon.frame.height/2
         ProfileIcon.clipsToBounds = true
         //
-    
-        //Check if User has uploaded a picture, if not Displays Stock image
-        if userHasImage == true {
-            
-            print("User's Profile")
+        //
+        
+        self.db.collection("users").document(self.id).getDocument { (snapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            }else {
+                
+                self.userURL = snapshot?.get("image url") as! String
+                
+                // Check if User does not have a profile image saved
+                if self.userURL == "" {
+                    //insert stock picture
+                    self.ProfileIcon.image = UIImage(named: "Profile1x.png")
+                    //end gs Ref
+                } else {
+                    let gsReference = Storage.storage().reference(forURL: self.userURL)
+                    
+                    //Extract image and put it into ProfileIcon
+                    gsReference.getData(maxSize: 1 * 1024 * 1024) {
+                        data, error in
+                        if error != nil {
+                            print("error occured")
+                        } else {
+                            let profImage = UIImage(data: data!)
+                            self.ProfileIcon.image = profImage
+                        }
+                    }
+                }
+                
+            }
         }
-        else {
-            //stock image
-            ProfileIcon.image = UIImage(named: "Profile1x.png")
-        }
-        //end
+        
+        
+        
         
     }
     

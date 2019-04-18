@@ -213,7 +213,7 @@
                                                                     <segue destination="2bd-oj-8Ol" kind="presentation" identifier="EditProfileButton" id="3Yw-vZ-jzN"/>
                                                                 </connections>
                                                             </button>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Bio: " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eFm-KS-03V">
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eFm-KS-03V">
                                                                 <rect key="frame" x="67" y="151" width="240" height="33"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -748,6 +748,7 @@ IT’S A MAGICAL WORLD OUT THERE.
         <image name="SettingsIcon" width="52" height="52"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="3Yw-vZ-jzN"/>
         <segue reference="bBT-m9-MKU"/>
         <segue reference="Iel-WY-mun"/>
         <segue reference="RNW-2x-rNB"/>
