@@ -25,6 +25,7 @@ class MapViewController: UIViewController {
     private let locationManager = CLLocationManager()
     
     let db: Firestore! = Firestore.firestore()
+    let storage = Storage.storage()
     let spotsRef = Firestore.firestore().collection("spots")
     let geoFirestore = GeoFirestore(collectionRef: Firestore.firestore().collection("spots"))
     let id: String = Auth.auth().currentUser?.uid ?? "invalid user"
@@ -39,6 +40,8 @@ class MapViewController: UIViewController {
     var locationMarker : GMSMarker? = GMSMarker()
     
     var circleQuery: GFSCircleQuery?
+    let locationGroup = DispatchGroup()
+    var firstTimeGettingLocation = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,12 +50,23 @@ class MapViewController: UIViewController {
         
         mapView.delegate = self
         locationManager.delegate = self
+        
+        
+        locationGroup.enter()
         startLocationServices()
         
-        circleQuery = geoFirestore.query(withCenter: GeoPoint(latitude: 35.9132, longitude: -79.0558), radius: 0.804672)
-        let _ = circleQuery?.observe(.documentEntered, with: loadSpotFromDB)
-        
-        //setSpotLocations()
+        locationGroup.notify(queue: DispatchQueue.main) {
+         
+            guard let lat = self.mapView.myLocation?.coordinate.latitude,
+                let lng = self.mapView.myLocation?.coordinate.longitude else { return }
+            
+            self.circleQuery = self.geoFirestore.query(withCenter: GeoPoint(latitude: lat, longitude: lng), radius: 0.804672)
+            
+            let _ = self.circleQuery?.observe(.documentEntered, with: self.loadSpotFromDB)
+ 
+ 
+        }
+ 
     }
     
     
@@ -70,17 +84,6 @@ class MapViewController: UIViewController {
         
     }
     
-    //setting location for spot in database using geoFirestore
-    func setSpotLocations() {
-        //old well
-        geoFirestore.setLocation(location: CLLocation(latitude: 35.9121, longitude: -79.0512), forDocumentWithID: "4fbapPCV0sxcnE9rdLyE") { (error) in
-            if (error != nil) {
-                print("An error occured: \(String(describing: error))")
-            } else {
-                print("Saved location successfully!")
-            }
-        }
-    }
     
     func startLocationServices() {
         switch CLLocationManager.authorizationStatus() {
@@ -103,21 +106,42 @@ class MapViewController: UIViewController {
     
     //getting spot from database
     func loadSpotFromDB(key: String?, location: CLLocation?) {
-        print("in load spot from db")
+        //checking to make sure marker isn't already displaying
         if let spotKey = key, markers[key!] == nil {
+            let group = DispatchGroup()
+            
+            //getting spot document from database so marker can be made
             self.spotsRef.document(spotKey).getDocument { (document, error) in
-                print("in get document")
                 if let document = document, document.exists {
                     let description = document.get("description")
                     let lat = location?.coordinate.latitude as! Double
                     let long = location?.coordinate.longitude as! Double
                     let privacyLevel = document.get("privacyLevel") as? String
-                    let spotName = document.get("spotName")
+                    let spotName = document.get("spot name")
                     
-                    let spotData = ["spotId": spotKey, "description": description, "latitude": lat, "longitude": long, "privacyLevel": privacyLevel, "spotName": spotName]
+                    var image = UIImage(named: "Signuplogo")
                     
-                    self.loadSpotToMap(data: spotData)
+                    if let imageURL = document.get("image url") as? String {
+                        let gsRef = Storage.storage().reference(forURL: imageURL)
+                        
+                        group.enter()
+                        gsRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                            if (error != nil) {
+                                print("error occured in getting image from storage")
+                            } else {
+                                image = UIImage(data: data!)
+                            }
+                            group.leave()
+                        }
+                        
+                    }
                     
+                    group.notify(queue: DispatchQueue.main) {
+                        let spotData = ["spotId": spotKey, "description": description, "latitude": lat, "longitude": long, "privacyLevel": privacyLevel, "spotName": spotName, "image": image]
+                        
+                        self.loadSpotToMap(data: spotData)
+                    }
+ 
                 } else {
                     print("Document does not exist")
                 }
@@ -129,7 +153,6 @@ class MapViewController: UIViewController {
     
     //making marker to add to map
     func loadSpotToMap(data: [String:Any]) {
-        print("in load spot to map")
         let spotID = data["spotId"] as! String
         let privacyLevel = data["privacyLevel"] as? String
         guard let lat = data["latitude"] as? Double else {
@@ -179,12 +202,19 @@ extension MapViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last as? CLLocation else {
+        guard let location = locations.last else {
             return
         }
         
-        
-        mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+        if (firstTimeGettingLocation) {
+            mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 18, bearing: 0, viewingAngle: 65)
+            mapView.isBuildingsEnabled = true
+            firstTimeGettingLocation = false
+            locationGroup.leave()
+        } else {
+            mapView.animate(toLocation: location.coordinate)
+            
+        }
         
         locationManager.pausesLocationUpdatesAutomatically = true
         //locationManager.stopUpdatingLocation()
@@ -207,13 +237,11 @@ extension MapViewController: GMSMapViewDelegate {
      
         let description = markerData!["description"] as? String
         let title = markerData!["spotName"] as? String
-        //let img = UIImageView(image: UIImage(named: "Signuplogo"))
+        let image = markerData!["image"] as? UIImage
         
         infoWindow.titleLabel.text = title
         infoWindow.descriptionLabel.text = description
-        //infoWindow.spotImage = img
-        
-        
+        infoWindow.spotImage.image = image
      
         return infoWindow
      }
@@ -229,6 +257,7 @@ extension MapViewController: GMSMapViewDelegate {
         print("tapped on map")
     }
     
+    //updating circle query when camera position changes
     func mapView(_ mapView: GMSMapView, idleAt cameraPosition: GMSCameraPosition) {
         let lat = cameraPosition.target.latitude
         let long = cameraPosition.target.longitude

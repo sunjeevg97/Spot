@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="326" height="103"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Signuplogo" translatesAutoresizingMaskIntoConstraints="NO" id="wNd-gC-ufS">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wNd-gC-ufS">
                     <rect key="frame" x="214" y="0.0" width="112" height="103"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -47,7 +47,4 @@
             <point key="canvasLocation" x="-17656" y="-11478.710644677662"/>
         </view>
     </objects>
-    <resources>
-        <image name="Signuplogo" width="83" height="24"/>
-    </resources>
 </document>
