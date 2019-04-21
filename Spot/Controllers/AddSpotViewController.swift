@@ -30,6 +30,8 @@ class AddSpotViewController: UIViewController{
     
     var urlStr : String = " "
     
+    let firstPostID = UUID().uuidString
+    
     let locationManager : CLLocationManager = CLLocationManager()
     var currentLocation : CLLocation!
     override func viewDidLoad() {
@@ -299,6 +301,7 @@ class AddSpotViewController: UIViewController{
         //let geoFirestore = GeoFirestore(collectionRef: geoFirestoreRef)
         let spotId = UUID().uuidString
         
+        
         guard let userId = Auth.auth().currentUser?.uid else{return}
         
         guard let name = spotNameTextField.text as String? else{return}
@@ -339,6 +342,16 @@ class AddSpotViewController: UIViewController{
         db.collection("spots").document(spotId).setData(values, merge: true)
 //        db.collection("spots").document(spotId).setData(locations, merge: true)
         let ArrayLocation = setSpotLocations(userLocation: currentLocation, spotID: spotId)
+        
+        //Get the time that the post was created
+        let timestamp = NSDate().timeIntervalSince1970
+        let myTimeInterval = TimeInterval(timestamp)
+        let time = NSDate(timeIntervalSince1970: TimeInterval(myTimeInterval))
+        
+        db.collection("spots").document(spotId).collection("feedPost").document(firstPostID).setData(["caption" : description, "posterID" : userId, "timestamp" : time], merge:true)
+        
+//        db.collection("spots").document(spotId).collection("feedPost").addDocument(data: ["caption" : description, "posterID" : userId])
+
         
         if(pubBtnWasChecked == true){
             let btnVal = ["public" : 1]
@@ -400,6 +413,12 @@ class AddSpotViewController: UIViewController{
 
                     let values = ["image url": urlStr]
                     db.collection("spots").document(spotId).setData(values, merge:true)
+
+                    db.collection("spots").document(spotId).collection("feedPost").document(self.firstPostID).setData(values,merge:true)
+                    
+                    
+                    
+//                    addDocument(data: ["caption" : description, "posterID" : userId])
                     
                 })
                 
