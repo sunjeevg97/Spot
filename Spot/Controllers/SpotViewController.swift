@@ -93,6 +93,12 @@ class SpotViewController: UIViewController {
                 vc.spotID = self.spotId
             }
         }
+        
+        if segue.identifier == "spotPageToPost"{
+            if let vc = segue.destination as? SpotPagePostViewController{
+                vc.spotID = self.spotId
+            }
+        }
     }
     /*
      // MARK: - Navigation
