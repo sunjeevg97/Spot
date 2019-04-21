@@ -18,8 +18,10 @@ class CreatePostViewController: UIViewController{
     let imgPicker = UIImagePickerController()
     var urlStr : String = " "
     
+    var spotID : String!
+    
     //hard coded for now, will change, need to get this value from previous page
-    let spotID: String = "NZNdh5JLF3xwFykXubdY"
+    //let spotID: String = "NZNdh5JLF3xwFykXubdY"
     
     
     override func viewDidLoad() {

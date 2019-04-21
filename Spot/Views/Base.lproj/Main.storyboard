@@ -425,7 +425,7 @@
             <objects>
                 <viewController id="McA-Zb-s0J" customClass="CreatePostViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eD9-j3-nN6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="669"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="4oF-Q7-Kd7"/>
@@ -619,7 +619,7 @@ IT’S A MAGICAL WORLD OUT THERE.
                                 <rect key="frame" x="0.0" y="56" width="414" height="669"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <segue destination="YHu-H4-iyw" kind="embed" id="zBw-Aq-ZIj"/>
+                                    <segue destination="YHu-H4-iyw" kind="embed" identifier="spotPageToPost" id="zBw-Aq-ZIj"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HQb-mc-kM2">
@@ -831,19 +831,32 @@ IT’S A MAGICAL WORLD OUT THERE.
             </objects>
             <point key="canvasLocation" x="1515.9420289855075" y="3852.7901785714284"/>
         </scene>
-        <!--View Controller-->
+        <!--Spot Page Post View Controller-->
         <scene sceneID="z8c-1I-qWo">
             <objects>
-                <viewController id="YHu-H4-iyw" sceneMemberID="viewController">
+                <viewController id="YHu-H4-iyw" customClass="SpotPagePostViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="D2q-qc-fDB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="669"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6f-lw-5ep">
+                                <rect key="frame" x="123" y="276" width="168" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Create Post"/>
+                                <connections>
+                                    <action selector="createPost:" destination="YHu-H4-iyw" eventType="touchUpInside" id="ElR-GA-hg8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
+                    <connections>
+                        <segue destination="McA-Zb-s0J" kind="show" identifier="postToCreatePost" id="2TA-DW-OVH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQs-lE-Ggo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="841" y="3853"/>
+            <point key="canvasLocation" x="840.57971014492762" y="3852.7901785714284"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="OB4-4E-cJ0">
@@ -878,6 +891,7 @@ IT’S A MAGICAL WORLD OUT THERE.
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9YR-rZ-IJ2"/>
+        <segue reference="2TA-DW-OVH"/>
         <segue reference="RNW-2x-rNB"/>
         <segue reference="FMj-j9-qIR"/>
     </inferredMetricsTieBreakers>

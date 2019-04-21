@@ -11,6 +11,7 @@
 		1D58C263225AA29C00EA646C /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D58C262225AA29C00EA646C /* SuccessViewController.swift */; };
 		1D649045226D18880000CD8E /* SpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D649044226D18880000CD8E /* SpotViewController.swift */; };
 		1D649047226D1A6E0000CD8E /* AboutSpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D649046226D1A6E0000CD8E /* AboutSpotViewController.swift */; };
+		1D64904B226D21440000CD8E /* SpotPagePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D64904A226D21440000CD8E /* SpotPagePostViewController.swift */; };
 		1DF6E03522089F4500BA0C36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6E03422089F4500BA0C36 /* AppDelegate.swift */; };
 		1DF6E03722089F4500BA0C36 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6E03622089F4500BA0C36 /* SignUpViewController.swift */; };
 		1DF6E03A22089F4500BA0C36 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DF6E03822089F4500BA0C36 /* Main.storyboard */; };
@@ -61,6 +62,7 @@
 		1D58C262225AA29C00EA646C /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		1D649044226D18880000CD8E /* SpotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotViewController.swift; sourceTree = "<group>"; };
 		1D649046226D1A6E0000CD8E /* AboutSpotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSpotViewController.swift; sourceTree = "<group>"; };
+		1D64904A226D21440000CD8E /* SpotPagePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPagePostViewController.swift; sourceTree = "<group>"; };
 		1DF6E03122089F4500BA0C36 /* Spot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF6E03422089F4500BA0C36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1DF6E03622089F4500BA0C36 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				611FA3072267991000310ED2 /* EditProfileViewController.swift */,
 				1D649044226D18880000CD8E /* SpotViewController.swift */,
 				1D649046226D1A6E0000CD8E /* AboutSpotViewController.swift */,
+				1D64904A226D21440000CD8E /* SpotPagePostViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				611FA3082267991000310ED2 /* EditProfileViewController.swift in Sources */,
 				7A37801E22174BD6008B835A /* ProfileViewController.swift in Sources */,
 				3E6189572213DEAD00A7CFF4 /* LoginViewController.swift in Sources */,
+				1D64904B226D21440000CD8E /* SpotPagePostViewController.swift in Sources */,
 				1D649045226D18880000CD8E /* SpotViewController.swift in Sources */,
 				1DF6E03722089F4500BA0C36 /* SignUpViewController.swift in Sources */,
 				3ED3F1A622147EAE008CC29B /* ResetViewController.swift in Sources */,
