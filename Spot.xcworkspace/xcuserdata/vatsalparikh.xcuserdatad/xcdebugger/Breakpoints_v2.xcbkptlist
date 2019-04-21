@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spot/Controllers/FeedViewController.swift"
-            timestampString = "577572183.518001"
+            timestampString = "577568570.361021"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
-            landmarkName = "runGeoDispatch(nearbySpotID:)"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
+            landmarkName = "runGeoDispatch(nearbySpotID:index:)"
             landmarkType = "7">
             <Locations>
                <Location
