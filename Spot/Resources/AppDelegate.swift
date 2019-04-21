@@ -24,9 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyDr91JijTPT2QsHIEe1R0O-Subfz0aZilA")
         GMSPlacesClient.provideAPIKey("AIzaSyDr91JijTPT2QsHIEe1R0O-Subfz0aZilA")
         
-        application.statusBarStyle = .lightContent
-        
-    
         return true
     }
     

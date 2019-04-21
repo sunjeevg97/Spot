@@ -16,7 +16,7 @@
 
 #include <grpc/support/port_platform.h>
 
-#include "src/core/ext/filters/client_channel/service_config.h"
+#include "src/core/lib/transport/service_config.h"
 
 #include <string.h>
 
@@ -33,23 +33,18 @@
 
 namespace grpc_core {
 
-RefCountedPtr<ServiceConfig> ServiceConfig::Create(const char* json) {
-  UniquePtr<char> service_config_json(gpr_strdup(json));
+UniquePtr<ServiceConfig> ServiceConfig::Create(const char* json) {
   UniquePtr<char> json_string(gpr_strdup(json));
   grpc_json* json_tree = grpc_json_parse_string(json_string.get());
   if (json_tree == nullptr) {
     gpr_log(GPR_INFO, "failed to parse JSON for service config");
     return nullptr;
   }
-  return MakeRefCounted<ServiceConfig>(std::move(service_config_json),
-                                       std::move(json_string), json_tree);
+  return MakeUnique<ServiceConfig>(std::move(json_string), json_tree);
 }
 
-ServiceConfig::ServiceConfig(UniquePtr<char> service_config_json,
-                             UniquePtr<char> json_string, grpc_json* json_tree)
-    : service_config_json_(std::move(service_config_json)),
-      json_string_(std::move(json_string)),
-      json_tree_(json_tree) {}
+ServiceConfig::ServiceConfig(UniquePtr<char> json_string, grpc_json* json_tree)
+    : json_string_(std::move(json_string)), json_tree_(json_tree) {}
 
 ServiceConfig::~ServiceConfig() { grpc_json_destroy(json_tree_); }
 

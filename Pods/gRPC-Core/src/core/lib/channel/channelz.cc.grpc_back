@@ -385,65 +385,52 @@ grpc_json* SocketNode::RenderJson() {
   json = data;
   json_iterator = nullptr;
   gpr_timespec ts;
-  gpr_atm streams_started = gpr_atm_no_barrier_load(&streams_started_);
-  if (streams_started != 0) {
+  if (streams_started_ != 0) {
     json_iterator = grpc_json_add_number_string_child(
-        json, json_iterator, "streamsStarted", streams_started);
-    gpr_atm last_local_stream_created_millis =
-        gpr_atm_no_barrier_load(&last_local_stream_created_millis_);
-    if (last_local_stream_created_millis != 0) {
-      ts = grpc_millis_to_timespec(last_local_stream_created_millis,
+        json, json_iterator, "streamsStarted", streams_started_);
+    if (last_local_stream_created_millis_ != 0) {
+      ts = grpc_millis_to_timespec(last_local_stream_created_millis_,
                                    GPR_CLOCK_REALTIME);
       json_iterator = grpc_json_create_child(
           json_iterator, json, "lastLocalStreamCreatedTimestamp",
           gpr_format_timespec(ts), GRPC_JSON_STRING, true);
     }
-    gpr_atm last_remote_stream_created_millis =
-        gpr_atm_no_barrier_load(&last_remote_stream_created_millis_);
-    if (last_remote_stream_created_millis != 0) {
-      ts = grpc_millis_to_timespec(last_remote_stream_created_millis,
+    if (last_remote_stream_created_millis_ != 0) {
+      ts = grpc_millis_to_timespec(last_remote_stream_created_millis_,
                                    GPR_CLOCK_REALTIME);
       json_iterator = grpc_json_create_child(
           json_iterator, json, "lastRemoteStreamCreatedTimestamp",
           gpr_format_timespec(ts), GRPC_JSON_STRING, true);
     }
   }
-  gpr_atm streams_succeeded = gpr_atm_no_barrier_load(&streams_succeeded_);
-  if (streams_succeeded != 0) {
+  if (streams_succeeded_ != 0) {
     json_iterator = grpc_json_add_number_string_child(
-        json, json_iterator, "streamsSucceeded", streams_succeeded);
+        json, json_iterator, "streamsSucceeded", streams_succeeded_);
   }
-  gpr_atm streams_failed = gpr_atm_no_barrier_load(&streams_failed_);
-  if (streams_failed) {
+  if (streams_failed_) {
     json_iterator = grpc_json_add_number_string_child(
-        json, json_iterator, "streamsFailed", streams_failed);
+        json, json_iterator, "streamsFailed", streams_failed_);
   }
-  gpr_atm messages_sent = gpr_atm_no_barrier_load(&messages_sent_);
-  if (messages_sent != 0) {
+  if (messages_sent_ != 0) {
     json_iterator = grpc_json_add_number_string_child(
-        json, json_iterator, "messagesSent", messages_sent);
-    ts = grpc_millis_to_timespec(
-        gpr_atm_no_barrier_load(&last_message_sent_millis_),
-        GPR_CLOCK_REALTIME);
+        json, json_iterator, "messagesSent", messages_sent_);
+    ts = grpc_millis_to_timespec(last_message_sent_millis_, GPR_CLOCK_REALTIME);
     json_iterator =
         grpc_json_create_child(json_iterator, json, "lastMessageSentTimestamp",
                                gpr_format_timespec(ts), GRPC_JSON_STRING, true);
   }
-  gpr_atm messages_received = gpr_atm_no_barrier_load(&messages_received_);
-  if (messages_received != 0) {
+  if (messages_received_ != 0) {
     json_iterator = grpc_json_add_number_string_child(
-        json, json_iterator, "messagesReceived", messages_received);
-    ts = grpc_millis_to_timespec(
-        gpr_atm_no_barrier_load(&last_message_received_millis_),
-        GPR_CLOCK_REALTIME);
+        json, json_iterator, "messagesReceived", messages_received_);
+    ts = grpc_millis_to_timespec(last_message_received_millis_,
+                                 GPR_CLOCK_REALTIME);
     json_iterator = grpc_json_create_child(
         json_iterator, json, "lastMessageReceivedTimestamp",
         gpr_format_timespec(ts), GRPC_JSON_STRING, true);
   }
-  gpr_atm keepalives_sent = gpr_atm_no_barrier_load(&keepalives_sent_);
-  if (keepalives_sent != 0) {
+  if (keepalives_sent_ != 0) {
     json_iterator = grpc_json_add_number_string_child(
-        json, json_iterator, "keepAlivesSent", keepalives_sent);
+        json, json_iterator, "keepAlivesSent", keepalives_sent_);
   }
   return top_level_json;
 }
