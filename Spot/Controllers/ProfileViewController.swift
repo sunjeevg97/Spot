@@ -66,6 +66,7 @@ class ProfileViewController: UIViewController {
         profileIconInsert()
         getProfileInt()
         getUserBio()
+        bioText.textAlignment = .center
         super.viewDidLoad()
         
         //logout code
@@ -218,6 +219,7 @@ class ProfileViewController: UIViewController {
                 }else {
                 //inserts bio into textfield
                     self.bioText.insertText(self.userBioString)
+                    
                 }
                 
             }
@@ -291,6 +293,10 @@ class ProfileViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     
+    
+    // Segue to Navigation Controller
+
+    
     @objc func logoutFunc(_sender: AnyObject){
         
         do {
@@ -304,22 +310,4 @@ class ProfileViewController: UIViewController {
     }
 
 }
-//commented out to figure out how to add user's name
 
-/* let display_name = UILabel(frame: CGRect(x: 150, y: 50, width: 298, height: 26))
- display_name.lineBreakMode = .byWordWrapping
- display_name.numberOfLines = 0
- display_name.textColor = UIColor.orange
- display_name.textAlignment = .center
- let display_Content = "NISH"
- let display_String = NSMutableAttributedString(string: display_Content, attributes: [
- NSAttributedString.Key.font: UIFont(name: "Arial", size: 22)!
- ])
- let textRange = NSRange(location: 0, length: display_String.length)
- let paragraphStyle = NSMutableParagraphStyle()
- paragraphStyle.lineSpacing = 1.14
- display_String.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: textRange)
- display_name.attributedText = display_String
- display_name.sizeToFit()
- self.view.addSubview(display_name)
- */
