@@ -65,8 +65,8 @@ class FeedViewController: UIViewController {
             print("please turn on location services")
         }
         
-        userLat = currentLocation.coordinate.latitude
-        userLong = currentLocation.coordinate.longitude
+        userLat = currentLocation.coordinate.latitude ?? 0
+        userLong = currentLocation.coordinate.longitude ?? 0
         
         self.tableView.dataSource = self
         
