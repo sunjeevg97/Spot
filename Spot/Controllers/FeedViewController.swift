@@ -94,6 +94,8 @@ class FeedViewController: UIViewController {
                     print("alldoc ", doc)
 //                    testlist.append(doc.documentID)
                     
+                    
+                    
                     self.runGeoDispatch(nearbySpotID: doc.documentID, index: self.index);
                     
                     
@@ -577,6 +579,7 @@ extension FeedViewController: UITableViewDataSource {
         numComments.sizeToFit()
         cell.addSubview(numComments)
         
+        
         //Display number of likes
         let numLikes = UILabel(frame: CGRect(x: 346, y: 560, width: 15, height: 13))
         numLikes.lineBreakMode = .byWordWrapping
@@ -595,6 +598,15 @@ extension FeedViewController: UITableViewDataSource {
         numLikes.attributedText = likesString
         numLikes.sizeToFit()
         cell.addSubview(numLikes)
+        
+        //like button
+        let likebutton = UIImageView(frame: CGRect(x: 346, y: 573, width: 15.24, height: 15.24))
+        likebutton.backgroundColor = UIColor.black
+        likebutton.image = UIImage(named: "UpArrow1x.png")
+        likebutton.layer.borderWidth = 1.24
+//        likebutton.layer.borderColor = UIColor(red:0.02, green:0.62, blue:1, alpha:1).cgColor
+        cell.addSubview(likebutton)
+//        self.view.addSubview(likebutton)
         
         
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
