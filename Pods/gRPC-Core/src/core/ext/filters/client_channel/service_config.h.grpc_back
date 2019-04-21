@@ -14,8 +14,8 @@
 // limitations under the License.
 //
 
-#ifndef GRPC_CORE_LIB_TRANSPORT_SERVICE_CONFIG_H
-#define GRPC_CORE_LIB_TRANSPORT_SERVICE_CONFIG_H
+#ifndef GRPC_CORE_EXT_FILTERS_CLIENT_CHANNEL_SERVICE_CONFIG_H
+#define GRPC_CORE_EXT_FILTERS_CLIENT_CHANNEL_SERVICE_CONFIG_H
 
 #include <grpc/support/port_platform.h>
 
@@ -23,6 +23,7 @@
 #include <grpc/support/string_util.h>
 
 #include "src/core/lib/gprpp/inlined_vector.h"
+#include "src/core/lib/gprpp/ref_counted.h"
 #include "src/core/lib/gprpp/ref_counted_ptr.h"
 #include "src/core/lib/json/json.h"
 #include "src/core/lib/slice/slice_hash_table.h"
@@ -41,8 +42,7 @@
 //         }
 //       ],
 //       // remaining fields are optional.
-//       // see
-//       https://developers.google.com/protocol-buffers/docs/proto3#json
+//       // see https://developers.google.com/protocol-buffers/docs/proto3#json
 //       // for format details.
 //       "waitForReady": bool,
 //       "timeout": "duration_string",
@@ -54,13 +54,15 @@
 
 namespace grpc_core {
 
-class ServiceConfig {
+class ServiceConfig : public RefCounted<ServiceConfig> {
  public:
   /// Creates a new service config from parsing \a json_string.
   /// Returns null on parse error.
-  static UniquePtr<ServiceConfig> Create(const char* json);
+  static RefCountedPtr<ServiceConfig> Create(const char* json);
 
   ~ServiceConfig();
+
+  const char* service_config_json() const { return service_config_json_.get(); }
 
   /// Invokes \a process_json() for each global parameter in the service
   /// config.  \a arg is passed as the second argument to \a process_json().
@@ -82,7 +84,7 @@ class ServiceConfig {
   using CreateValue = RefCountedPtr<T> (*)(const grpc_json* method_config_json);
   template <typename T>
   RefCountedPtr<SliceHashTable<RefCountedPtr<T>>> CreateMethodConfigTable(
-      CreateValue<T> create_value);
+      CreateValue<T> create_value) const;
 
   /// A helper function for looking up values in the table returned by
   /// \a CreateMethodConfigTable().
@@ -92,7 +94,7 @@ class ServiceConfig {
   /// Caller does NOT own a reference to the result.
   template <typename T>
   static RefCountedPtr<T> MethodConfigTableLookup(
-      const SliceHashTable<RefCountedPtr<T>>& table, grpc_slice path);
+      const SliceHashTable<RefCountedPtr<T>>& table, const grpc_slice& path);
 
  private:
   // So New() can call our private ctor.
@@ -100,7 +102,8 @@ class ServiceConfig {
   friend T* New(Args&&... args);
 
   // Takes ownership of \a json_tree.
-  ServiceConfig(UniquePtr<char> json_string, grpc_json* json_tree);
+  ServiceConfig(UniquePtr<char> service_config_json,
+                UniquePtr<char> json_string, grpc_json* json_tree);
 
   // Returns the number of names specified in the method config \a json.
   static int CountNamesInMethodConfig(grpc_json* json);
@@ -117,6 +120,7 @@ class ServiceConfig {
       grpc_json* json, CreateValue<T> create_value,
       typename SliceHashTable<RefCountedPtr<T>>::Entry* entries, size_t* idx);
 
+  UniquePtr<char> service_config_json_;
   UniquePtr<char> json_string_;  // Underlying storage for json_tree.
   grpc_json* json_tree_;
 };
@@ -172,7 +176,7 @@ bool ServiceConfig::ParseJsonMethodConfig(
 
 template <typename T>
 RefCountedPtr<SliceHashTable<RefCountedPtr<T>>>
-ServiceConfig::CreateMethodConfigTable(CreateValue<T> create_value) {
+ServiceConfig::CreateMethodConfigTable(CreateValue<T> create_value) const {
   // Traverse parsed JSON tree.
   if (json_tree_->type != GRPC_JSON_OBJECT || json_tree_->key != nullptr) {
     return nullptr;
@@ -223,7 +227,7 @@ ServiceConfig::CreateMethodConfigTable(CreateValue<T> create_value) {
 
 template <typename T>
 RefCountedPtr<T> ServiceConfig::MethodConfigTableLookup(
-    const SliceHashTable<RefCountedPtr<T>>& table, grpc_slice path) {
+    const SliceHashTable<RefCountedPtr<T>>& table, const grpc_slice& path) {
   const RefCountedPtr<T>* value = table.Get(path);
   // If we didn't find a match for the path, try looking for a wildcard
   // entry (i.e., change "/service/method" to "/service/*").
@@ -247,4 +251,4 @@ RefCountedPtr<T> ServiceConfig::MethodConfigTableLookup(
 
 }  // namespace grpc_core
 
-#endif /* GRPC_CORE_LIB_TRANSPORT_SERVICE_CONFIG_H */
+#endif /* GRPC_CORE_EXT_FILTERS_CLIENT_CHANNEL_SERVICE_CONFIG_H */

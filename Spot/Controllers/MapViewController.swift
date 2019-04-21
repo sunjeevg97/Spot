@@ -43,6 +43,7 @@ class MapViewController: UIViewController {
     let locationGroup = DispatchGroup()
     var firstTimeGettingLocation = true
     
+    var spotID : String!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -263,5 +264,22 @@ extension MapViewController: GMSMapViewDelegate {
         let long = cameraPosition.target.longitude
         
         circleQuery?.center = CLLocation(latitude: lat, longitude: long)
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker){
+        self.spotID = infoWindow.spotData!["spotId"] as! String
+        
+        self.performSegue(withIdentifier: "markerToSpotPage", sender: self )
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print(self.spotID)
+        if segue.identifier == "markerToSpotPage"{
+            //if let destination = segue.destination as? UITabBarController,
+                if let navController = segue.destination as? UINavigationController,
+                let homeController = navController.topViewController as? SpotViewController{
+                    homeController.spotId = self.spotID
+            }
+        }
     }
 }
