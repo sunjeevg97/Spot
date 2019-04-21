@@ -111,11 +111,10 @@ void grpc_transport_move_stats(grpc_transport_stream_stats* from,
 // currently handling the batch).  Once a filter or transport passes control
 // of the batch to the next handler, it cannot depend on the contents of
 // this struct anymore, because the next handler may reuse it.
-struct grpc_handler_private_op_data {
-  void* extra_arg = nullptr;
+typedef struct {
+  void* extra_arg;
   grpc_closure closure;
-  grpc_handler_private_op_data() { memset(&closure, 0, sizeof(closure)); }
-};
+} grpc_handler_private_op_data;
 
 typedef struct grpc_transport_stream_op_batch_payload
     grpc_transport_stream_op_batch_payload;
@@ -273,40 +272,40 @@ struct grpc_transport_stream_op_batch_payload {
 /** Transport op: a set of operations to perform on a transport as a whole */
 typedef struct grpc_transport_op {
   /** Called when processing of this op is done. */
-  grpc_closure* on_consumed = nullptr;
+  grpc_closure* on_consumed;
   /** connectivity monitoring - set connectivity_state to NULL to unsubscribe */
-  grpc_closure* on_connectivity_state_change = nullptr;
-  grpc_connectivity_state* connectivity_state = nullptr;
+  grpc_closure* on_connectivity_state_change;
+  grpc_connectivity_state* connectivity_state;
   /** should the transport be disconnected
    * Error contract: the transport that gets this op must cause
    *                 disconnect_with_error to be unref'ed after processing it */
-  grpc_error* disconnect_with_error = nullptr;
+  grpc_error* disconnect_with_error;
   /** what should the goaway contain?
    * Error contract: the transport that gets this op must cause
    *                 goaway_error to be unref'ed after processing it */
-  grpc_error* goaway_error = nullptr;
+  grpc_error* goaway_error;
   /** set the callback for accepting new streams;
       this is a permanent callback, unlike the other one-shot closures.
       If true, the callback is set to set_accept_stream_fn, with its
       user_data argument set to set_accept_stream_user_data */
-  bool set_accept_stream = false;
+  bool set_accept_stream;
   void (*set_accept_stream_fn)(void* user_data, grpc_transport* transport,
-                               const void* server_data) = nullptr;
-  void* set_accept_stream_user_data = nullptr;
+                               const void* server_data);
+  void* set_accept_stream_user_data;
   /** add this transport to a pollset */
-  grpc_pollset* bind_pollset = nullptr;
+  grpc_pollset* bind_pollset;
   /** add this transport to a pollset_set */
-  grpc_pollset_set* bind_pollset_set = nullptr;
+  grpc_pollset_set* bind_pollset_set;
   /** send a ping, if either on_initiate or on_ack is not NULL */
   struct {
     /** Ping may be delayed by the transport, on_initiate callback will be
         called when the ping is actually being sent. */
-    grpc_closure* on_initiate = nullptr;
+    grpc_closure* on_initiate;
     /** Called when the ping ack is received */
-    grpc_closure* on_ack = nullptr;
+    grpc_closure* on_ack;
   } send_ping;
   // If true, will reset the channel's connection backoff.
-  bool reset_connect_backoff = false;
+  bool reset_connect_backoff;
 
   /***************************************************************************
    * remaining fields are initialized and used at the discretion of the

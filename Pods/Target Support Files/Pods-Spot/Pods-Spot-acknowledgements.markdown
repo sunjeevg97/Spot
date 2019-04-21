@@ -1554,11 +1554,11 @@ THE SOFTWARE.
 
 ## GoogleMaps
 
-Copyright 2019 Google
+Copyright 2018 Google
 
 ## GooglePlaces
 
-Copyright 2019 Google
+Copyright 2018 Google
 
 ## GoogleToolboxForMac
 

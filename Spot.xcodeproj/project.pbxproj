@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D33FF2222694DE50092D260 /* SpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D33FF2122694DE50092D260 /* SpotViewController.swift */; };
-		1D4B1A15226C08EB004FB146 /* AboutSpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4B1A14226C08EB004FB146 /* AboutSpotViewController.swift */; };
 		1D58C261225174C900EA646C /* AddSpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D58C260225174C900EA646C /* AddSpotViewController.swift */; };
 		1D58C263225AA29C00EA646C /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D58C262225AA29C00EA646C /* SuccessViewController.swift */; };
 		1DF6E03522089F4500BA0C36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6E03422089F4500BA0C36 /* AppDelegate.swift */; };
@@ -57,8 +55,6 @@
 /* Begin PBXFileReference section */
 		099F03F44BE587F421FFCFD8 /* Pods-Spot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spot.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spot/Pods-Spot.release.xcconfig"; sourceTree = "<group>"; };
 		0F50D9F87630DD023950437E /* Pods-Spot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Spot/Pods-Spot.debug.xcconfig"; sourceTree = "<group>"; };
-		1D33FF2122694DE50092D260 /* SpotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotViewController.swift; sourceTree = "<group>"; };
-		1D4B1A14226C08EB004FB146 /* AboutSpotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSpotViewController.swift; sourceTree = "<group>"; };
 		1D58C260225174C900EA646C /* AddSpotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpotViewController.swift; sourceTree = "<group>"; };
 		1D58C262225AA29C00EA646C /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		1DF6E03122089F4500BA0C36 /* Spot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spot.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,8 +203,6 @@
 				1D58C262225AA29C00EA646C /* SuccessViewController.swift */,
 				3EC4D92C225C21BF0061F36F /* CreatePostViewController.swift */,
 				611FA3072267991000310ED2 /* EditProfileViewController.swift */,
-				1D33FF2122694DE50092D260 /* SpotViewController.swift */,
-				1D4B1A14226C08EB004FB146 /* AboutSpotViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -522,11 +516,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D4B1A15226C08EB004FB146 /* AboutSpotViewController.swift in Sources */,
 				611FA3082267991000310ED2 /* EditProfileViewController.swift in Sources */,
 				7A37801E22174BD6008B835A /* ProfileViewController.swift in Sources */,
 				3E6189572213DEAD00A7CFF4 /* LoginViewController.swift in Sources */,
-				1D33FF2222694DE50092D260 /* SpotViewController.swift in Sources */,
 				1DF6E03722089F4500BA0C36 /* SignUpViewController.swift in Sources */,
 				3ED3F1A622147EAE008CC29B /* ResetViewController.swift in Sources */,
 				7A37801C22174BB1008B835A /* MapViewController.swift in Sources */,
