@@ -75,38 +75,83 @@ class FeedViewController: UIViewController {
         
         self.tableView.dataSource = self
         
-        
+        var testlist : [String] = []
         
         self.circleQuery = self.geoFirestoreSpots.query(withCenter: GeoPoint(latitude: self.userLat, longitude: self.userLong), radius: 0.804672)
+        
+        DispatchQueue.global().async {
+            
+            let dispatchgroup = DispatchGroup()
+            
+            dispatchgroup.enter()
+            
+            Firestore.firestore().collection("spots").getDocuments { (documentsAll, err1) in
+                
+                for doc in documentsAll!.documents{
+                    
+//                    doc.documentID
+                    
+                    print("alldoc ", doc)
+//                    testlist.append(doc.documentID)
+                    
+                    self.runGeoDispatch(nearbySpotID: doc.documentID, index: self.index);
+                    
+                    
+                    
+                }
+                
+                dispatchgroup.leave()
+                
+            }
+            
+            dispatchgroup.wait()
+            
+            
+            for post in self.postsList{
+                print("postslist crossed ", post.spotname)
+            }
+
+            DispatchQueue.main.sync {
+                self.tableView.reloadData()
+            }
+            
+        }
+        
+        
 
 
         print("circleQuery", self.circleQuery)
+
+//
+//        DispatchQueue.global().async {
+//            let dispatchgroup = DispatchGroup()
         
-//        self.postsList = []
-
-
-        self.circleQuery?.observe(.documentEntered, with: { (key, location) in
-            print("The document with documentID '\(key)' entered the search area and is at location '\(location)'")
-
-            self.nearbySpotsList.append(key!);
-
-            print("incremental", self.nearbySpotsList)
+//            dispatchgroup.enter()
             
+//            self.circleQuery?.observe(.documentEntered, with: { (key, location) in
+//                print("The document with documentID '\(key)' entered the search area and is at location '\(location)'")
+//
+//                self.nearbySpotsList.append(key!);
+//
+//                print("incremental", self.nearbySpotsList)
+//
+//
+//
+//                self.runGeoDispatch(nearbySpotID: key!, index: self.index);
+//
+//    //            self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PostCell")
+//    //            self.tableView.reloadData()
+//
+//            })
             
-            
-            self.runGeoDispatch(nearbySpotID: key!, index: self.index);
-            
-//            self.tableView.reloadData()
-            self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PostCell")
-
-
-        })
+//        }
 
        
 
         //It's good to run dispatch after everything else in viewDidLoad because nothing afterwards will run before it finishes
 //        runDispatch()
-    }
+        
+    } //End view did load
     
     
     func runGeoDispatch(nearbySpotID : String, index: Int) {
@@ -114,8 +159,6 @@ class FeedViewController: UIViewController {
         let pathOfNearby = self.db.collection("spots").document(nearbySpotID)
         
         self.db.collection("spots").document(nearbySpotID).getDocument(completion: { (spotSnapshot, spotsErr) in
-        
-        
         
             self.db.collection("users").document(self.id).getDocument { (userSnapshot, userErr) in
                 
@@ -166,6 +209,8 @@ class FeedViewController: UIViewController {
                                 print("placemarker: ", cityAndState)
                                 
                                 
+                                DispatchQueue.main.async {
+                                    
                                 //Extract image and put it into a Post object
                                 imgReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
                                     if error != nil {
@@ -174,20 +219,28 @@ class FeedViewController: UIViewController {
                                         let image = UIImage(data: data!)!
                                         
                                         
+
+
+                                            if index <= 10{
+                                                
+                                                self.postsList[index].spotname = spotName
+                                                self.postsList[index].caption = captionText
+                                                self.postsList[index].photo = image
+                                                self.postsList[index].uName = posterUserName
+                                                self.postsList[index].numLikes = 0
+                                                self.postsList[index].location = cityAndState
+                                                
+                                                self.index = index + 1
+                                                
+                                            }else{
+                                                self.postsList.append(Post(spotname: spotName, captionText: captionText, photoObj: image, uNameString: posterUserName, likesCount: 0, location: cityAndState))
+                                                
+                                                self.index = index + 1
+
+                                            }
                                         
-                                        if index <= 10{
-                                            
-                                            self.postsList[index].spotname = spotName
-                                            self.postsList[index].caption = captionText
-                                            self.postsList[index].photo = image
-                                            self.postsList[index].uName = posterUserName
-                                            self.postsList[index].numLikes = 0
-                                            self.postsList[index].location = cityAndState
-                                            
-                                        }else{
-                                            self.postsList.append(Post(spotname: spotName, captionText: captionText, photoObj: image, uNameString: posterUserName, likesCount: 0, location: cityAndState))
-                                        }
                                         
+
                                         
                                         print("posts list", self.postsList)
                                         var counter = self.postsList.count
@@ -195,13 +248,16 @@ class FeedViewController: UIViewController {
                                                 print(self.postsList[index].spotname)
                                         }
                                         
-                                        self.index = index + 1
+//                                        self.index = index + 1
                                         
 //                                        self.tableView.reloadData()
                                         
                                     }
                                 } // End get image data
-
+                                    
+                                }
+                                
+                        
  
                             }) // End reverse geocode location
 
@@ -219,19 +275,10 @@ class FeedViewController: UIViewController {
     } //End function GeoRunDispatch
     
     
-    
-    
-    
-    
-    
-    func runDispatch() {
+    func runDispatchOriginal() {
         DispatchQueue.global().async {
             let dispatchGroup = DispatchGroup()
             
-//            print("nearby spots disp", nearbySpotID)
-            
-            //////////////////////////////////////////////////////////
- 
             dispatchGroup.enter()
             self.db.collection("users").document(self.id).getDocument { (snapshot, err) in
                 
@@ -388,10 +435,15 @@ class FeedViewController: UIViewController {
 
 extension FeedViewController: UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+//        return 10
+        return postsList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
