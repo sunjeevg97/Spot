@@ -25,4 +25,9 @@ class Post {
         self.location = location
         
     }
+    
+    func toString() -> String {
+        let output = self.spotname+"|"+self.caption+"|"+self.uName+"|"+self.location
+        return output
+    }
 }
