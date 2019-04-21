@@ -11,10 +11,9 @@ import Firebase
 import FirebaseFirestore
 import FirebaseStorage
 import CoreLocation
+import Geofirestore
 
 class FeedViewController: UIViewController {
-    
-    
     
     @IBOutlet weak var tableView: UITableView!
     let email: String = Auth.auth().currentUser?.email ?? "Invalid User"
@@ -26,29 +25,213 @@ class FeedViewController: UIViewController {
     var usertestGlobal : String?;
     var postsList : [Post] = [];
     var fullURL: String?;
+    let geoFirestoreSpots = GeoFirestore(collectionRef: Firestore.firestore().collection("spots"));
+    var currentLocation : CLLocation! ;
+    let locationManager : CLLocationManager = CLLocationManager();
+    var userLat : Double = 0;
+    var userLong : Double = 0;
+    var circleQuery: GFSCircleQuery?
+    var nearbySpotsList : [String] = [];
+    var index : Int = 0;
     
     override func viewDidLoad() {
         
+            for i in 0...10{
+    
+                self.postsList.append(Post(spotname: "",captionText: "", photoObj: UIImage(), uNameString: "",likesCount:0, location: ""))
+    //            postsList.append(Post(spotname: "",captionText: "", photoObj: UIImage(), uNameString: "",likesCount:0, location: ""))
+    
+    
+            }
+        
         
         nameGlobal = "test"
-        usernameGlobal = ""
+        usernameGlobal = "test"
         nametestGlobal = "test"
         usertestGlobal = "test"
+        
+        //Get User's current location
+        if CLLocationManager.locationServicesEnabled() == true{
+            if CLLocationManager.authorizationStatus() == .restricted ||
+                CLLocationManager.authorizationStatus() == .denied ||
+                CLLocationManager.authorizationStatus() == .notDetermined{
+                
+                locationManager.requestWhenInUseAuthorization()
+            }
+            locationManager.desiredAccuracy = 1.0
+            locationManager.startUpdatingLocation()
+            currentLocation = locationManager.location
+            
+        }else{
+            print("please turn on location services")
+        }
+        
+        userLat = currentLocation.coordinate.latitude
+        userLong = currentLocation.coordinate.longitude
         
         super.viewDidLoad()
         
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Signuplogo.png"))
         
-        tableView.dataSource = self
+        self.tableView.dataSource = self
         
+        
+        
+        self.circleQuery = self.geoFirestoreSpots.query(withCenter: GeoPoint(latitude: self.userLat, longitude: self.userLong), radius: 0.804672)
+
+
+        print("circleQuery", self.circleQuery)
+        
+//        self.postsList = []
+
+
+        self.circleQuery?.observe(.documentEntered, with: { (key, location) in
+            print("The document with documentID '\(key)' entered the search area and is at location '\(location)'")
+
+            self.nearbySpotsList.append(key!);
+
+            print("incremental", self.nearbySpotsList)
+            
+            
+            
+            self.runGeoDispatch(nearbySpotID: key!, index: self.index);
+            
+//            self.tableView.reloadData()
+            self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PostCell")
+
+
+        })
+
+       
+
         //It's good to run dispatch after everything else in viewDidLoad because nothing afterwards will run before it finishes
-        runDispatch()
+//        runDispatch()
     }
+    
+    
+    func runGeoDispatch(nearbySpotID : String, index: Int) {
+        
+        let pathOfNearby = self.db.collection("spots").document(nearbySpotID)
+        
+        self.db.collection("spots").document(nearbySpotID).getDocument(completion: { (spotSnapshot, spotsErr) in
+        
+        
+        
+            self.db.collection("users").document(self.id).getDocument { (userSnapshot, userErr) in
+                
+                if (userErr != nil) {
+                    print("Error getting documents: \(userErr)")
+                } else{
+                    
+                    self.nameGlobal = userSnapshot?.get("name") as? String
+                    self.usernameGlobal = userSnapshot?.get("username") as? String
+                    
+                }
+                
+                pathOfNearby.collection("feedPost").getDocuments { (querysnapshot, err) in
+                    for document in querysnapshot!.documents {
+
+                        print("feedpost for nearby")
+                        print("\(document.documentID) => \(document.data())")
+
+                        let spotName : String = spotSnapshot?.get("spot name") as! String
+                        let captionText : String = document.get("caption") as! String
+                        let imgURL : String = document.get("image url") as! String
+                        
+                        let imgReference = Storage.storage().reference(forURL: imgURL)
+                        
+                        let timestamp = document.get("timestamp")
+                        let posterID : String = document.get("posterID") as! String
+                        
+                        
+                        
+                        self.db.collection("users").document(posterID).getDocument(completion: { (posterSnapshot, posterErr) in
+                            
+                            let posterUserName : String = posterSnapshot?.get("username") as! String
+                        
+                            let arrayLocation = spotSnapshot?.get("l") as! [NSNumber]
+                        
+                            let spotLatitude : Double = arrayLocation[0] as! Double
+                            let spotLongitude : Double = arrayLocation[1] as! Double
+                        
+                            let convertedLocation = CLLocation(latitude: spotLatitude, longitude: spotLongitude);
+                        
+                            CLGeocoder().reverseGeocodeLocation(convertedLocation, completionHandler: { (placemarks, error) -> Void in
+                                
+                                let cityName: String = placemarks?[0].locality ?? "City"
+                                let stateName: String = placemarks?[0].administrativeArea ?? "Earth"
+                                
+                                let cityAndState : String = cityName + ", " + stateName
+                                
+                                print("placemarker: ", cityAndState)
+                                
+                                
+                                //Extract image and put it into a Post object
+                                imgReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                                    if error != nil {
+                                        print("error occured")
+                                    } else {
+                                        let image = UIImage(data: data!)!
+                                        
+                                        
+                                        
+                                        if index <= 10{
+                                            
+                                            self.postsList[index].spotname = spotName
+                                            self.postsList[index].caption = captionText
+                                            self.postsList[index].photo = image
+                                            self.postsList[index].uName = posterUserName
+                                            self.postsList[index].numLikes = 0
+                                            self.postsList[index].location = cityAndState
+                                            
+                                        }else{
+                                            self.postsList.append(Post(spotname: spotName, captionText: captionText, photoObj: image, uNameString: posterUserName, likesCount: 0, location: cityAndState))
+                                        }
+                                        
+                                        
+                                        print("posts list", self.postsList)
+                                        var counter = self.postsList.count
+                                        for index in 0...(counter-1){
+                                                print(self.postsList[index].spotname)
+                                        }
+                                        
+                                        self.index = index + 1
+                                        
+//                                        self.tableView.reloadData()
+                                        
+                                    }
+                                } // End get image data
+
+ 
+                            }) // End reverse geocode location
+
+                            
+                        }) // End get user that created the post
+                    } // End loop through all feed post documents
+                    
+                    
+                    
+                } // End get collection of all feed post documents
+            } // End get current user information
+        }) //End get nearby spot
+        
+        
+    } //End function GeoRunDispatch
+    
+    
+    
+    
+    
+    
     
     func runDispatch() {
         DispatchQueue.global().async {
             let dispatchGroup = DispatchGroup()
             
+//            print("nearby spots disp", nearbySpotID)
+            
+            //////////////////////////////////////////////////////////
+ 
             dispatchGroup.enter()
             self.db.collection("users").document(self.id).getDocument { (snapshot, err) in
                 
@@ -73,6 +256,7 @@ class FeedViewController: UIViewController {
             print(self.usernameGlobal)
             print(self.nameGlobal)
             
+            
             //Need to load posts from user's friends list (order by post timestamp or location)
             
             
@@ -86,18 +270,19 @@ class FeedViewController: UIViewController {
                 let pathOfPost = self.db.collection("spots").document(spotID)
                 
                 pathOfPost.getDocument(completion: { (snapshot, err) in
+                    
+                    
+                    
                     if let err = err {
                         print("Error getting documents: \(err)")
                     }else{
                         self.postsList[index].spotname = snapshot?.get("spotName") as! String
                         
-//                        let coordinates: GeoPoint = snapshot?.get("location") as! GeoPoint
                         let arrayLocation = snapshot?.get("l") as! [NSNumber]
                         
                         print("arrayLocation",arrayLocation as! [Double])
                         
-//                        var longitude: Double =  coordinates.longitude
-//                        var latitude: Double = coordinates.latitude
+
                         
                         let latitude : Double = arrayLocation[0] as! Double
                         let longitude : Double = arrayLocation[1] as! Double
@@ -123,10 +308,13 @@ class FeedViewController: UIViewController {
                     dispatchGroup.leave()
                 })
                 
+                dispatchGroup.wait()
+                
                 
                 dispatchGroup.enter()
                 var imageURL:String = "";
                 var posterUsername : String = "";
+                
                 
                 pathOfPost.collection("feedPost").document("C94475D4-0585-4C9D-BAC0-70433B4E9523").getDocument{(snapshotSpot, errSpot) in
                     
@@ -203,7 +391,7 @@ extension FeedViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 5
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -213,15 +401,10 @@ extension FeedViewController: UITableViewDataSource {
         tableView.rowHeight = 629
         
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
-        
-        //        var postsList : [Post] = []
-        for i in 0...10{
-            
-            postsList.append(Post(spotname: "",captionText: "", photoObj: UIImage(), uNameString: "",likesCount:0, location: ""))
-            
-            
-        }
+        var cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
+//        if cell != nil{
+//            cell = UITableViewCell(style: ., reuseIdentifier: "PostCell") as! UITableViewCell
+//        }
         
         //        let cell = UITableViewCell()
         cell.backgroundColor = UIColor.black
@@ -233,7 +416,7 @@ extension FeedViewController: UITableViewDataSource {
         handleDisplay1.lineBreakMode = .byWordWrapping
         handleDisplay1.numberOfLines = 0
         handleDisplay1.textColor = UIColor(red:0.82, green:0.82, blue:0.82, alpha:1)
-        let handleContent = postsList[indexPath.row].uName
+        let handleContent = self.postsList[indexPath.row].uName
         let handleString = NSMutableAttributedString(string: handleContent, attributes: [
             NSAttributedString.Key.font: UIFont(name: "Arial", size: 12)!
             ])
@@ -252,7 +435,7 @@ extension FeedViewController: UITableViewDataSource {
         spotName.numberOfLines = 0
         spotName.textColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
         spotName.textAlignment = .right
-        let spotNameContent = postsList[indexPath.row].spotname
+        let spotNameContent = self.postsList[indexPath.row].spotname
         let spotNameString = NSMutableAttributedString(string: spotNameContent, attributes: [
             NSAttributedString.Key.font: UIFont(name: "Arial", size: 18)!
             ])
@@ -272,7 +455,7 @@ extension FeedViewController: UITableViewDataSource {
         city.numberOfLines = 0
         city.textColor = UIColor.white
         city.textAlignment = .right
-        let cityContent = postsList[indexPath.row].location
+        let cityContent = self.postsList[indexPath.row].location
         let cityString = NSMutableAttributedString(string: cityContent, attributes: [
             NSAttributedString.Key.font: UIFont(name: "Arial", size: 11)!
             ])
@@ -290,7 +473,7 @@ extension FeedViewController: UITableViewDataSource {
         //        postImage.backgroundColor = UIColor.brown
         //        cell.addSubview(postImage)
         //        postImage.image = UIImage(named: "Signuplogo.png")
-        postImage.image = postsList[indexPath.row].photo as! UIImage
+        postImage.image = self.postsList[indexPath.row].photo as! UIImage
         postImage.contentMode = UIView.ContentMode.scaleAspectFit
         cell.insertSubview(postImage, at: 0)
         
@@ -313,8 +496,8 @@ extension FeedViewController: UITableViewDataSource {
         captionLayer.lineBreakMode = .byWordWrapping
         captionLayer.numberOfLines = 0
         captionLayer.textColor = UIColor.white
-        let captionContent = postsList[indexPath.row].caption
-        let captionString = NSMutableAttributedString(string: captionContent, attributes: [
+        var captionContent = self.postsList[indexPath.row].caption
+        var captionString = NSMutableAttributedString(string: captionContent, attributes: [
             NSAttributedString.Key.font: UIFont(name: "Arial", size: 13)!
             ])
         let captionRange = NSRange(location: 0, length: captionString.length)
@@ -348,7 +531,7 @@ extension FeedViewController: UITableViewDataSource {
         numLikes.numberOfLines = 0
         numLikes.textColor = UIColor(red:0.02, green:0.62, blue:1, alpha:1)
         numLikes.textAlignment = .center
-        let likesContent = String(postsList[indexPath.row].numLikes)
+        let likesContent = String(self.postsList[indexPath.row].numLikes)
         let likesString = NSMutableAttributedString(string: likesContent, attributes: [
             NSAttributedString.Key.font: UIFont(name: "Arial", size: 11)!
             ])
