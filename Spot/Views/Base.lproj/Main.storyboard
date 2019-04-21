@@ -190,6 +190,7 @@
             <objects>
                 <viewController id="JJG-83-qOE" customClass="ProfileViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QUw-Ma-y8r">
+
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -782,17 +783,20 @@ IT’S A MAGICAL WORLD OUT THERE.
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6X-Us-JBH">
-                                <rect key="frame" x="16" y="34" width="34" height="30"/>
+                                <rect key="frame" x="32" y="59" width="57" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
-                                    <segue destination="JJG-83-qOE" kind="presentation" id="Iel-WY-mun"/>
+                                    <segue destination="8JJ-p2-ETf" kind="presentation" identifier="editBackProfile" id="9YR-rZ-IJ2"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="sbL-og-rzH"/>
                     </view>
+                    <connections>
+                        <outlet property="backButton" destination="H6X-Us-JBH" id="3Dq-oR-83X"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LPc-9N-grI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -891,6 +895,7 @@ IT’S A MAGICAL WORLD OUT THERE.
     <inferredMetricsTieBreakers>
         <segue reference="9cG-7c-1HM"/>
         <segue reference="Iel-WY-mun"/>
+
         <segue reference="RNW-2x-rNB"/>
         <segue reference="noH-gm-GA0"/>
     </inferredMetricsTieBreakers>

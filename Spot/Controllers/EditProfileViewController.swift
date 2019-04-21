@@ -20,11 +20,37 @@ class EditProfileViewController: UIViewController {
     let imgPicker = UIImagePickerController()
     var urlStr : String = " "
     
+    @IBOutlet weak var backButton: UIButton!
+
     override func viewDidLoad() {
         
         imgPicker.delegate = self
 
         super.viewDidLoad()
+        
+        
+        //top rectangle with a gradient
+        let topRectangle = UIView(frame: CGRect(x: 0, y: 0, width: 375, height: 87))
+        let topRectangleGradient = CAGradientLayer()
+        topRectangleGradient.frame = CGRect(x: 0, y: 0, width: 375, height: 87)
+        topRectangleGradient.colors = [
+            UIColor.black.cgColor,
+            UIColor(red:0.17, green:0.17, blue:0.17, alpha:1).cgColor
+        ]
+        topRectangleGradient.locations = [0, 1]
+        topRectangleGradient.startPoint = CGPoint(x: 0.5, y: 0.16)
+        topRectangleGradient.endPoint = CGPoint(x: 0.5, y: 1.13)
+        topRectangle.layer.addSublayer(topRectangleGradient)
+        self.view.addSubview(topRectangle)
+        
+        //BackButton
+        self.view.addSubview(backButton)
+        self.view.bringSubviewToFront(backButton)
+        backButton.layer.cornerRadius = 12
+        backButton.backgroundColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1)
+        backButton.layer.borderWidth = 2.4
+        backButton.layer.borderColor = UIColor(red:0.31, green:0.89, blue:0.76, alpha:1).cgColor
+        
         
         //Post button
         let postBtn = UIButton(frame: CGRect(x: 312, y: 54, width: 51, height: 24))
@@ -54,6 +80,26 @@ class EditProfileViewController: UIViewController {
         postLabel.attributedText = postLabelString
         postLabel.sizeToFit()
         self.view.addSubview(postLabel)
+        
+        
+        //Edit Profile Label
+        let spotName = UILabel(frame: CGRect(x: 120, y: 45, width: 325, height: 24))
+        spotName.lineBreakMode = .byWordWrapping
+        spotName.numberOfLines = 0
+        spotName.textColor = UIColor.white
+        spotName.textAlignment = .center
+        let spotNameContent = "Edit Profile"
+        let spotNameString = NSMutableAttributedString(string: spotNameContent, attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Arial", size: 24)!
+            ])
+        let spotNameRange = NSRange(location: 0, length: spotNameString.length)
+        _ = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 1.17
+        spotNameString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: spotNameRange)
+        spotNameString.addAttribute(NSAttributedString.Key.kern, value: 1.38, range: spotNameRange)
+        spotName.attributedText = spotNameString
+        spotName.sizeToFit()
+        self.view.addSubview(spotName)
         
         //Gallery image
         let galleryFrame = UIImageView(frame: CGRect(x: 150, y: 200, width: 84, height: 48))
@@ -126,17 +172,61 @@ class EditProfileViewController: UIViewController {
     @objc func handleCreatePost(_sender: AnyObject){
         let userBio = self.userBioTextField.text
         
-        let values = ["userBio" : userBio,
-            ] as [String : Any]
-        
-        self.db.collection("users").document(self.userID).setData(values, merge: true)
-        print("post created")
-        
-        self.uploadPostImage(profilePic.image!, userId: userID) { error in
-            if error == nil{
-                print("imaged saved to db")
-            }
+        if userBio == "" {
+            print ("No Bio updated")
         }
+        else {
+            let values = ["userBio" : userBio!,
+                          ] as [String : Any]
+            
+            self.db.collection("users").document(self.userID).setData(values, merge: true)
+            print("post created")
+            
+        }
+        
+        // to check if an image and Bio has been updated
+        if profilePic.image == nil {
+            print ("No image updated")
+            if userBio == "" {
+                self.createAlert(title: "No Changes have been made", message: "No changes have been made!")
+            }
+            else {
+                self.createAlert(title: "Post Updated", message: "Bio: Updated , Profile Image: Not Updated")
+            }
+            
+        }
+        else { //profile pic is not nil
+            if userBio == "" {
+                self.uploadPostImage(profilePic.image!, userId: userID) { error in
+                    if error == nil{
+                        print("imaged saved to db")
+                    }
+                }
+                self.createAlert(title: "Post Updated", message: "Bio: Not Updated , Profile Image: Updated")
+            }
+            else {
+                self.uploadPostImage(profilePic.image!, userId: userID) { error in
+                    if error == nil{
+                        print("imaged saved to db")
+                        
+                    }
+                }
+                self.createAlert(title: "Post Updated", message: "Your Profile has been Updated")
+            }
+            
+        }
+        
+        
+    }//function end
+    
+    // this block of code checks if bio and profile icon have been updated
+    // alert when post button is clicked
+    func createAlert(title:String, message:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func uploadPostImage(_ image:UIImage, userId: String,  completion: @escaping ((_ url:String?) -> ())){
@@ -213,4 +303,16 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         
         dismiss(animated: true, completion: nil)
     }
+    
+    
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //        if let navVC = segue.destinationViewController as? UINavigationController{
+    //            if let historyVC = navVC.viewControllers[0] as? HistoryController{
+    //                historyVC.detailItem = barcodeInt as AnyObject
+    //            }
+    //        }
+    //    }
+    
+    
+    
 }
