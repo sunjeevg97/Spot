@@ -172,24 +172,57 @@ class EditProfileViewController: UIViewController {
     @objc func handleCreatePost(_sender: AnyObject){
         let userBio = self.userBioTextField.text
         
-        let values = ["userBio" : userBio,
-            ] as [String : Any]
-        
-        self.db.collection("users").document(self.userID).setData(values, merge: true)
-        print("post created")
-        
-
-        self.uploadPostImage(profilePic.image!, userId: userID) { error in
-            if error == nil{
-                print("imaged saved to db")
-            }
+        if userBio == "" {
+            print ("No Bio updated")
         }
-        self.createAlert()
-    }
+        else {
+            let values = ["userBio" : userBio!,
+                          ] as [String : Any]
+            
+            self.db.collection("users").document(self.userID).setData(values, merge: true)
+            print("post created")
+            
+        }
+        
+        // to check if an image and Bio has been updated
+        if profilePic.image == nil {
+            print ("No image updated")
+            if userBio == "" {
+                self.createAlert(title: "No Changes have been made", message: "No changes have been made!")
+            }
+            else {
+                self.createAlert(title: "Post Updated", message: "Bio: Updated , Profile Image: Not Updated")
+            }
+            
+        }
+        else { //profile pic is not nil
+            if userBio == "" {
+                self.uploadPostImage(profilePic.image!, userId: userID) { error in
+                    if error == nil{
+                        print("imaged saved to db")
+                    }
+                }
+                self.createAlert(title: "Post Updated", message: "Bio: Not Updated , Profile Image: Updated")
+            }
+            else {
+                self.uploadPostImage(profilePic.image!, userId: userID) { error in
+                    if error == nil{
+                        print("imaged saved to db")
+                        
+                    }
+                }
+                self.createAlert(title: "Post Updated", message: "Your Profile has been Updated")
+            }
+            
+        }
+        
+        
+    }//function end
     
+    // this block of code checks if bio and profile icon have been updated
     // alert when post button is clicked
-    func createAlert() {
-        let alert = UIAlertController(title: "Post Updated", message: "Your profile has been updated!", preferredStyle: .alert)
+    func createAlert(title:String, message:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))
