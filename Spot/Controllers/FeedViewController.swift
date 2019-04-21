@@ -39,6 +39,7 @@ class FeedViewController: UIViewController {
             for i in 0...10{
     
                 self.postsList.append(Post(spotname: "",captionText: "", photoObj: UIImage(), uNameString: "",likesCount:0, location: ""))
+    //            postsList.append(Post(spotname: "",captionText: "", photoObj: UIImage(), uNameString: "",likesCount:0, location: ""))
     
     
             }
@@ -68,19 +69,11 @@ class FeedViewController: UIViewController {
         userLat = currentLocation.coordinate.latitude
         userLong = currentLocation.coordinate.longitude
         
-        self.tableView.dataSource = self
-        
         super.viewDidLoad()
         
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Signuplogo.png"))
         
-        
-        
-        
-        
-        
-        
-        
+        self.tableView.dataSource = self
         
         var testlist : [String] = []
         
@@ -103,7 +96,7 @@ class FeedViewController: UIViewController {
                     
                     
                     
-                    self.runGeoDispatch(nearbySpotID: doc.documentID);
+                    self.runGeoDispatch(nearbySpotID: doc.documentID, index: self.index);
                     
                     
                     
@@ -125,7 +118,35 @@ class FeedViewController: UIViewController {
             }
             
         }
+        
+        
 
+
+        print("circleQuery", self.circleQuery)
+
+//
+//        DispatchQueue.global().async {
+//            let dispatchgroup = DispatchGroup()
+        
+//            dispatchgroup.enter()
+            
+//            self.circleQuery?.observe(.documentEntered, with: { (key, location) in
+//                print("The document with documentID '\(key)' entered the search area and is at location '\(location)'")
+//
+//                self.nearbySpotsList.append(key!);
+//
+//                print("incremental", self.nearbySpotsList)
+//
+//
+//
+//                self.runGeoDispatch(nearbySpotID: key!, index: self.index);
+//
+//    //            self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PostCell")
+//    //            self.tableView.reloadData()
+//
+//            })
+            
+//        }
 
        
 
@@ -135,7 +156,7 @@ class FeedViewController: UIViewController {
     } //End view did load
     
     
-    func runGeoDispatch(nearbySpotID : String) {
+    func runGeoDispatch(nearbySpotID : String, index: Int) {
         
         let pathOfNearby = self.db.collection("spots").document(nearbySpotID)
         
@@ -200,37 +221,38 @@ class FeedViewController: UIViewController {
                                         let image = UIImage(data: data!)!
                                         
                                         
-                                        
 
-                                            if self.index <= 10{
+
+                                            if index <= 10{
                                                 
-                                                self.postsList[self.index].spotname = spotName
-                                                self.postsList[self.index].caption = captionText
-                                                self.postsList[self.index].photo = image
-                                                self.postsList[self.index].uName = posterUserName
-                                                self.postsList[self.index].numLikes = 0
-                                                self.postsList[self.index].location = cityAndState
+                                                self.postsList[index].spotname = spotName
+                                                self.postsList[index].caption = captionText
+                                                self.postsList[index].photo = image
+                                                self.postsList[index].uName = posterUserName
+                                                self.postsList[index].numLikes = 0
+                                                self.postsList[index].location = cityAndState
                                                 
-                                                
+                                                self.index = index + 1
                                                 
                                             }else{
                                                 self.postsList.append(Post(spotname: spotName, captionText: captionText, photoObj: image, uNameString: posterUserName, likesCount: 0, location: cityAndState))
+                                                
+                                                self.index = index + 1
 
                                             }
                                         
-                                        self.index = self.index + 1
+                                        
 
                                         
                                         print("posts list", self.postsList)
                                         var counter = self.postsList.count
-                                        for track in 0...(counter-1){
-                                                print(self.postsList[track].spotname)
-                                            print("index: ",track, "|",self.postsList[track].toString())
+                                        for index in 0...(counter-1){
+                                                print(self.postsList[index].spotname)
                                         }
                                         
 //                                        self.index = index + 1
                                         
-                                        self.tableView.reloadData()
+//                                        self.tableView.reloadData()
                                         
                                     }
                                 } // End get image data
