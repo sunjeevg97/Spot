@@ -15,7 +15,7 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SignUpViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="669"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -34,7 +34,7 @@
             <objects>
                 <viewController title="resetView" id="VBi-4S-HmH" customClass="ResetViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vFk-2O-OHB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="669"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="cme-O4-bPL"/>
                     </view>
@@ -51,7 +51,7 @@
             <objects>
                 <viewController title="loginView" id="gWK-HF-6yf" customClass="LoginViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KtO-vt-APb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="669"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Cnz-rS-oVl"/>
                     </view>
@@ -70,7 +70,7 @@
             <objects>
                 <viewController title="instructionsP1" id="3qA-Fj-wcO" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aKl-oj-SRs">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="669"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How it works" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yco-aF-wR0">
@@ -110,7 +110,7 @@
             <objects>
                 <viewController title="instructionsP2" id="cMf-RT-if1" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jhj-hD-K21">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="669"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How it works" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kdy-WS-rO2">
@@ -150,7 +150,7 @@
             <objects>
                 <viewController title="instructionsP3" id="AxO-LR-EH8" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3QP-hs-oeo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="669"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How it works" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6CB-mI-EJs">
@@ -190,11 +190,11 @@
             <objects>
                 <viewController id="JJG-83-qOE" customClass="ProfileViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QUw-Ma-y8r">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="586"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OT2-yw-8PQ">
-                                <rect key="frame" x="0.0" y="88" width="414" height="498"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wdj-rY-bYR">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="722"/>
@@ -336,7 +336,7 @@
             <objects>
                 <viewController id="635-3n-tgi" customClass="FeedViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LA3-TR-tTo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="586"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QXo-29-8il">
@@ -347,7 +347,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vVM-dx-tsn">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="634"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="861"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PostCell" id="3UF-Kn-hHh">
@@ -387,7 +387,7 @@
             <objects>
                 <viewController id="McA-Zb-s0J" customClass="CreatePostViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eD9-j3-nN6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="669"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="4oF-Q7-Kd7"/>
@@ -405,22 +405,22 @@
             <objects>
                 <viewController id="vkr-4K-2jk" customClass="MapViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vo6-2s-g3b">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="586"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qcc-qJ-c0D" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="88" width="414" height="498"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqm-Bm-Lkd">
-                                <rect key="frame" x="8" y="437" width="112" height="112"/>
+                                <rect key="frame" x="8" y="664" width="112" height="112"/>
                                 <state key="normal" image="LocateIcon"/>
                                 <connections>
                                     <action selector="moveToMyLocation:" destination="vkr-4K-2jk" eventType="touchUpInside" id="Sh3-2n-7VY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9oj-XG-G6K">
-                                <rect key="frame" x="334" y="506" width="72" height="72"/>
+                                <rect key="frame" x="334" y="733" width="72" height="72"/>
                                 <state key="normal" image="AddSpotIcon"/>
                                 <connections>
                                     <action selector="addSpot:" destination="vkr-4K-2jk" eventType="touchUpInside" id="Xgf-F2-24c"/>
@@ -464,7 +464,7 @@
             <objects>
                 <viewController id="x0m-OS-bdd" customClass="AddSpotViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Eq-P8-TTE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="586"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59S-OX-lm2">
@@ -523,7 +523,7 @@
             <objects>
                 <viewController title="instructionsP4" id="irR-3H-iQR" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xxg-Fg-Eor">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="669"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How it works" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPd-IK-iNB">
@@ -570,36 +570,25 @@ IT’S A MAGICAL WORLD OUT THERE.
             <objects>
                 <viewController id="eCr-eN-N6D" customClass="SpotViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Lr-wN-HvS">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="498"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bGj-ak-Eph">
-                                <rect key="frame" x="0.0" y="-171" width="414" height="669"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="669"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="iHY-7d-6vC" kind="embed" identifier="spotPageToAbout" id="Y6h-1w-Xk6"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aQ6-w2-2MQ">
-                                <rect key="frame" x="0.0" y="-171" width="414" height="669"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <segue destination="YHu-H4-iyw" kind="embed" identifier="spotPageToPost" id="zBw-Aq-ZIj"/>
-                                </connections>
-                            </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HQb-mc-kM2">
-                                <rect key="frame" x="0.0" y="-171" width="414" height="669"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="669"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <segue destination="vEW-tt-h2z" kind="embed" id="9pL-fu-sbW"/>
-                                </connections>
                             </containerView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AN4-Do-OLu">
                                 <rect key="frame" x="69" y="20" width="277" height="29"/>
                                 <segments>
                                     <segment title="Posts"/>
                                     <segment title="About"/>
-                                    <segment title="Directions"/>
                                 </segments>
                                 <connections>
                                     <action selector="switchView:" destination="eCr-eN-N6D" eventType="valueChanged" id="8ka-dl-hzF"/>
@@ -615,7 +604,6 @@ IT’S A MAGICAL WORLD OUT THERE.
                     <navigationItem key="navigationItem" id="Qv1-Ze-Idw"/>
                     <connections>
                         <outlet property="aboutView" destination="bGj-ak-Eph" id="3q9-gg-xTT"/>
-                        <outlet property="directionsView" destination="aQ6-w2-2MQ" id="trw-7W-GTm"/>
                         <outlet property="postView" destination="HQb-mc-kM2" id="QAS-ES-uCt"/>
                         <outlet property="segUI" destination="AN4-Do-OLu" id="hS1-mx-WSL"/>
                     </connections>
@@ -689,7 +677,7 @@ IT’S A MAGICAL WORLD OUT THERE.
             <objects>
                 <viewController id="jhu-Ys-cOK" customClass="SuccessViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5pB-eN-AjX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="586"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="PoB-73-3co"/>
@@ -731,7 +719,7 @@ IT’S A MAGICAL WORLD OUT THERE.
             <objects>
                 <viewController id="2bd-oj-8Ol" customClass="EditProfileViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HSG-kk-2Ma">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="669"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6X-Us-JBH">
@@ -785,17 +773,80 @@ IT’S A MAGICAL WORLD OUT THERE.
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="296"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sRS-eY-bCV">
-                                <rect key="frame" x="20" y="319" width="34" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jrO-12-t9t">
+                                <rect key="frame" x="46" y="345" width="315" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Back"/>
-                            </button>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TYk-2O-wQl">
+                                <rect key="frame" x="46" y="384" width="62" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOf-Hd-nli">
+                                <rect key="frame" x="101" y="384" width="62" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ef-ZM-wQC">
+                                <rect key="frame" x="46" y="448" width="226" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9q9-gh-dz4">
+                                <rect key="frame" x="46" y="498" width="242" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ixx-gd-nQl">
+                                <rect key="frame" x="46" y="544" width="132" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbT-Js-JGA">
+                                <rect key="frame" x="46" y="304" width="132" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVi-oP-6UR">
+                                <rect key="frame" x="180" y="384" width="108" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BlackSpotIcon" translatesAutoresizingMaskIntoConstraints="NO" id="J0F-zj-Pvd">
+                                <rect key="frame" x="0.0" y="452" width="29" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="zO4-XF-KnK"/>
                     </view>
                     <connections>
+                        <outlet property="aboutTitle" destination="rbT-Js-JGA" id="3M8-IB-jXb"/>
+                        <outlet property="addressLabel" destination="9ef-ZM-wQC" id="ziY-rf-Vn6"/>
+                        <outlet property="descriptionLabel" destination="jrO-12-t9t" id="Ni3-jY-L33"/>
+                        <outlet property="openLabel" destination="9q9-gh-dz4" id="Bf8-K4-3J0"/>
+                        <outlet property="phoneNumLabel" destination="ixx-gd-nQl" id="34x-OU-o8Z"/>
                         <outlet property="spotImgView" destination="eD4-kC-Nk7" id="X5p-6D-QXU"/>
+                        <outlet property="tag1" destination="TYk-2O-wQl" id="aHk-BH-HIZ"/>
+                        <outlet property="tag2" destination="zOf-Hd-nli" id="tFf-aJ-iSz"/>
+                        <outlet property="tag3" destination="AVi-oP-6UR" id="TxU-7l-74Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m4E-iD-sSX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -807,7 +858,7 @@ IT’S A MAGICAL WORLD OUT THERE.
             <objects>
                 <viewController id="YHu-H4-iyw" customClass="SpotPagePostViewController" customModule="Spot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="D2q-qc-fDB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="669"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6f-lw-5ep">
@@ -846,26 +897,12 @@ IT’S A MAGICAL WORLD OUT THERE.
             </objects>
             <point key="canvasLocation" x="840.57971014492762" y="3852.7901785714284"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="OB4-4E-cJ0">
-            <objects>
-                <viewController id="vEW-tt-h2z" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Uwc-cD-XwI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="669"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="qPi-xf-lmK"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9Yr-X7-F3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2201" y="3853"/>
-        </scene>
     </scenes>
     <resources>
         <image name="AddSpotCircleChecked1x" width="34" height="34"/>
         <image name="AddSpotCircleUnchecked1x" width="34" height="34"/>
         <image name="AddSpotIcon" width="72" height="72"/>
+        <image name="BlackSpotIcon" width="48" height="48"/>
         <image name="FeedActiveIcon" width="68" height="76"/>
         <image name="FeedIcon" width="68" height="76"/>
         <image name="LocateIcon" width="112" height="112"/>
@@ -879,8 +916,7 @@ IT’S A MAGICAL WORLD OUT THERE.
         <image name="SettingsIcon" width="52" height="52"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zBw-Aq-ZIj"/>
-        <segue reference="ZiT-fG-auW"/>
+        <segue reference="bBT-m9-MKU"/>
         <segue reference="RNW-2x-rNB"/>
         <segue reference="FMj-j9-qIR"/>
     </inferredMetricsTieBreakers>
