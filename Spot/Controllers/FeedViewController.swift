@@ -36,7 +36,7 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         
-            for i in 0...10{
+            for i in 0...1{
     
                 self.postsList.append(Post(spotname: "",captionText: "", photoObj: UIImage(), uNameString: "",likesCount:0, location: ""))
     
@@ -182,7 +182,7 @@ class FeedViewController: UIViewController {
                                         
                                         
 
-                                            if self.index <= 10{
+                                            if self.index <= 1{
                                                 
                                                 self.postsList[self.index].spotname = spotName
                                                 self.postsList[self.index].caption = captionText
@@ -210,7 +210,7 @@ class FeedViewController: UIViewController {
                                         
 //                                        self.index = index + 1
                                         
-//                                        self.tableView.reloadData()
+                                        self.tableView.reloadData()
                                         
                                     }
                                 } // End get image data
@@ -247,7 +247,6 @@ extension FeedViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-//        return 10
         return postsList.count
     }
     
