@@ -573,25 +573,22 @@ IT’S A MAGICAL WORLD OUT THERE.
                         <rect key="frame" x="0.0" y="0.0" width="414" height="498"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HQb-mc-kM2">
+                                <rect key="frame" x="0.0" y="56" width="414" height="669"/>
+
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="YHu-H4-iyw" kind="embed" identifier="spotPageToPost" id="tYQ-8Q-kOC"/>
+                                </connections>
+                            </containerView>
+
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bGj-ak-Eph">
-                                <rect key="frame" x="0.0" y="-171" width="414" height="669"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="669"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="iHY-7d-6vC" kind="embed" identifier="spotPageToAbout" id="Y6h-1w-Xk6"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aQ6-w2-2MQ">
-                                <rect key="frame" x="0.0" y="-171" width="414" height="669"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <segue destination="YHu-H4-iyw" kind="embed" identifier="spotPageToPost" id="zBw-Aq-ZIj"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HQb-mc-kM2">
-                                <rect key="frame" x="0.0" y="-171" width="414" height="669"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <segue destination="vEW-tt-h2z" kind="embed" id="9pL-fu-sbW"/>
+
                                 </connections>
                             </containerView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AN4-Do-OLu">
