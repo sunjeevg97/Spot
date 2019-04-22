@@ -86,7 +86,7 @@ class FeedViewController: UIViewController {
                 
                 for doc in documentsAll!.documents{
 
-                    self.runGeoDispatch(nearbySpotID: doc.documentID);
+                    self.loadSpots(nearbySpotID: doc.documentID);
                     
                 }
                 
@@ -115,7 +115,7 @@ class FeedViewController: UIViewController {
     } //End view did load
     
     
-    func runGeoDispatch(nearbySpotID : String) {
+    func loadSpots(nearbySpotID : String) {
         
         let pathOfNearby = self.db.collection("spots").document(nearbySpotID)
         
@@ -232,7 +232,7 @@ class FeedViewController: UIViewController {
         }) //End get nearby spot
         
         
-    } //End function GeoRunDispatch
+    } //End function load spots
 
 }
 
