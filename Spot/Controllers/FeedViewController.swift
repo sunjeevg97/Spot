@@ -70,19 +70,9 @@ class FeedViewController: UIViewController {
         
         self.tableView.dataSource = self
         
-        super.viewDidLoad()
+        
         
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "Signuplogo.png"))
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        var testlist : [String] = []
         
         self.circleQuery = self.geoFirestoreSpots.query(withCenter: GeoPoint(latitude: self.userLat, longitude: self.userLong), radius: 0.804672)
         
@@ -95,19 +85,11 @@ class FeedViewController: UIViewController {
             Firestore.firestore().collection("spots").getDocuments { (documentsAll, err1) in
                 
                 for doc in documentsAll!.documents{
-                    
-//                    doc.documentID
-                    
-                    print("alldoc ", doc)
-//                    testlist.append(doc.documentID)
-                    
-                    
-                    
+
                     self.runGeoDispatch(nearbySpotID: doc.documentID);
                     
-                    
-                    
                 }
+                
                 
                 dispatchgroup.leave()
                 
@@ -120,17 +102,15 @@ class FeedViewController: UIViewController {
                 print("postslist crossed ", post.spotname)
             }
 
-            DispatchQueue.main.sync {
-                self.tableView.reloadData()
-            }
+//            DispatchQueue.main.sync {
+//                self.tableView.reloadData()
+//
+//            }
             
         }
+        
+        super.viewDidLoad()
 
-
-       
-
-        //It's good to run dispatch after everything else in viewDidLoad because nothing afterwards will run before it finishes
-//        runDispatch()
         
     } //End view did load
     
@@ -230,7 +210,7 @@ class FeedViewController: UIViewController {
                                         
 //                                        self.index = index + 1
                                         
-                                        self.tableView.reloadData()
+//                                        self.tableView.reloadData()
                                         
                                     }
                                 } // End get image data
@@ -253,162 +233,7 @@ class FeedViewController: UIViewController {
         
         
     } //End function GeoRunDispatch
-    
-    
-    func runDispatchOriginal() {
-        DispatchQueue.global().async {
-            let dispatchGroup = DispatchGroup()
-            
-            dispatchGroup.enter()
-            self.db.collection("users").document(self.id).getDocument { (snapshot, err) in
-                
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else{
-                    
-                    self.nameGlobal = snapshot?.get("name") as? String
-                    self.usernameGlobal = snapshot?.get("username") as? String
-                    
-                    //need to query list of user's friends and store them in a global variable
-                    
-                }
-                
-                dispatchGroup.leave()
-                
-            }
-            
-            dispatchGroup.wait()
-            
-            print("username values")
-            print(self.usernameGlobal)
-            print(self.nameGlobal)
-            
-            
-            //Need to load posts from user's friends list (order by post timestamp or location)
-            
-            
-            
-            for index in 0...4{
-                
-                dispatchGroup.enter()
-                
-                let spotID : String = "NZNdh5JLF3xwFykXubdY"
-                
-                let pathOfPost = self.db.collection("spots").document(spotID)
-                
-                pathOfPost.getDocument(completion: { (snapshot, err) in
-                    
-                    
-                    
-                    if let err = err {
-                        print("Error getting documents: \(err)")
-                    }else{
-                        self.postsList[index].spotname = snapshot?.get("spotName") as! String
-                        
-                        let arrayLocation = snapshot?.get("l") as! [NSNumber]
-                        
-                        print("arrayLocation",arrayLocation as! [Double])
-                        
 
-                        
-                        let latitude : Double = arrayLocation[0] as! Double
-                        let longitude : Double = arrayLocation[1] as! Double
-                        
-                        
-                        let convertedLocation = CLLocation(latitude: latitude, longitude: longitude);
-                        
-                        CLGeocoder().reverseGeocodeLocation(convertedLocation, completionHandler: { (placemarks, error) -> Void in
-                            
-                            let cityName: String = placemarks?[0].locality ?? "City"
-                            let stateName: String = placemarks?[0].administrativeArea ?? "Earth"
-                            
-                            let cityAndState : String = cityName + ", " + stateName
-                            
-                            print("placemarker: ", cityAndState)
-                            
-                            self.postsList[index].location = cityAndState
-                            
-                        })
-                        
-                    }
-                    
-                    dispatchGroup.leave()
-                })
-                
-                dispatchGroup.wait()
-                
-                
-                dispatchGroup.enter()
-                var imageURL:String = "";
-                var posterUsername : String = "";
-                
-                
-                pathOfPost.collection("feedPost").document("C94475D4-0585-4C9D-BAC0-70433B4E9523").getDocument{(snapshotSpot, errSpot) in
-                    
-                    
-                    if let err = errSpot {
-                        print("Error getting documents: \(err)")
-                    } else{
-                        print("image URL")
-                        
-                        let posterID = snapshotSpot?.get("posterID") as! String
-                        
-                        imageURL = snapshotSpot?.get("image url") as! String
-                        
-                        self.postsList[index].caption = (snapshotSpot?.get("caption") as! String) + ": Row " + String(index)
-                        self.postsList[index].uName = snapshotSpot?.get("posterID") as! String
-                        self.postsList[index].numLikes = snapshotSpot?.get("numLikes") as! Int
-                        
-                        
-                        self.db.collection("users").document(posterID).getDocument(completion: {
-                            
-                            (snapshotUser, errUser) in
-                            
-                            posterUsername = snapshotUser?.get("username") as! String
-                            
-                            self.postsList[index].uName = posterUsername
-                            
-                            
-                            
-                            let gsReference = Storage.storage().reference(forURL: imageURL)
-                            
-                            print("reference info")
-                            print(gsReference)
-                            print(gsReference.fullPath)
-                            print(gsReference.name)
-                            //            print(gsReference.parent())
-                            
-                            
-                            
-                            //Extract image and put it into a Post object
-                            gsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                                if error != nil {
-                                    print("error occured")
-                                } else {
-                                    let image = UIImage(data: data!)
-                                    self.postsList[index].photo = image!;
-                                    
-                                    self.tableView.reloadData()
-                                    
-                                    dispatchGroup.leave()
-                                    
-                                }
-                            }
-                            
-                        })
-                    }
-                }
-            }//End loop
-            
-            
-            
-            
-            
-        }
-    }
-    
-    
-    
 }
 
 
