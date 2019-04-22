@@ -373,7 +373,8 @@ class SignUpViewController: UIViewController {
                       "username" : username,
                       "userBio" : "",
                       "friendsList" :  friendsList,
-                      "spotsList" : spotsList
+                      "spotsList" : spotsList,
+                      "image url" : "",
             ] as [String : Any]
         
         db.collection("users").document(userId).setData(values, merge: true)
