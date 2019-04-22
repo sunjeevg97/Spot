@@ -409,6 +409,7 @@ extension FeedViewController: UITableViewDataSource {
         likebutton.layer.borderWidth = 1.24
 //        likebutton.layer.borderColor = UIColor(red:0.02, green:0.62, blue:1, alpha:1).cgColor
         cell.addSubview(likebutton)
+        
 //        self.view.addSubview(likebutton)
         
         
