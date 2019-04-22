@@ -236,6 +236,10 @@ class CreatePostViewController: UIViewController{
         }
         
         print("image uploaded")
+        
+        self.performSegue(withIdentifier: "leaveCreate", sender: self) //Go to tab view page
+        
+        
     }
     
     func uploadPostImage(_ image:UIImage, postId: String,  completion: @escaping ((_ url:String?) -> ())){

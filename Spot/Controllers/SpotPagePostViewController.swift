@@ -29,7 +29,7 @@ class SpotPagePostViewController: UIViewController {
     
     override func viewDidLoad() {
         
-        for i in 0...10{
+        for i in 0...1{
             
             self.postsList.append(Post(spotname: "",captionText: "", photoObj: UIImage(), uNameString: "",likesCount:0, location: ""))
             
@@ -94,7 +94,7 @@ class SpotPagePostViewController: UIViewController {
                         
                         let spotName : String = spotSnapshot?.get("spot name") as! String
                         let captionText : String = document.get("caption") as! String
-                        let imgURL : String = document.get("image url") as! String
+                        let imgURL : String = document.get("image url") as? String ?? "https://firebasestorage.googleapis.com/v0/b/spot69420.appspot.com/o/spotPics-dev%2FFAF3DB19-99D7-4582-821A-99DE5374C9C8?alt=media&token=26df4aec-20cf-4b46-9e4b-5e06ddb39ad4"
                         
                         let imgReference = Storage.storage().reference(forURL: imgURL)
                         
@@ -137,7 +137,7 @@ class SpotPagePostViewController: UIViewController {
                                             print(spotName,captionText,posterID)
                                             
                                             
-                                            if self.index <= 10{
+                                            if self.index <= 1{
 
                                                 self.postsList[self.index].spotname = spotName
                                                 self.postsList[self.index].caption = captionText
@@ -162,6 +162,8 @@ class SpotPagePostViewController: UIViewController {
                                                 print(self.postsList[track].spotname)
                                                 print("index: ",track, "|",self.postsList[track].toString())
                                             }
+                                            
+                                            self.tableview.reloadData()
                                             
                                           
                                             
@@ -202,7 +204,7 @@ extension SpotPagePostViewController: UITableViewDataSource {
         
         //        return 10
         return postsList.count
-//        return 2
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

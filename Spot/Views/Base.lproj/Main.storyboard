@@ -392,6 +392,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="4oF-Q7-Kd7"/>
                     </view>
+                    <connections>
+                        <segue destination="8JJ-p2-ETf" kind="presentation" identifier="leaveCreate" id="ZiT-fG-auW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K3Y-54-oVr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -879,7 +882,7 @@ IT’S A MAGICAL WORLD OUT THERE.
         <image name="SettingsIcon" width="52" height="52"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9YR-rZ-IJ2"/>
+        <segue reference="ZiT-fG-auW"/>
         <segue reference="RNW-2x-rNB"/>
         <segue reference="FMj-j9-qIR"/>
     </inferredMetricsTieBreakers>
