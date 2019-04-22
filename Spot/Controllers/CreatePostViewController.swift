@@ -65,13 +65,16 @@ class CreatePostViewController: UIViewController{
         self.view.addSubview(cancelBtn)
 
 
+        Firestore.firestore().collection("spots").document(self.spotID).getDocument { (snapshot, err) in
+            
+            
         //Display name of Spot
         let spotName = UILabel(frame: CGRect(x: 120, y: 45, width: 325, height: 24))
         spotName.lineBreakMode = .byWordWrapping
         spotName.numberOfLines = 0
         spotName.textColor = UIColor.white
         spotName.textAlignment = .center
-        let spotNameContent = "Caffe Driade"
+        let spotNameContent = snapshot?.get("spot name") as! String
         let spotNameString = NSMutableAttributedString(string: spotNameContent, attributes: [
             NSAttributedString.Key.font: UIFont(name: "Arial", size: 24)!
             ])
@@ -83,6 +86,8 @@ class CreatePostViewController: UIViewController{
         spotName.attributedText = spotNameString
         spotName.sizeToFit()
         self.view.addSubview(spotName)
+            
+        }
         
         //Display name of city
         let cityName = UILabel(frame: CGRect(x: 145, y: 69, width: 186, height: 15))

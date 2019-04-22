@@ -838,6 +838,7 @@ IT’S A MAGICAL WORLD OUT THERE.
                         <viewLayoutGuide key="safeArea" id="MkV-u1-qv7"/>
                     </view>
                     <connections>
+                        <outlet property="tableview" destination="GPN-me-Mbr" id="1Xl-pK-U93"/>
                         <segue destination="McA-Zb-s0J" kind="show" identifier="postToCreatePost" id="2TA-DW-OVH"/>
                     </connections>
                 </viewController>
