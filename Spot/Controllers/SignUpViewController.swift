@@ -372,7 +372,6 @@ class SignUpViewController: UIViewController {
                       "email" : email,
                       "username" : username,
                       "userBio" : "",
-                      "image url": "",
                       "friendsList" :  friendsList,
                       "spotsList" : spotsList
             ] as [String : Any]
