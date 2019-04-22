@@ -19,17 +19,16 @@ class SpotViewController: UIViewController {
   
     @IBOutlet weak var segUI: UISegmentedControl!
     
-
     @IBOutlet weak var postView: UIView!
     @IBOutlet weak var directionsView: UIView!
-
+    @IBOutlet weak var aboutView: UIView!
     
     @IBAction func switchView(_ sender: UISegmentedControl) {
         switch segUI.selectedSegmentIndex{
         case 0:
             self.directionsView.isHidden = false
             self.aboutView.isHidden = true
-            self.postView.isHidden = false
+            self.postView.isHidden = true
         case 1:
             self.directionsView.isHidden = true
             self.aboutView.isHidden = false
