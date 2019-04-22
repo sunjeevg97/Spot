@@ -19,38 +19,9 @@ class AboutSpotViewController: UIViewController {
     
     @IBOutlet weak var spotImgView: UIImageView!
     
-    @IBOutlet weak var descriptionLabel: UILabel!
-    
-    @IBOutlet weak var tag1: UILabel!
-    @IBOutlet weak var tag2: UILabel!
-    @IBOutlet weak var tag3: UILabel!
-    
-    
-    @IBOutlet weak var addressLabel: UILabel!
-    
-    
-    @IBOutlet weak var phoneNumLabel: UILabel!
-    
-    @IBOutlet weak var openLabel: UILabel!
-    
-    @IBOutlet weak var aboutTitle: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = .black
-        descriptionLabel.textColor = UIColor.white
-        tag1.textColor = UIColor.white
-        tag2.textColor = UIColor.white
-        tag3.textColor = UIColor.white
-        addressLabel.textColor = UIColor.white
-        phoneNumLabel.textColor = UIColor.white
-        openLabel.textColor = UIColor.white
-        
-        aboutTitle.text = "Overview"
-        aboutTitle.textColor = UIColor.white
-        aboutTitle.font = UIFont.boldSystemFont(ofSize: 24.0)
-        
         DispatchQueue.global().async{
             let dispatch = DispatchGroup()
             
@@ -62,12 +33,6 @@ class AboutSpotViewController: UIViewController {
                 } else{
                     
                     self.imageURL = snapshot?.get("image url") as? String
-                    self.descriptionLabel.text = snapshot?.get("description") as? String
-                    self.tag1.text = "art"
-                    self.tag2.text = "painting"
-                    self.tag3.text = "landmarks"
-                    
-                    self.addressLabel.text = "Chapel Hill, NC"
                     
                 }
                 
